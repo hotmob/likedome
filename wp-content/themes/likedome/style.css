@@ -1,0 +1,23 @@
+/*
+Theme Name: LikeDome
+Description: http://www.likedome.com
+Description: 来动网网站模版风格.
+Version: 1.0
+Author: Mob
+Author URI: http://www.ammob.com
+*/
+
+@import 'css/required.css';
+@import 'css/typography.css';
+@import 'css/layout.css';
+@import 'css/navigation.css';
+@import 'css/pagination.css';
+@import 'css/color.css';
+@import 'css/slideshow.css';
+@import 'css/tabs.css';
+
+@import 'css/photoShow.css';
+@import 'css/style.css';
+
+
+

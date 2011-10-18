@@ -1,0 +1,10 @@
+(function($){
+	$.fn.show_obj=function(obj){
+		$(this).click(function(){
+			$(obj).show();
+		});
+		$(obj).find(".close_div").click(function(){
+			$(obj).hide();
+		});	
+	};
+})(jQuery);
