@@ -8,11 +8,9 @@
                 <?php get_search_form(); ?>
             </div>
         </div>-->
-<?php if ( !function_exists('dynamic_sidebar')
-        || !dynamic_sidebar() ) : ?>
         <div class="title2">
             <h3 class="flo">热门新闻</h3>
-            <code class="fro margin-r10"><a href="列表页面.html">更多</a></code>
+            <code class="fro margin-r10"><a href="?cat=5">更多</a></code>
             <div class="clear"></div>
         </div>
         <div id="tab1">
@@ -22,11 +20,15 @@
                 <li>官方新闻</li>
             </ul>
             <div class="clear"></div>
-            <div class="topNews margin-t18"> <a href="比赛页面.html" target="_blank" class="fl"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
+            <div class="topNews margin-t18">
+            	<?php $queryObject = new WP_Query('posts_per_page=1&cat=11');
+                    if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();?>
+            	<a href="<?php the_permalink(); ?>" target="_blank" class="fl" title="<?php the_title_attribute(); ?>" ><?php the_post_thumbnail(); ?></a>
                 <div class="fro topNews-text">
-                    <h4>来动网与农大第一界羽毛球公开赛</h4>
-                    <p class="margin-t6">来动网与农大第一界羽毛球公开赛简介内容总共20只队伍，由农大老师...</p>
+                    <h4><?php the_title_attribute(); ?></h4>
+                    <p class="margin-t6"><?php  the_excerpt()  ?></p>
                 </div>
+                <?php endwhile; endif;?>
                 <div class="clear"></div>
             </div>
             <ul class="sideTab-list margin-t13 tab_main">
@@ -88,7 +90,7 @@
         <!--热门视频-->
         <div class="title2 margin-t18">
             <h3 class="flo">热门视频</h3>
-            <code class="fro margin-r10"><a href="列表页面.html" target="_blank">更多</a></code>
+            <code class="fro margin-r10"><a href="?cat=4" target="_blank">更多</a></code>
             <div class="clear"></div>
         </div>
         <div id="tab2">
@@ -170,6 +172,7 @@
                 <li><code>213123</code><span class="icon-topList2">10</span><span>碉堡</span></li>
             </ul>
         </div>
+        <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar() ) : ?>
         <?php endif; ?>
     </div>
     <div class="clear"></div>

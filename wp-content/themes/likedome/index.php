@@ -6,10 +6,10 @@
             <div class="kind flo">
                 <select name="kindList">
                     <option>请选择比赛类型</option>
-                    <option>全部比赛</option>
-                    <option>全部比赛</option>
-                    <option>全部比赛</option>
-                    <option>全部比赛</option>
+                    <option>羽毛球</option>
+                    <option>篮球</option>
+                    <option>足球</option>
+                    <option>网球</option>
                 </select>
             </div>
             <ul class="tab_menu fro margin-t6 padding-r6"><li class="select">全部比赛</li><li>正在进行中</li><li>报名中</li><li>比赛结束</li></ul>
@@ -17,13 +17,13 @@
         <div class="tab_main">
             <div class="margin-t10 tabimg"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></div>
             <h4 class="margin-t6 margin-b10">来动网与农大第一界羽毛球公开赛</h4>
-            <p>来动网与农大第一界羽毛球公开赛福建dota2第一届公开赛来动网与农大第一界羽毛球公开赛福建dota2第一届公开赛来动网与农大第一界羽毛球公开赛福建dota2第一届公开赛来动网与农大第一界羽毛球公开赛福建dota2第一届公开赛来动网与农大第一界羽毛球公开赛福建dota2第一届公开赛</p>
+            <p>来动网与农大第一界羽毛球公赛将于2011年10月21号开幕，本次比赛由优适体育独家赞助。</p>
             <dl class="margin-t10 tablist">
                 <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
-                <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                <dd>比赛类别：dota类网游竞技</dd>
-                <dd>首轮赛制：单淘汰</dd>
-                <dd>比赛场地：福州营迹路开心网吧</dd>
+                 <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
+                 <dd>比赛类别：羽毛球</dd>
+                  <dd>首轮赛制：单淘汰</dd>
+                    <dd>比赛场地：福州省体育</dd>
                 <dd class="margin-t13 join"> <a class="btn margin-r10 fl" href="比赛页面.html">点击参加</a> <a class="btn margin-r10 fl" href="#">关注比赛</a> <span class="margin-r10 fl">30人参加</span> <span class="margin-r10 fl">180人关注</span>
                         <!--<span class="margin-r10 fl listen height-23"><a style="color:#222; font-weight:bold;" href="#">小天</a></span> <a href="#" class="fl" style="color:#3a8dc9;">立即收听</a>-->
                     <div id="txWB_W1"></div><script type="text/javascript">var tencent_wb_name = "likedo545336";var tencent_wb_sign = "0b559270946bf9185b42b093de5d6d1e6a8bbe86";var tencent_wb_style = "3";</script><script type="text/javascript" src="http://v.t.qq.com/follow/widget.js" charset="utf-8"/></script>
@@ -36,9 +36,9 @@
                         <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                        <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
@@ -48,21 +48,21 @@
                         <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                        <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
                 </li>
                 <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
                     <dl>
-                        <dt>来动网与农大第一界羽毛球公开赛2比赛</dt>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                         <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
@@ -81,9 +81,9 @@
                         <dt>来动网与农大第一界羽毛球公开赛赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                        <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
@@ -93,135 +93,57 @@
                         <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                        <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
                 </li>
                 <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
                     <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                         <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
                 </li>
                 <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
                     <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                         <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
                 </li>
                 <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
                     <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                         <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
                 </li>
                 <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
                     <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                         <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
-                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
-                    </dl>
-                    <div class="clear"></div>
-                </li>
-            </ul>
-            <div class="clear"></div>
-            <div class="pageNo margin-t18"><span class="firstpage"><a href="#">首页</a></span><span class="prepage"><a href="#">上一页</a></span><a href="#">1</a><strong>2</strong><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a>...<a href="#">20</a><span class="nextpage"><a href="#">下一页</a></span><span class="lastpage"><a href="#">尾页</a></span></div>
-        </div>
-        <div class="tab_main">
-            <ul class="joinList margin-t2">
-                <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
-                    <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
-                        <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
-                        <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
-                        <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
-                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
-                    </dl>
-                    <div class="clear"></div>
-                </li>
-                <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
-                    <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
-                        <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
-                        <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
-                        <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
-                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
-                    </dl>
-                    <div class="clear"></div>
-                </li>
-                <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
-                    <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
-                        <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
-                        <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
-                        <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
-                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
-                    </dl>
-                    <div class="clear"></div>
-                </li>
-                <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
-                    <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
-                        <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
-                        <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
-                        <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
-                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
-                    </dl>
-                    <div class="clear"></div>
-                </li>
-                <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
-                    <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
-                        <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
-                        <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
-                        <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
-                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
-                    </dl>
-                    <div class="clear"></div>
-                </li>
-                <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
-                    <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
-                        <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
-                        <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
-                        <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
@@ -234,72 +156,150 @@
             <ul class="joinList margin-t2">
                 <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
                     <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                         <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
                 </li>
                 <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
                     <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                        <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
                 </li>
                 <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
                     <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                        <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
                 </li>
                 <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
                     <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                        <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
                 </li>
                 <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
                     <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                        <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
                 </li>
                 <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
                     <dl>
-                        <dt>766游戏网与福州网吧联盟组合第一届dota2比赛</dt>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
                         <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
                         <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                        <dd>比赛类别：dota类网游竞技</dd>
+                        <dd>比赛类别：羽毛球</dd>
                         <dd>首轮赛制：单淘汰</dd>
-                        <dd>比赛场地：福州营迹路开心网吧</dd>
+                        <dd>比赛场地：福州省体育</dd>
+                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
+                    </dl>
+                    <div class="clear"></div>
+                </li>
+            </ul>
+            <div class="clear"></div>
+            <div class="pageNo margin-t18"><span class="firstpage"><a href="#">首页</a></span><span class="prepage"><a href="#">上一页</a></span><a href="#">1</a><strong>2</strong><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a>...<a href="#">20</a><span class="nextpage"><a href="#">下一页</a></span><span class="lastpage"><a href="#">尾页</a></span></div>
+        </div>
+        <div class="tab_main">
+            <ul class="joinList margin-t2">
+                <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
+                    <dl>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
+                        <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
+                        <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
+                         <dd>比赛类别：羽毛球</dd>
+                        <dd>首轮赛制：单淘汰</dd>
+                        <dd>比赛场地：福州省体育</dd>
+                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
+                    </dl>
+                    <div class="clear"></div>
+                </li>
+                <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
+                    <dl>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
+                        <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
+                        <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
+                         <dd>比赛类别：羽毛球</dd>
+                        <dd>首轮赛制：单淘汰</dd>
+                        <dd>比赛场地：福州省体育</dd>
+                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
+                    </dl>
+                    <div class="clear"></div>
+                </li>
+                <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
+                    <dl>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
+                        <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
+                        <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
+                       <dd>比赛类别：羽毛球</dd>
+                        <dd>首轮赛制：单淘汰</dd>
+                        <dd>比赛场地：福州省体育</dd>
+                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
+                    </dl>
+                    <div class="clear"></div>
+                </li>
+                <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
+                    <dl>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
+                        <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
+                        <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
+                       <dd>比赛类别：羽毛球</dd>
+                        <dd>首轮赛制：单淘汰</dd>
+                        <dd>比赛场地：福州省体育</dd>
+                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
+                    </dl>
+                    <div class="clear"></div>
+                </li>
+                <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
+                    <dl>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
+                        <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
+                        <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
+                        <dd>比赛类别：羽毛球</dd>
+                        <dd>首轮赛制：单淘汰</dd>
+                        <dd>比赛场地：福州省体育</dd>
+                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
+                    </dl>
+                    <div class="clear"></div>
+                </li>
+                <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
+                    <dl>
+                        <dt>来动网与农大第一界羽毛球公开赛</dt>
+                        <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
+                        <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
+                       <dd>比赛类别：羽毛球</dd>
+                        <dd>首轮赛制：单淘汰</dd>
+                        <dd>比赛场地：福州省体育</dd>
                         <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
                     </dl>
                     <div class="clear"></div>
@@ -315,16 +315,16 @@
         <div class="clear"></div>
     </div>
     <ul class="playerList">
-        <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
+        <li><a href="?p=128"><img src="http://www.laidongwang.com/wp-content/uploads/2011/10/4602.jpg" /></a>
             <div class="icon-camara"></div>
         </li>
-        <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
+        <li><a href="?p=26"><img src="http://www.laidongwang.com/wp-content/uploads/2011/10/4641.jpg" /></a>
             <div class="icon-camara"></div>
         </li>
-        <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
+        <li><a href="?p=120"><img src="http://www.laidongwang.com/wp-content/uploads/2011/10/4621.jpg" /></a>
             <div class="icon-camara"></div>
         </li>
-        <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
+        <li><a href="?p=19"><img src="http://www.laidongwang.com/wp-content/uploads/2011/10/462.jpg" /></a>
             <div class="icon-camara"></div>
         </li>
     </ul>
