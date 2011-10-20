@@ -22,7 +22,7 @@
 	<div class="clear"></div>
 	<div class="title margin-t22">
 		<h3 class="flo">精彩视频</h3>
-		<code class="fro margin-r10"><a href="?cat=3">更多视频</a></code>
+		<code class="fro margin-r10"><a href="?cat=4">更多视频</a></code>
 		<div class="clear"></div>
 	</div>
 	<ul class="playerList">
