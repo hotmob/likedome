@@ -311,22 +311,16 @@
     </div>
     <div class="title margin-t13">
         <h3 class="flo">选手风采</h3>
-        <code class="fro margin-r10"><a href="#">更多选手</a></code>
+        <code class="fro margin-r10"><a href="?cat=10">更多选手</a></code>
         <div class="clear"></div>
     </div>
     <ul class="playerList">
-        <li><a href="?p=128"><img src="http://www.laidongwang.com/wp-content/uploads/2011/10/4602.jpg" /></a>
+    	<?php $queryObject = new WP_Query('posts_per_page=4&cat=10');
+        if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();?>
+        <li><a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
             <div class="icon-camara"></div>
         </li>
-        <li><a href="?p=26"><img src="http://www.laidongwang.com/wp-content/uploads/2011/10/4641.jpg" /></a>
-            <div class="icon-camara"></div>
-        </li>
-        <li><a href="?p=120"><img src="http://www.laidongwang.com/wp-content/uploads/2011/10/4621.jpg" /></a>
-            <div class="icon-camara"></div>
-        </li>
-        <li><a href="?p=19"><img src="http://www.laidongwang.com/wp-content/uploads/2011/10/462.jpg" /></a>
-            <div class="icon-camara"></div>
-        </li>
+        <?php endwhile; endif;?>
     </ul>
     <div class="clear"></div>
 
