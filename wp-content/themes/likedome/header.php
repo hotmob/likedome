@@ -31,7 +31,7 @@
         <div class="body-t">	
             <div class="fbg">		
                 <div class="head wrapper">
-                    <div class="site flo">
+                    <div class="site flo" style="float:left;">
                         <p class="flo">福州站</p>
                     </div>
 					<?php 
@@ -40,6 +40,15 @@
 						<div class="login fro" id="platFrom766_login"></div>
 					<?php } else { ?>
 						<div class="login fro" id="platFrom766_login" style="visibility:hidden"></div>
+                        <div class="hu-xt">
+                	<ul>
+                    	<li class="touxiang"><a href="http://www.laidongwang.com/bbs/home.php?mod=space&uid=1&do=profile" target="_blank"><img src="http://www.laidongwang.com/bbs/uc_server/avatar.php?uid=1&size=small" /></a></li>
+                    	<li class="topnew"><span>xiaotian</span>欢迎你回来！</li>
+                        <li class="topnew"><a href="#" target="_blank">初级会员</a></li>
+                        <li class="topnew"><a href="http://www.laidongwang.com/bbs/home.php?mod=space&uid=1&do=profile" target="_blank">个人空间</a><a href="#">退出登录</a></li>
+                   
+                    </ul>
+                </div>
 					<?php }; ?>
                 </div>
                 <div class="clear"></div>
@@ -63,7 +72,7 @@
                         <div class="thumbScroll">
                             <div class="sShow"></div>
                             <ul class="sImg">
-                            	<?php $queryObject = new WP_Query('posts_per_page=10&cat=10');
+                            	<?php $queryObject = new WP_Query('posts_per_page=10&cat=12');
                     				if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();
                     				$szPostContent = $post->post_content;
 									$szSearchPattern = '~<img [^\>]*\ />~'; // 搜索所有符合的图片
@@ -74,11 +83,11 @@
                             <div class="sText"> <a href="#" class="sLeft">左</a>
                                 <div class="sThumb">
                                     <ul>
-                                    <?php $queryObject = new WP_Query('posts_per_page=10&cat=10');
+                                    <?php $queryObject = new WP_Query('posts_per_page=10&cat=12');
                     				if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();?>
             	 					<li><?php the_post_thumbnail(); ?></li>
                 					<?php endwhile; endif;?>
-                					<?php $queryObject = new WP_Query('posts_per_page=10&cat=10');
+                					<?php $queryObject = new WP_Query('posts_per_page=10&cat=12');
                     				if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();?>
             	 					<li><?php the_post_thumbnail(); ?></li>
                 					<?php endwhile; endif;?>
