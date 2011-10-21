@@ -83,6 +83,7 @@ function get_poll($temp_poll_id = 0, $display = true) {
 	if(intval(get_option('poll_currentpoll')) == -1) {
 		if($display) {
 			echo stripslashes(get_option('poll_template_disable'));
+			exit;
 			return;
 		} else {
 			return stripslashes(get_option('poll_template_disable'));
@@ -147,12 +148,20 @@ function get_poll($temp_poll_id = 0, $display = true) {
 		} else {
 			$poll_close = 0;
 		}
+		
 		if(intval($check_voted) > 0 || (is_array($check_voted) && sizeof($check_voted) > 0) || ($poll_active == 0 && $poll_close == 1)) {
+			// 投完票
+			// if($display) {
+				// echo display_pollresult($poll_id, $check_voted);
+				// return;
+			// } else {
+				// return display_pollresult($poll_id, $check_voted);
+			// }
 			if($display) {
-				echo display_pollresult($poll_id, $check_voted);
+				echo display_pollvote($poll_id);
 				return;
 			} else {
-				return display_pollresult($poll_id, $check_voted);
+				return display_pollvote($poll_id);
 			}
 		} elseif(!check_allowtovote() || ($poll_active == 0 && $poll_close == 3)) {
 			$disable_poll_js = '<script type="text/javascript">jQuery("#polls_form_'.$poll_id.' :input").each(function (i){jQuery(this).attr("disabled","disabled")});</script>';
@@ -482,7 +491,7 @@ function display_pollvote($poll_id, $display_loading = true) {
 		$template_question = str_replace("%POLL_MULTIPLE_ANS_MAX%", '1', $template_question);
 	}
 	// Get Poll Answers Data
-	$poll_answers = $wpdb->get_results("SELECT polla_aid, polla_answers, polla_votes FROM $wpdb->pollsa WHERE polla_qid = $poll_question_id ORDER BY ".get_option('poll_ans_sortby').' '.get_option('poll_ans_sortorder'));
+	$poll_answers = $wpdb->get_results("SELECT polla_aid, polla_answers, poll_answers_custom, poll_answers_image, polla_votes FROM $wpdb->pollsa WHERE polla_qid = $poll_question_id ORDER BY ".get_option('poll_ans_sortby').' '.get_option('poll_ans_sortorder'));
 	// If There Is Poll Question With Answers
 	if($poll_question && $poll_answers) {
 		// Display Poll Voting Form
@@ -499,10 +508,14 @@ function display_pollvote($poll_id, $display_loading = true) {
 			$poll_answer_id = intval($poll_answer->polla_aid); 
 			$poll_answer_text = stripslashes($poll_answer->polla_answers);
 			$poll_answer_votes = intval($poll_answer->polla_votes);
+			$poll_answers_custom_text = stripslashes($poll_answer->poll_answers_custom);
+			$poll_answers_image_text = stripslashes($poll_answer->poll_answers_image);
 			$template_answer = stripslashes(get_option('poll_template_votebody'));
 			$template_answer = str_replace("%POLL_ID%", $poll_question_id, $template_answer);
 			$template_answer = str_replace("%POLL_ANSWER_ID%", $poll_answer_id, $template_answer);
 			$template_answer = str_replace("%POLL_ANSWER%", $poll_answer_text, $template_answer);
+			$template_answer = str_replace("%POLL_ANSWER_CUSTOM%", $poll_answers_custom_text, $template_answer);
+			$template_answer = str_replace("%POLL_ANSWER_IMAGE%", $poll_answers_image_text, $template_answer);
 			$template_answer = str_replace("%POLL_ANSWER_VOTES%", number_format_i18n($poll_answer_votes), $template_answer);
 			if($poll_multiple_ans > 0) {
 				$template_answer = str_replace("%POLL_CHECKBOX_RADIO%", 'checkbox', $template_answer);
@@ -1318,7 +1331,8 @@ function vote_poll() {
 					foreach($poll_aid_array as $polla_aid) {
 						$wpdb->query("INSERT INTO $wpdb->pollsip VALUES (0, $poll_id, $polla_aid, '$pollip_ip', '$pollip_host', '$pollip_timestamp', '$pollip_user', $pollip_userid)");
 					}
-					echo display_pollresult($poll_id,$poll_aid_array, false);
+					//echo display_pollresult($poll_id,$poll_aid_array, false);
+					printf("恭喜你投票成功!");
 					exit();
 				} else {
 					printf(__('Unable To Update Poll Total Votes And Poll Total Voters. Poll ID #%s', 'wp-polls'), $poll_id);

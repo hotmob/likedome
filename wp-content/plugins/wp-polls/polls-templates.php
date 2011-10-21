@@ -270,6 +270,16 @@ if($_POST['Submit']) {
 				<?php _e('Display the poll archive URL', 'wp-polls'); ?>
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<strong>%POLL_ANSWER_CUSTOM%</strong><br />
+				用户自定义字段, 暂时用作ID号唯一标识.
+			</td>
+			<td>
+				<strong>%POLL_ANSWER_IMAGE%</strong><br />
+				投票图片字段
+			</td>
+		</tr>
 		<tr class="alternate">
 			<td colspan="2">
 				<?php _e('Note: <strong>%POLL_TOTALVOTES%</strong> and <strong>%POLL_TOTALVOTERS%</strong> will be different if your poll supports multiple answers. If your poll allows only single answer, both value will be the same.', 'wp-polls'); ?>
@@ -302,6 +312,8 @@ if($_POST['Submit']) {
 				<p style="margin: 2px 0">- %POLL_ID%</p>
 				<p style="margin: 2px 0">- %POLL_ANSWER_ID%</p>
 				<p style="margin: 2px 0">- %POLL_ANSWER%</p>
+				<p style="margin: 2px 0">- %POLL_ANSWER_CUSTOM%</p>
+				<p style="margin: 2px 0">- %POLL_ANSWER_IMAGE%</p>
 				<p style="margin: 2px 0">- %POLL_ANSWER_VOTES%</p>
 				<p style="margin: 2px 0">- %POLL_CHECKBOX_RADIO%</p><br />
 				<input type="button" name="RestoreDefault" value="<?php _e('Restore Default Template', 'wp-polls'); ?>" onclick="poll_default_templates('votebody');" class="button" />

@@ -41,14 +41,13 @@
 					<?php } else { ?>
 						<div class="login fro" id="platFrom766_login" style="visibility:hidden"></div>
                         <div class="hu-xt">
-                	<ul>
-                    	<li class="touxiang"><a href="http://www.laidongwang.com/bbs/home.php?mod=space&uid=1&do=profile" target="_blank"><img src="http://www.laidongwang.com/bbs/uc_server/avatar.php?uid=1&size=small" /></a></li>
-                    	<li class="topnew"><span>xiaotian</span>欢迎你回来！</li>
-                        <li class="topnew"><a href="#" target="_blank">初级会员</a></li>
-                        <li class="topnew"><a href="http://www.laidongwang.com/bbs/home.php?mod=space&uid=1&do=profile" target="_blank">个人空间</a><a href="#">退出登录</a></li>
-                   
-                    </ul>
-                </div>
+	                		<ul>
+		                    	<li class="touxiang"><a href="http://www.laidongwang.com/bbs/home.php?mod=space&uid=1&do=profile" target="_blank"><img src="http://www.laidongwang.com/bbs/uc_server/avatar.php?uid=1&size=small" /></a></li>
+		                    	<li class="topnew"><span>xiaotian</span>欢迎你回来！</li>
+		                        <li class="topnew"><a href="#" target="_blank">初级会员</a></li>
+		                        <li class="topnew"><a href="http://www.laidongwang.com/bbs/home.php?mod=space&uid=1&do=profile" target="_blank">个人空间</a><a href="#">退出登录</a></li>
+	                    	</ul>
+                		</div>
 					<?php }; ?>
                 </div>
                 <div class="clear"></div>
@@ -72,25 +71,27 @@
                         <div class="thumbScroll">
                             <div class="sShow"></div>
                             <ul class="sImg">
-                            	<?php $queryObject = new WP_Query('posts_per_page=10&cat=12');
-                    				if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();
-                    				$szPostContent = $post->post_content;
-									$szSearchPattern = '~<img [^\>]*\ />~'; // 搜索所有符合的图片
-									preg_match_all( $szSearchPattern, $szPostContent, $aPics );
-                    				echo '<li><a href="'.the_permalink().'">'.$aPics[0][0].'</a></li>';  //显示文章内图片
- 								endwhile; endif;?>
+                            	<?php $queryObject = new WP_Query('posts_per_page=10&cat=10');
+                    			while ($queryObject->have_posts()) : $queryObject->the_post(); ?>
+                    				<li><a target="_blank" href="<?php the_permalink(); ?>">
+                    					<img src="<?php echo get_content_image(); ?>" />
+                    				</a></li>
+ 								<?php endwhile; ?>
+ 								<?php wp_reset_postdata(); ?>
                             </ul>
                             <div class="sText"> <a href="#" class="sLeft">左</a>
                                 <div class="sThumb">
                                     <ul>
-                                    <?php $queryObject = new WP_Query('posts_per_page=10&cat=12');
+                                    <?php $queryObject = new WP_Query('posts_per_page=10&cat=10');
                     				if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();?>
             	 					<li><?php the_post_thumbnail(); ?></li>
                 					<?php endwhile; endif;?>
-                					<?php $queryObject = new WP_Query('posts_per_page=10&cat=12');
+                					<?php wp_reset_postdata(); ?>
+                					<?php $queryObject = new WP_Query('posts_per_page=10&cat=10');
                     				if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();?>
             	 					<li><?php the_post_thumbnail(); ?></li>
                 					<?php endwhile; endif;?>
+                					<?php wp_reset_postdata(); ?>
                                     </ul>
                                 </div>
                                 <a href="#" class="sRight">右</a> </div>
