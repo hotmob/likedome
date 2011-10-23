@@ -14,6 +14,7 @@ Author URI: http://chenyundong.com
 */
 
 if ( !defined('UCENTER_DEFINE_SETTING_NAME') ) :
+	
 define('UCENTER_DEFINE_SETTING_NAME', 'plugin_ucenter_define_settings');
 define('UCENTER_INTEGRATION_SETTING_NAME', 'plugin_ucenter_integration_settings');
 

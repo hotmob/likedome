@@ -125,7 +125,7 @@
         <!--选手得分榜-->
         <div class="title2 margin-t18">
             <h3 class="flo">选手人气排行榜</h3>
-            <code class="fro margin-r10"><a href="#">更多</a></code>
+            <code class="fro margin-r10"><a href="?page_id=73">更多</a></code>
             <div class="clear"></div>
         </div>
         <div id="tab3">
@@ -136,40 +136,46 @@
             </ul>
             <div class="clear"></div>
             <ul class="topList margin-t13 tab_main">
-                <li><code>213123</code><span class="icon-topList1">1</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList1">2</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList1">3</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">4</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">5</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">6</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">7</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">8</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">9</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">10</span><span>碉堡</span></li>
+				<?php if (function_exists('vote_poll') && !in_pollarchive()): ?>
+					<?php
+						$count = 1;
+		                $related = $wpdb->get_results("
+		                SELECT polla_aid, polla_answers, polla_votes
+		                FROM {$wpdb->prefix}pollsa
+		                WHERE {$wpdb->prefix}pollsa.polla_qid = 1 
+		                ORDER BY polla_votes DESC 
+		                LIMIT 10");
+		                foreach ($related as $id) { ?>
+		                <li><code><?php echo $id->polla_votes ?></code><span class="icon-topList1"><?php echo $count++ ?></span><span><?php echo $id->polla_answers ?></span></li>
+				<?php } endif;?>
             </ul>
             <ul class="topList margin-t13 tab_main">
-                <li><code>213123</code><span class="icon-topList1">1</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList1">2</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList1">3</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">4</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">5</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">6</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">7</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">8</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">9</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">10</span><span>碉堡</span></li>
+                <?php if (function_exists('vote_poll') && !in_pollarchive()): ?>
+					<?php
+						$count = 1;
+		                $related = $wpdb->get_results("
+		                SELECT polla_aid, polla_answers, polla_votes
+		                FROM {$wpdb->prefix}pollsa
+		                WHERE {$wpdb->prefix}pollsa.polla_qid = 2 
+		                ORDER BY polla_votes DESC 
+		                LIMIT 10");
+		                foreach ($related as $id) { ?>
+		                <li><code><?php echo $id->polla_votes ?></code><span class="icon-topList1"><?php echo $count++ ?></span><span><?php echo $id->polla_answers ?></span></li>
+				<?php } endif;?>
             </ul>
             <ul class="topList margin-t13 tab_main">
-                <li><code>213123</code><span class="icon-topList1">1</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList1">2</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList1">3</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">4</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">5</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">6</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">7</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">8</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">9</span><span>碉堡</span></li>
-                <li><code>213123</code><span class="icon-topList2">10</span><span>碉堡</span></li>
+                <?php if (function_exists('vote_poll') && !in_pollarchive()): ?>
+					<?php
+						$count = 1;
+		                $related = $wpdb->get_results("
+		                SELECT polla_aid, polla_answers, polla_votes
+		                FROM {$wpdb->prefix}pollsa
+		                WHERE {$wpdb->prefix}pollsa.polla_qid = 3 
+		                ORDER BY polla_votes DESC 
+		                LIMIT 10");
+		                foreach ($related as $id) { ?>
+		                <li><code><?php echo $id->polla_votes ?></code><span class="icon-topList1"><?php echo $count++ ?></span><span><?php echo $id->polla_answers ?></span></li>
+				<?php } endif;?>
             </ul>
         </div>
         <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar() ) : ?>

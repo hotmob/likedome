@@ -12,10 +12,10 @@
     </div>
     <div class="server">
         <ul>
-            <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=138545336&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:138545336:45" alt="点击这里给我发消息" title="点击这里给我发消息">在线客服1</a></li>
+            <!-- <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=138545336&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:138545336:45" alt="点击这里给我发消息" title="点击这里给我发消息">在线客服1</a></li>
             <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=139545336&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:139545336:45" alt="点击这里给我发消息" title="点击这里给我发消息">在线客服2</a></li>
             <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=138545336&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:138545336:45" alt="点击这里给我发消息" title="点击这里给我发消息">在线客服3</a></li>
-            <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=139545336&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:139545336:45" alt="点击这里给我发消息" title="点击这里给我发消息">在线客服4</a></li>
+            <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=139545336&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:139545336:45" alt="点击这里给我发消息" title="点击这里给我发消息">在线客服4</a></li> -->
         </ul>
         <p>服务电话：<br />
             暂未开放</p>

@@ -22,6 +22,7 @@ add_theme_support('automatic-feed-links');
 
 register_nav_menus(array(
 	'main' => 'Main Menu',
+	'tournament' => 'Tournament Menu',
 ));
 
 set_post_thumbnail_size(PADD_LIST_THUMB_W,PADD_LIST_THUMB_H,true);

@@ -1,35 +1,95 @@
-<?php get_header(); ?>
+<?php get_header(); 
+	if($_POST['matchTypeList'] == "所有比赛") {
+		$_POST['matchTypeList'] = null;
+	}
+?>
 <div class="margin-l18 flo width-600">
     <div id="tab">
         <div class="title">
-            <h3 class="flo margin-l12">查看</h3>
+            <h3 class="flo margin-l12">查看<?php echo $_POST['matchTypeList']; ?></h3>
             <div class="kind flo">
-                <select name="kindList">
-                    <option>请选择比赛类型</option>
-                    <option>羽毛球</option>
-                    <option>篮球</option>
-                    <option>足球</option>
-                    <option>网球</option>
-                </select>
+            	<form name= "matchTypeSelect" action= "" method= "post">
+	                <select name="matchTypeList" onChange= "document.matchTypeSelect.submit();">
+	                	<?php
+	                		$matchTypeId = 0;
+	                		if(!empty($_POST['matchTypeList'])) {
+	                			echo '<option>'.$_POST['matchTypeList'].'</option>';
+							}
+							echo '<option>所有比赛</option>';
+			                $related = $wpdb->get_results("
+			                SELECT id, type
+			                FROM {$wpdb->prefix}likedome_match_type
+			                LIMIT 10");
+			                if ( $related ) {
+			                    foreach ($related as $related_post) {
+			                    	if(!empty($_POST['matchTypeList']) && $related_post->type == $_POST['matchTypeList']) {
+			                    		$matchTypeId = $related_post->id;
+			                    		continue;
+									}
+			                    	echo '<option>'.$related_post->type.'</option>';
+								}
+							}
+			            ?>
+			            <?php wp_reset_postdata(); ?>
+	                </select>
+                </form>
             </div>
             <ul class="tab_menu fro margin-t6 padding-r6"><li class="select">全部比赛</li><li>正在进行中</li><li>报名中</li><li>比赛结束</li></ul>
         </div>
         <div class="tab_main">
-            <div class="margin-t10 tabimg"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></div>
-            <h4 class="margin-t6 margin-b10">来动网与农大第一界羽毛球公开赛</h4>
-            <p>来动网与农大第一界羽毛球公赛将于2011年10月21号开幕，本次比赛由优适体育独家赞助。</p>
-            <dl class="margin-t10 tablist">
-                <dd>报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00</dd>
-                 <dd>比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00</dd>
-                 <dd>比赛类别：羽毛球</dd>
-                  <dd>首轮赛制：单淘汰</dd>
-                    <dd>比赛场地：福州省体育</dd>
-                <dd class="margin-t13 join"> <a class="btn margin-r10 fl" href="比赛页面.html">点击参加</a> <a class="btn margin-r10 fl" href="#">关注比赛</a> <span class="margin-r10 fl">30人参加</span> <span class="margin-r10 fl">180人关注</span>
-                        <!--<span class="margin-r10 fl listen height-23"><a style="color:#222; font-weight:bold;" href="#">小天</a></span> <a href="#" class="fl" style="color:#3a8dc9;">立即收听</a>-->
-                    <div id="txWB_W1"></div><script type="text/javascript">var tencent_wb_name = "likedo545336";var tencent_wb_sign = "0b559270946bf9185b42b093de5d6d1e6a8bbe86";var tencent_wb_style = "3";</script><script type="text/javascript" src="http://v.t.qq.com/follow/widget.js" charset="utf-8"/></script>
+        	<?php
+        		$querySql = "SELECT id, type FROM {$wpdb->prefix}likedome_match";
+				if(!empty($_POST['matchTypeList'])) {
+	            	$querySql.=" WHERE type = ".$matchTypeId;
+				}
+	            $related = $wpdb->get_results($querySql." ORDER BY id DESC LIMIT 10");
+				$count = 0;
+	            if ( $related ) {
+	                foreach ($related as $related_post) {
+						if($count == 0) { 
+							$matchPostId = $wpdb->get_results("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = '链接比赛' AND meta_value = '{$related_post->id}' LIMIT 10");
+							// TODO 还要查分类
+							?>
+							<div class="margin-t10 tabimg"><img src="<?php  echo get_template_directory_uri();?>/pic/01.jpg" /></div>
+							<h4 class="margin-t6 margin-b10">来动网与农大第一界羽毛球公开赛<?php  echo '' . $matchPostId; ?></h4>
+							<p>
+								来动网与农大第一界羽毛球公赛将于2011年10月21号开幕，本次比赛由优适体育独家赞助。
+							</p>
+							<dl class="margin-t10 tablist">
+								<dd>
+									报名时间：4月8日 周四 03:00 - 4月18日 周日 23:00
+								</dd>
+								<dd>
+									比赛时间：5月8日 周四 03:00 - 5月18日 周日 23:00
+								</dd>
+								<dd>
+									比赛类别：羽毛球
+								</dd>
+								<dd>
+									首轮赛制：单淘汰
+								</dd>
+								<dd>
+									比赛场地：福州省体育
+								</dd>
+								<dd class="margin-t13 join">
+									<a class="btn margin-r10 fl" href="比赛页面.html">点击参加</a><a class="btn margin-r10 fl" href="#">关注比赛</a><span class="margin-r10 fl">30人参加</span><span class="margin-r10 fl">180人关注</span>
+									<!--<span class="margin-r10 fl listen height-23"><a style="color:#222; font-weight:bold;" href="#">小天</a></span> <a href="#" class="fl" style="color:#3a8dc9;">立即收听</a>-->
+									<div id="txWB_W1"></div>
+									<script type="text/javascript">
+										var tencent_wb_name = "likedo545336";
+										var tencent_wb_sign = "0b559270946bf9185b42b093de5d6d1e6a8bbe86";
+										var tencent_wb_style = "3";
+				
+									</script><!-- <script type="text/javascript" src="http://v.t.qq.com/follow/widget.js" charset="utf-8"/> --></script>
+								</dd>
+							</dl>
+			<?php			continue;
+						}
+					}
+				}
+	        ?>
+	        <?php wp_reset_postdata(); ?>
 
-                </dd>
-            </dl>
             <ul class="joinList margin-t13 border-t">
                 <li> <a href="比赛页面.html" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/pic/01.jpg" /></a>
                     <dl>
@@ -315,26 +375,16 @@
         <div class="clear"></div>
     </div>
     <ul class="playerList">
+    	<?php wp_reset_postdata(); ?>
     	<?php $queryObject = new WP_Query('posts_per_page=4&cat=10');
         if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();?>
         <li><a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
             <div class="icon-camara"></div>
         </li>
         <?php endwhile; endif;?>
+        <?php wp_reset_postdata(); ?>
     </ul>
     <div class="clear"></div>
-
-<!--    <div id="content" class="content-group content-index">
-        <div class="pad">
-            <div class="post-group append-clear">
-                <?php //while (have_posts()) : the_post(); ?>
-
-                    <?php //get_template_part('content', get_post_format()); ?>
-
-                <?php //endwhile; ?>
-            </div>
-        </div>
-    </div>-->
 </div>
 <?php get_sidebar(); ?>
 

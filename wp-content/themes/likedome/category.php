@@ -5,17 +5,12 @@
 ?>
 <?php get_header(); ?>
 <div id="content" class="margin-l18 flo width-600">
-    <div id="content" class="content-group content-category">
-        <div class="pad">
-            <div class="post-group">
-                <div class="content-title">
-                    <h1 class="title"><?php single_cat_title(); ?></h1>
-                </div>
-                <?php rewind_posts(); ?>		
-                <?php get_template_part('loop', 'category'); ?>
-            </div>
-        </div>
+    <div class="title">
+        <h3 class="flo"><?php single_cat_title(); ?></h3>
     </div>
+    <ul class="list-xt">
+        <?php rewind_posts(); ?>		
+        <?php get_template_part('loop', 'category'); ?>
 </div>
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

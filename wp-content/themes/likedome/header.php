@@ -5,7 +5,9 @@
         <title><?php wp_title('&laquo;', true, 'right'); ?> <?php bloginfo('name'); ?></title>
         <link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>" type="text/css" media="screen" />
         <?php
-        wp_enqueue_script('jquery-min', get_template_directory_uri() . '/js/jquery-1.6.2.min.js');
+        wp_enqueue_script('jquery');
+		wp_enqueue_script('jquery-ui-tabs');
+		wp_enqueue_script('jquery-min', get_template_directory_uri() . '/js/jquery-1.6.2.min.js');
         wp_enqueue_script('js-simple', get_template_directory_uri() . '/js/js_simple.js');
         wp_enqueue_script('call', get_template_directory_uri() . '/js/call.js');
         wp_enqueue_script('base-platform', get_template_directory_uri() . '/js/platForm766.js');
@@ -25,6 +27,21 @@
                 $(".thumbScroll").thumbScroll();
             });
         </script>
+        <script type="text/javascript">
+		function showWindowsFrame(url) {
+			Dialog.frame("herdDialog", url, {
+				"width" : "400px",
+				"title" : "来动网",
+				'modal' : true,
+				"closeModal" : false
+			});
+			setTimeout("windowsFrameReload()", 3000);
+		};
+
+		function windowsFrameReload() {
+			location.reload();
+		}
+    	</script>
     </head>
 
     <body>
@@ -71,7 +88,7 @@
                         <div class="thumbScroll">
                             <div class="sShow"></div>
                             <ul class="sImg">
-                            	<?php $queryObject = new WP_Query('posts_per_page=10&cat=10');
+                            	<?php $queryObject = new WP_Query('posts_per_page=10&cat=12');
                     			while ($queryObject->have_posts()) : $queryObject->the_post(); ?>
                     				<li><a target="_blank" href="<?php the_permalink(); ?>">
                     					<img src="<?php echo get_content_image(); ?>" />
@@ -82,12 +99,7 @@
                             <div class="sText"> <a href="#" class="sLeft">左</a>
                                 <div class="sThumb">
                                     <ul>
-                                    <?php $queryObject = new WP_Query('posts_per_page=10&cat=10');
-                    				if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();?>
-            	 					<li><?php the_post_thumbnail(); ?></li>
-                					<?php endwhile; endif;?>
-                					<?php wp_reset_postdata(); ?>
-                					<?php $queryObject = new WP_Query('posts_per_page=10&cat=10');
+                                    <?php $queryObject = new WP_Query('posts_per_page=10&cat=12');
                     				if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();?>
             	 					<li><?php the_post_thumbnail(); ?></li>
                 					<?php endwhile; endif;?>

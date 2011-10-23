@@ -11,7 +11,7 @@ Template Name: big page
         bcn_display();
         echo '</p>';
     }
-    ?>		
+    ?>
     <?php while (have_posts()) : ?>
         <?php the_post(); ?>
 

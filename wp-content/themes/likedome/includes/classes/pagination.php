@@ -62,15 +62,15 @@ class Padd_PageNavigation {
 				$larger_end_page_end = $max_page;
 			}
 			if($max_page > 1) {
-				$pages_text = str_replace("%CURRENT_PAGE%", number_format_i18n($paged), 'Page %CURRENT_PAGE% of %TOTAL_PAGES%');
+				$pages_text = str_replace("%CURRENT_PAGE%", number_format_i18n($paged), '当前 %CURRENT_PAGE% 页, 共有 %TOTAL_PAGES% 页');
 				$pages_text = str_replace("%TOTAL_PAGES%", number_format_i18n($max_page), $pages_text);
-				echo $before.'<div class="pagination">'."\n";
+				echo $before.'<div class="pageNo margin-t22">'."\n";
 				if(!empty($pages_text)) {
-					echo '<span class="pages">' . Padd_PageNavigation::ANTE_PAGE . $pages_text . Padd_PageNavigation::POST_PAGE . '</span>';
+					echo '<span class="firstpage">' . Padd_PageNavigation::ANTE_PAGE . $pages_text . Padd_PageNavigation::POST_PAGE . '</span>';
 				}
 				if ($start_page >= 2 && $pages_to_show < $max_page) {
-					$first_page_text = str_replace("%TOTAL_PAGES%", number_format_i18n($max_page), '&laquo; First');
-					echo '<a href="'.clean_url(get_pagenum_link()).'" class="first page-word" title="'.$first_page_text.'">' . Padd_PageNavigation::ANTE_PAGE . $first_page_text . Padd_PageNavigation::POST_PAGE . '</a>';
+					$first_page_text = str_replace("%TOTAL_PAGES%", number_format_i18n($max_page), '&laquo; 首页');
+					echo '<a href="'.clean_url(get_pagenum_link()).'" class="firstpage" title="'.$first_page_text.'">' . Padd_PageNavigation::ANTE_PAGE . $first_page_text . Padd_PageNavigation::POST_PAGE . '</a>';
 					echo '<span class="extend">' . Padd_PageNavigation::ANTE_PAGE . '...' . Padd_PageNavigation::POST_PAGE . '</span>';
 				}
 				if($larger_page_to_show > 0 && $larger_start_page_start > 0 && $larger_start_page_end <= $max_page) {
@@ -80,19 +80,19 @@ class Padd_PageNavigation {
 					}
 				}
 				if (($paged - 1) > 0) {
-					echo '<a href="'.clean_url(get_pagenum_link($paged - 1)).'" class="page prev" title="Previous">' . Padd_PageNavigation::ANTE_PAGE . '&laquo; Prev' . Padd_PageNavigation::POST_PAGE . '</a>';
+					echo '<a href="'.clean_url(get_pagenum_link($paged - 1)).'" class="prepage" title="Previous">' . Padd_PageNavigation::ANTE_PAGE . '&laquo; 上一页' . Padd_PageNavigation::POST_PAGE . '</a>';
 				}
 				for($i = $start_page; $i  <= $end_page; $i++) {						
 					if($i == $paged) {
 						$current_page_text = str_replace("%PAGE_NUMBER%", number_format_i18n($i), '%PAGE_NUMBER%');
-						echo '<span class="current">'. Padd_PageNavigation::ANTE_PAGE . $current_page_text. Padd_PageNavigation::POST_PAGE . '</span>';
+						echo '<span class="current"><strong>'. Padd_PageNavigation::ANTE_PAGE . $current_page_text. Padd_PageNavigation::POST_PAGE . '</strong></span>';
 					} else {
 						$page_text = str_replace("%PAGE_NUMBER%", number_format_i18n($i), '%PAGE_NUMBER%');
 						echo '<a href="'.clean_url(get_pagenum_link($i)).'" class="page" title="'.$page_text.'">' . Padd_PageNavigation::ANTE_PAGE .$page_text . Padd_PageNavigation::POST_PAGE . '</a>';
 					}
 				}
 				if (($paged + 1) <= $max_page) {
-					echo '<a href="'.clean_url(get_pagenum_link($paged + 1)).'" class="page next" title="Next">' . Padd_PageNavigation::ANTE_PAGE . 'Next &raquo;' . Padd_PageNavigation::POST_PAGE . '</a>';
+					echo '<a href="'.clean_url(get_pagenum_link($paged + 1)).'" class="nextpage" title="Next">' . Padd_PageNavigation::ANTE_PAGE . '下一页 &raquo;' . Padd_PageNavigation::POST_PAGE . '</a>';
 				}
 				if($larger_page_to_show > 0 && $larger_end_page_start < $max_page) {
 					for($i = $larger_end_page_start; $i <= $larger_end_page_end; $i+=$larger_page_multiple) {
@@ -102,8 +102,8 @@ class Padd_PageNavigation {
 				}
 				if ($end_page < $max_page) {
 					echo '<span class="extend">' . Padd_PageNavigation::ANTE_PAGE . '...' . Padd_PageNavigation::POST_PAGE . '</span>';
-					$last_page_text = str_replace("%TOTAL_PAGES%", number_format_i18n($max_page),'Last &raquo;');
-					echo '<a href="'.clean_url(get_pagenum_link($max_page)).'" class="last page-word" title="'.$last_page_text.'">' . Padd_PageNavigation::ANTE_PAGE .$last_page_text . Padd_PageNavigation::POST_PAGE . '</a>';
+					$last_page_text = str_replace("%TOTAL_PAGES%", number_format_i18n($max_page),'尾页 &raquo;');
+					echo '<a href="'.clean_url(get_pagenum_link($max_page)).'" class="lastpage" title="'.$last_page_text.'">' . Padd_PageNavigation::ANTE_PAGE .$last_page_text . Padd_PageNavigation::POST_PAGE . '</a>';
 				}
 				echo '</div>'.$after."\n";
 			}

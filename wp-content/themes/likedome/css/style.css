@@ -18,7 +18,8 @@ body{ font-size:12px; font-family:"宋体"; color:#333; word-break:break-all; wo
 a { color:#333; text-decoration: none;}
 a:hover { color:#007fe4; text-decoration:underline;}
 body{ background:url(../images/body-y.gif) center top repeat-y #dadada; }
-.wrapper, .wrapper2 {width:961px; margin:0 auto; text-align:left; overflow:hidden; }
+.wrapper{width:961px; margin:0 auto;  overflow:hidden; }
+ .wrapper2 {width:961px; margin:0 auto; text-align:left; overflow:hidden; }
 .wrapper2{ background:#fff; }
 /* common */
 .fl{ float:left; display:inline; }
@@ -181,6 +182,20 @@ dd.join{ height:23px; line-height:23p; color:#075377; }
 .playerList{ width:110%; }
 	.playerList li{ width:294px; height:154px; position:relative; margin:10px 12px 0 0; float:left; display:inline; }
 	.playerList img{ width:290px; height:150px; padding:1px; border:1px solid #ddd; }
+	
+	/*修改列表页*/
+	.list-xt li{ background: url("http://www.laidongwang.com/wp-content/themes/likedome/images/bg-hentry-1.png") no-repeat scroll left top transparent; border:1px solid #ddd;
+    float: left;
+    height: 308px; margin:6px 6px 0 0;
+    overflow: hidden;
+    padding: 13px;
+    width: 266px; display:inline;}
+	.list-xt li h4{ color:#666666; height:36px; width:100%; overflow:hidden; line-height:18px; font-size:14px; margin-bottom:5px; font-weight:normal;}
+	.list-xt li h4 a{color:#333; }
+	.list-xt li code{ display:block; height:36px; width:100%; overflow:hidden; line-height:18px; color:#999;}
+	.list-xt li p{ display:block; height:90px; width:100%; overflow:hidden; line-height:18px; color:#666;}
+	.list-xt img{ width:258px; height:140px; padding:1px; border:1px solid #ddd; }
+	/*结束*/
 
 .side-playerList{ width:100%; margin:0 0 0 3px; }
 	.side-playerList li{ margin:12px 0 0; }
@@ -280,7 +295,7 @@ dd.join{ height:23px; line-height:23p; color:#075377; }
 .myGame-info{ line-height:36px; }
 
 /*== 内页 ==*/
-.h1{ font-size:24px; line-height:40px; padding:15px 10px 0; text-align:center; }
+.h1{ font-size:24px; line-height:40px; padding:15px 10px 0; text-align:center; font-family:"宋体","黑体","Microsoft YaHei"; }
 .pageTitle{ line-height:26px; height:26px; text-align:center; color:#7e7e7e; }
 .pageTitle span{ margin:0 10px; }
 .pageTitle a{ color:#007dcb; }
@@ -303,9 +318,19 @@ dd.join{ height:23px; line-height:23p; color:#075377; }
 .comment-text1, .comment-text2{ background:#fff; border:1px solid #a3b6d3; height:16px; line-height:16px; padding:3px 4px; margin-right:5px; width:120px; }
 .comment-text2{ width:60px; }
 .comment-form a{ color:#f00; }
-
+.content{ font-size:14px; line-height:26px;}
+.content img{ margin:15px 0;}
 .videoPlay, .videoPlay embed, .videoPlay object, .videoPlay img{ width:600px; height:500px; }
 .chaxun{ width:100%; padding:15px;}
 .table table{ background:#CCC; border:#666; margin-top:15px;}
 
 .table table tr td { background:#FFF; line-height:30px;}
+/*登录后头部*/
+.hu-xt{ width:400px; padding:24px 2px 0 0; float:right; margin-right:-500px; display:inline;text-align:right;}
+
+.hu-xt .touxiang{ width:50px; height:50px; border:2px solid #dcdcdd; float:right; overflow:hidden;  display:inline;}
+.hu-xt .touxiang img{ width:50px; height:50px;}
+.hu-xt .topnew{ width:330px;  height:20px; float:letf; font-size:12px; overflow:hidden; }
+.hu-xt .topnew a{ color:#1f67af; margin-left:15px;}
+.hu-xt .topnew span{ font-size:14px; padding-right:8px;}
+.title2 #xiu a{ color:#FFFFFF;}
