@@ -12,7 +12,7 @@
 	</div>
 	<ul class="playerList">
 		<?php wp_reset_postdata(); ?>
-    	<?php $queryObject = new WP_Query('posts_per_page=9&cat=5');
+    	<?php $queryObject = new WP_Query('posts_per_page=4&cat=5');
         if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();?>
         <li><a href="<?php the_permalink(); ?>" target="_blank" title="<?php the_title_attribute(); ?>" >
         	<?php the_post_thumbnail(); ?>
@@ -28,7 +28,7 @@
 	</div>
 	<ul class="playerList">
 		<?php wp_reset_postdata(); ?>
-    	<?php $queryObject = new WP_Query('posts_per_page=9&cat=3');
+    	<?php $queryObject = new WP_Query('posts_per_page=4&cat=3');
         if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();?>
         <li><a href="<?php the_permalink(); ?>" target="_blank" title="<?php the_title_attribute(); ?>" >
         	<?php the_post_thumbnail(); ?>
@@ -44,7 +44,7 @@
 		<div class="clear"></div>
 	</div>
 	<ul class="playerList">
-    	<?php $queryObject = new WP_Query('posts_per_page=9&cat=4');
+    	<?php $queryObject = new WP_Query('posts_per_page=4&cat=4');
         if ($queryObject->have_posts()) : while ($queryObject->have_posts()) :$queryObject->the_post();?>
         <li><a href="<?php the_permalink(); ?>" target="_blank" title="<?php the_title_attribute(); ?>" >
         	<?php the_post_thumbnail(); ?>
