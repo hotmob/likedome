@@ -75,6 +75,7 @@ function mytheme_comment($comment, $args, $depth) {
     </li>
     <?php
 }
+
 function get_content_image() {
     global $post, $posts;
 	$first_img = '';
@@ -87,4 +88,34 @@ function get_content_image() {
 		return null;
 	}
 	return $first_img;
+}
+
+/**
+ * 获取参加比赛按钮
+ */
+function get_apply_match_button($userid, $matchid) {
+	if (getUserApply($userid, $matchid) != NULL) : ?>
+		<div class="btn margin-r10 fl">
+		已经报名
+		</div>
+	<?php else : ?>
+		<a class="btn margin-r10 fl" onclick="showWindowsFrameTimer('apply_match', 'wp-content/plugins/likedome/tournament.php?opt=apply&matchid=<?php echo $related_post->id; ?>&flag=1', 500);" href="###">
+		点击参加
+		</a>
+	<?php endif; 
+}
+
+/**
+ * 获取关注比赛按钮
+ */
+function get_follow_match_button($userid, $matchid) {
+	if (getUserFollow($userid, $matchid) != NULL) : ?>
+		<div class="btn margin-r10 fl">
+		已经关注
+		</div>
+	<?php else : ?>
+		<a class="btn margin-r10 fl" onclick="showWindowsFrameTimer('follow_match', 'wp-content/plugins/likedome/tournament.php?opt=follow&matchid=<?php echo $related_post->id; ?>&flag=1', 500);" href="###">
+		关注比赛
+		</a>
+	<?php endif; 
 }

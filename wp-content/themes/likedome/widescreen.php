@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: big page
+Template Name: widescreen
 */
 ?>
 <?php get_header(); ?>

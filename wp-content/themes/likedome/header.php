@@ -29,18 +29,22 @@
         </script>
         <script type="text/javascript">
 		function showWindowsFrame(url) {
-			Dialog.frame("herdDialog", url, {
+			showWindowsFrameTimer("herdDialog", url, 3000);
+		};
+		
+		function showWindowsFrameTimer(name, url, timer) {
+			Dialog.frame(name, url, {
 				"width" : "400px",
 				"title" : "来动网",
 				'modal' : true,
 				"closeModal" : false
 			});
-			setTimeout("windowsFrameReload()", 3000);
+			setTimeout("windowsFrameReload()", timer);
 		};
-
+		
 		function windowsFrameReload() {
 			location.reload();
-		}
+		};
     	</script>
     </head>
 

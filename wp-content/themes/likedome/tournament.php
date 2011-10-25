@@ -1022,7 +1022,7 @@
 		<div class="fro margin-r30 margin-t13 width-231 joinGame">
 			<h4><span>30人报名</span><span class="margin-l10">180人关注</span></h4>
 			<p class="margin-t6">
-				<a id="frame" onclick="showWindowsFrame('wp-content/plugins/likedome/likedome.php?opt=competition&type=1&flag=1');" class="textOver btn4">我要参赛</a>
+				<a id="frame" onclick="showWindowsFrame('wp-content/plugins/likedome/tournament.php?opt=apply&type=1&flag=1');" class="textOver btn4">我要参赛</a>
 			</p>
 			<!--<p class="margin-t6"><a href="#" class="textOver btn6">取消报名</a></p>-->
 			<p class="margin-t22">
@@ -1039,7 +1039,7 @@
 					<a href="#">选手认证</a>
 				</p>
 				<p>
-					<a onclick="showWindowsFrame('wp-content/plugins/likedome/likedome.php?opt=competition&type=1&flag=1');" href="#">报名参赛</a>
+					<a onclick="showWindowsFrame('wp-content/plugins/likedome/tournament.php?opt=apply&type=1&flag=1');" href="#">报名参赛</a>
 				</p>
 				<p>
 					<a href="#">等待审核</a>

@@ -57,7 +57,7 @@
 							if($count == 0){ 
 								$count++; ?>
 								<div class="margin-t10 tabimg">
-									<a href="<?php the_permalink(); ?>" target="_blank" class="fl" title="<?php the_title_attribute(); ?>" >
+									<a href="?p=77&matchid=<?php echo $related_post->id; ?>" target="_blank" class="fl" title="<?php the_title_attribute(); ?>" >
 										<?php 
 										$imageContent = get_content_image();
 										if(!empty($imageContent)){
@@ -70,7 +70,9 @@
 								<dl class="margin-t10 tablist">
 									<?php the_excerpt(); ?>
 									<dd class="margin-t13 join">
-										<a class="btn margin-r10 fl" href="/?=77&matchid="<?php echo $related_post->id; ?>>点击参加</a><a class="btn margin-r10 fl" href="#">关注比赛</a><span class="margin-r10 fl">30人参加</span><span class="margin-r10 fl">180人关注</span>
+										<?php get_apply_match_button($current_user->ID, $related_post->id); ?>
+										<?php get_follow_match_button($current_user->ID, $related_post->id); ?>
+										<span class="margin-r10 fl"><?php echo getMatchApplyNum($related_post->id); ?>人参加</span><span class="margin-r10 fl"><?php echo getMatchFollowNum($related_post->id); ?>人关注</span>
 										<!--<span class="margin-r10 fl listen height-23"><a style="color:#222; font-weight:bold;" href="#">小天</a></span> <a href="#" class="fl" style="color:#3a8dc9;">立即收听</a>-->
 										<div id="txWB_W1"></div>
 										<script type="text/javascript">
@@ -85,7 +87,8 @@
 								<li> <a href="<?php the_permalink(); ?>" target="_blank"><?php the_post_thumbnail(); ?></a>
 				                    <dl>
 				                        <?php  the_excerpt();  ?>
-				                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
+				                        <dd class="join margin-t10"> 
+				                        <?php get_apply_match_button($current_user->ID, $related_post->id); ?>
 				                    </dl>
 				                    <div class="clear"></div>
 				                </li>
@@ -155,7 +158,7 @@
 							<li> <a href="<?php the_permalink(); ?>" target="_blank"><?php the_post_thumbnail(); ?></a>
 			                    <dl>
 			                        <?php the_excerpt(); ?>
-			                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
+			                        <?php get_apply_match_button($current_user->ID, $related_post->id); ?>
 			                    </dl>
 			                    <div class="clear"></div>
 			                </li>
@@ -188,7 +191,7 @@
 							<li> <a href="<?php the_permalink(); ?>" target="_blank"><?php the_post_thumbnail(); ?></a>
 			                    <dl>
 			                        <?php the_excerpt(); ?>
-			                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
+			                        <?php get_apply_match_button($current_user->ID, $related_post->id); ?>
 			                    </dl>
 			                    <div class="clear"></div>
 			                </li>
