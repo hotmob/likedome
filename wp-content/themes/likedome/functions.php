@@ -83,7 +83,8 @@ function get_content_image() {
 	$output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
 	$first_img = $matches[1][0];
 	if(empty($first_img)){ //Defines a default image
-		$first_img = "在这里指定如果没有图片则显示的默认图片路径";
+		// $first_img = "在这里指定如果没有图片则显示的默认图片路径";
+		return null;
 	}
 	return $first_img;
 }

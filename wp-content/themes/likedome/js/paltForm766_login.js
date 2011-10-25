@@ -20,7 +20,7 @@ $(function(){
 	'</div>'+
 	'</form>'+
 	'<div class="login1">'+
-		'<p><a href="http://hotmob.gicp.net/Likedome/bbs/connect.php?mod=login&op=init&referer=http://hotmob.gicp.net/Likedome/&statfrom=login_simple" class="login-tx">用qq账号登录</a></p>'+
+		'<p><a href="bbs/connect.php?mod=login&op=init&referer=http://www.laidongwang.com/&statfrom=login_simple" class="login-tx">用qq账号登录</a></p>'+
 		'<p class="secondPra">只需一步快速开始</p>'+
 	'</div>'
 	document.getElementById("platFrom766_login").innerHTML = platForm766_str;

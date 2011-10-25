@@ -59,7 +59,7 @@
 						<div class="login fro" id="platFrom766_login" style="visibility:hidden"></div>
                         <div class="hu-xt">
 	                		<ul>
-		                    	<li class="touxiang"><a href="http://www.laidongwang.com/bbs/home.php" target="_blank"><img src="http://www.laidongwang.com/bbs/uc_server/avatar.php?uid=1&size=small" /></a></li>
+		                    	<li class="touxiang"><a href="http://www.laidongwang.com/bbs/home.php" target="_blank"><img src="http://www.laidongwang.com/bbs/uc_server/avatar.php?uid=<?php echo $current_user->ID; ?>&size=small" /></a></li>
 		                    	<li class="topnew"><span><?php echo $current_user->data->display_name; ?></span>欢迎你回来！</li>
 		                        <li class="topnew"><a href="http://www.laidongwang.com/bbs/home.php" target="_blank">个人空间</a><a href="http://www.laidongwang.com/bbs/member.php?mod=logging&action=logout">退出登录</a></li>
 	                    	</ul>
