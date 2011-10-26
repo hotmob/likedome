@@ -47,15 +47,15 @@ class Likedome {
 		// add_action( 'init', array( &$this, 'load_dialect' ) );
 		// add_action( 'init', array( &$this, 'clear_cookie' ) );
 		// Give notice
-		add_action( 'admin_notices', array( &$this, 'notices' ) );
+		// add_action( 'admin_notices', array( &$this, 'notices' ) );
 		// Add Admin menu for ucenter integration
 		add_action( 'admin_menu', array( &$this, 'add_menu_page' ) );
 		// Clean up when deactivate
-		add_action( 'deactivated_plugin', array( &$this, 'deactivated_plugin' ) );
+		// add_action( 'deactivated_plugin', array( &$this, 'deactivated_plugin' ) );
 		// Activate
-		add_action( 'activated_plugin', array( &$this, 'activated_plugin' ) );
+		// add_action( 'activated_plugin', array( &$this, 'activated_plugin' ) );
 		// Load css
-		add_action( 'admin_head', array( &$this, 'load_css' ) );
+		// add_action( 'admin_head', array( &$this, 'load_css' ) );
 		
 		
 		### Function: Add Likedome Administration Menu

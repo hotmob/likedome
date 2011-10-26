@@ -16,9 +16,9 @@ error_reporting(0);
 define('IN_UC', TRUE);
 define('UC_CLIENT_VERSION', '1.5.0');
 define('UC_CLIENT_RELEASE', '20081212');
-define('UC_ROOT', substr(__FILE__, 0, -10));		//note ÓÃ»§ÖÐÐÄ¿Í»§¶ËµÄ¸ùÄ¿Â¼ UC_CLIENTROOT
-define('UC_DATADIR', UC_ROOT.'./data/');		//note ÓÃ»§ÖÐÐÄµÄÊý¾Ý»º´æÄ¿Â¼
-define('UC_DATAURL', UC_API.'/data');			//note ÓÃ»§ÖÐÐÄµÄÊý¾Ý URL
+define('UC_ROOT', substr(__FILE__, 0, -10));		//note ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ä¿Í»ï¿½ï¿½ËµÄ¸ï¿½Ä¿Â¼ UC_CLIENTROOT
+define('UC_DATADIR', UC_ROOT.'./data/');		//note ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½Ä¿Â¼
+define('UC_DATAURL', UC_API.'/data');			//note ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ URL
 define('UC_API_FUNC', UC_CONNECT == 'mysql' ? 'uc_api_mysql' : 'uc_api_post');
 $GLOBALS['uc_controls'] = array();
 
@@ -52,11 +52,11 @@ function uc_stripslashes($string) {
 }
 
 /**
- *  dfopen ·½Ê½È¡Ö¸¶¨µÄÄ£¿éºÍ¶¯×÷µÄÊý¾Ý
+ *  dfopen ï¿½ï¿½Ê½È¡Ö¸ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½Í¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *
- * @param string $module	ÇëÇóµÄÄ£¿é
- * @param string $action 	ÇëÇóµÄ¶¯×÷
- * @param array $arg		²ÎÊý£¨»á¼ÓÃÜµÄ·½Ê½´«ËÍ£©
+ * @param string $module	ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+ * @param string $action 	ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
+ * @param array $arg		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÜµÄ·ï¿½Ê½ï¿½ï¿½ï¿½Í£ï¿½
  * @return string
  */
 function uc_api_post($module, $action, $arg = array()) {
@@ -81,12 +81,12 @@ function uc_api_post($module, $action, $arg = array()) {
 }
 
 /**
- * ¹¹Ôì·¢ËÍ¸øÓÃ»§ÖÐÐÄµÄÇëÇóÊý¾Ý
+ * ï¿½ï¿½ï¿½ì·¢ï¿½Í¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *
- * @param string $module	ÇëÇóµÄÄ£¿é
- * @param string $action	ÇëÇóµÄ¶¯×÷
- * @param string $arg		²ÎÊý£¨»á¼ÓÃÜµÄ·½Ê½´«ËÍ£©
- * @param string $extra		¸½¼Ó²ÎÊý£¨´«ËÍÊ±²»¼ÓÃÜ£©
+ * @param string $module	ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+ * @param string $action	ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
+ * @param string $arg		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÜµÄ·ï¿½Ê½ï¿½ï¿½ï¿½Í£ï¿½
+ * @param string $extra		ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ü£ï¿½
  * @return string
  */
 function uc_api_requestdata($module, $action, $arg='', $extra='') {
@@ -106,11 +106,11 @@ function uc_api_input($data) {
 }
 
 /**
- * MYSQL ·½Ê½È¡Ö¸¶¨µÄÄ£¿éºÍ¶¯×÷µÄÊý¾Ý
+ * MYSQL ï¿½ï¿½Ê½È¡Ö¸ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½Í¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *
- * @param string $model		ÇëÇóµÄÄ£¿é
- * @param string $action	ÇëÇóµÄ¶¯×÷
- * @param string $args		²ÎÊý£¨»á¼ÓÃÜµÄ·½Ê½´«ËÍ£©
+ * @param string $model		ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+ * @param string $action	ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
+ * @param string $args		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÜµÄ·ï¿½Ê½ï¿½ï¿½ï¿½Í£ï¿½
  * @return mix
  */
 function uc_api_mysql($model, $action, $args=array()) {
@@ -142,13 +142,13 @@ function uc_unserialize($s) {
 }
 
 /**
- * ×Ö·û´®¼ÓÃÜÒÔ¼°½âÃÜº¯Êý
+ * ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½Üºï¿½ï¿½ï¿½
  *
- * @param string $string	Ô­ÎÄ»òÕßÃÜÎÄ
- * @param string $operation	²Ù×÷(ENCODE | DECODE), Ä¬ÈÏÎª DECODE
- * @param string $key		ÃÜÔ¿
- * @param int $expiry		ÃÜÎÄÓÐÐ§ÆÚ, ¼ÓÃÜÊ±ºòÓÐÐ§£¬ µ¥Î» Ãë£¬0 ÎªÓÀ¾ÃÓÐÐ§
- * @return string		´¦ÀíºóµÄ Ô­ÎÄ»òÕß ¾­¹ý base64_encode ´¦ÀíºóµÄÃÜÎÄ
+ * @param string $string	Ô­ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @param string $operation	ï¿½ï¿½ï¿½ï¿½(ENCODE | DECODE), Ä¬ï¿½ï¿½Îª DECODE
+ * @param string $key		ï¿½ï¿½Ô¿
+ * @param int $expiry		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ ï¿½ï¿½Î» ï¿½ë£¬0 Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§
+ * @return string		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ô­ï¿½Ä»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ base64_encode ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *
  * @example
  *
@@ -156,14 +156,14 @@ function uc_unserialize($s) {
  * 	$b = authcode($a, 'DECODE', 'key');  // $b(abc)
  *
  * 	$a = authcode('abc', 'ENCODE', 'key', 3600);
- * 	$b = authcode('abc', 'DECODE', 'key'); // ÔÚÒ»¸öÐ¡Ê±ÄÚ£¬$b(abc)£¬·ñÔò $b Îª¿Õ
+ * 	$b = authcode('abc', 'DECODE', 'key'); // ï¿½ï¿½Ò»ï¿½ï¿½Ð¡Ê±ï¿½Ú£ï¿½$b(abc)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ $b Îªï¿½ï¿½
  */
 function uc_authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 
-	$ckey_length = 4;	//note Ëæ»úÃÜÔ¿³¤¶È È¡Öµ 0-32;
-				//note ¼ÓÈëËæ»úÃÜÔ¿£¬¿ÉÒÔÁîÃÜÎÄÎÞÈÎºÎ¹æÂÉ£¬¼´±ãÊÇÔ­ÎÄºÍÃÜÔ¿ÍêÈ«ÏàÍ¬£¬¼ÓÃÜ½á¹ûÒ²»áÃ¿´Î²»Í¬£¬Ôö´óÆÆ½âÄÑ¶È¡£
-				//note È¡ÖµÔ½´ó£¬ÃÜÎÄ±ä¶¯¹æÂÉÔ½´ó£¬ÃÜÎÄ±ä»¯ = 16 µÄ $ckey_length ´Î·½
-				//note µ±´ËÖµÎª 0 Ê±£¬Ôò²»²úÉúËæ»úÃÜÔ¿
+	$ckey_length = 4;	//note ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½ È¡Öµ 0-32;
+				//note ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎºÎ¹ï¿½ï¿½É£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½Äºï¿½ï¿½ï¿½Ô¿ï¿½ï¿½È«ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ü½ï¿½ï¿½Ò²ï¿½ï¿½Ã¿ï¿½Î²ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½Ñ¶È¡ï¿½
+				//note È¡ÖµÔ½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ä¶¯ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ä»¯ = 16 ï¿½ï¿½ $ckey_length ï¿½Î·ï¿½
+				//note ï¿½ï¿½ï¿½ï¿½ÖµÎª 0 Ê±ï¿½ï¿½ï¿½ò²»²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿
 
 	$key = md5($key ? $key : UC_KEY);
 	$keya = md5(substr($key, 0, 16));
@@ -212,16 +212,16 @@ function uc_authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 }
 
 /**
- *  Ô¶³Ì´ò¿ªURL
- *  @param string $url		´ò¿ªµÄurl£¬¡¡Èç http://www.baidu.com/123.htm
- *  @param int $limit		È¡·µ»ØµÄÊý¾ÝµÄ³¤¶È
- *  @param string $post		Òª·¢ËÍµÄ POST Êý¾Ý£¬Èçuid=1&password=1234
- *  @param string $cookie	ÒªÄ£ÄâµÄ COOKIE Êý¾Ý£¬Èçuid=123&auth=a2323sd2323
- *  @param bool $bysocket	TRUE/FALSE ÊÇ·ñÍ¨¹ýSOCKET´ò¿ª
- *  @param string $ip		IPµØÖ·
- *  @param int $timeout		Á¬½Ó³¬Ê±Ê±¼ä
- *  @param bool $block		ÊÇ·ñÎª×èÈûÄ£Ê½
- *  @return			È¡µ½µÄ×Ö·û´®
+ *  Ô¶ï¿½Ì´ï¿½URL
+ *  @param string $url		ï¿½ò¿ªµï¿½urlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ http://www.baidu.com/123.htm
+ *  @param int $limit		È¡ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ÝµÄ³ï¿½ï¿½ï¿½
+ *  @param string $post		Òªï¿½ï¿½ï¿½Íµï¿½ POST ï¿½ï¿½Ý£ï¿½ï¿½ï¿½uid=1&password=1234
+ *  @param string $cookie	ÒªÄ£ï¿½ï¿½ï¿½ COOKIE ï¿½ï¿½Ý£ï¿½ï¿½ï¿½uid=123&auth=a2323sd2323
+ *  @param bool $bysocket	TRUE/FALSE ï¿½Ç·ï¿½Í¨ï¿½ï¿½SOCKETï¿½ï¿½
+ *  @param string $ip		IPï¿½ï¿½Ö·
+ *  @param int $timeout		ï¿½ï¿½ï¿½Ó³ï¿½Ê±Ê±ï¿½ï¿½
+ *  @param bool $block		ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½Ä£Ê½
+ *  @return			È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
  */
 function uc_fopen2($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE, $ip = '', $timeout = 15, $block = TRUE) {
 	$__times__ = isset($_GET['__times__']) ? intval($_GET['__times__']) + 1 : 1;
@@ -266,6 +266,8 @@ function uc_fopen($url, $limit = 0, $post = '', $cookie = '', $bysocket = FALSE,
 		$out .= "Cookie: $cookie\r\n\r\n";
 	}
 	$fp = @fsockopen(($ip ? $ip : $host), $port, $errno, $errstr, $timeout);
+	
+		
 	if(!$fp) {
 		return '';//note $errstr : $errno \r\n
 	} else {
@@ -301,25 +303,25 @@ function uc_app_ls() {
 }
 
 /**
- * Ìí¼Ó feed
+ * ï¿½ï¿½ï¿½ feed
  *
- * @param string $icon			Í¼±ê
+ * @param string $icon			Í¼ï¿½ï¿½
  * @param string $uid			uid
- * @param string $username		ÓÃ»§Ãû
- * @param string $title_template	±êÌâÄ£°å
- * @param array  $title_data		±êÌâÄÚÈÝ
- * @param string $body_template		ÄÚÈÝÄ£°å
- * @param array  $body_data		ÄÚÈÝÄÚÈÝ
- * @param string $body_general		±£Áô
- * @param string $target_ids		±£Áô
+ * @param string $username		ï¿½Ã»ï¿½ï¿½ï¿½
+ * @param string $title_template	ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+ * @param array  $title_data		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @param string $body_template		ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+ * @param array  $body_data		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @param string $body_general		ï¿½ï¿½ï¿½ï¿½
+ * @param string $target_ids		ï¿½ï¿½ï¿½ï¿½
  * @param array $images		Í¼Æ¬
- * 	¸ñÊ½Îª:
+ * 	ï¿½ï¿½Ê½Îª:
  * 		array(
  * 			array('url'=>'http://domain1/1.jpg', 'link'=>'http://domain1'),
  * 			array('url'=>'http://domain2/2.jpg', 'link'=>'http://domain2'),
  * 			array('url'=>'http://domain3/3.jpg', 'link'=>'http://domain3'),
  * 		)
- * 	Ê¾Àý:
+ * 	Ê¾ï¿½ï¿½:
  * 		$feed['images'][] = array('url'=>$vthumb1, 'link'=>$vthumb1);
  * 		$feed['images'][] = array('url'=>$vthumb2, 'link'=>$vthumb2);
  * @return int feedid
@@ -349,7 +351,7 @@ function uc_feed_add($icon, $uid, $username, $title_template='', $title_data='',
 }
 
 /**
- * Ã¿´ÎÈ¡¶àÉÙÌõ
+ * Ã¿ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *
  * @param int $limit
  * @return array()
@@ -360,34 +362,34 @@ function uc_feed_get($limit = 100, $delete = TRUE) {
 }
 
 /**
- * Ìí¼ÓºÃÓÑ
+ * ï¿½ï¿½Óºï¿½ï¿½ï¿½
  *
- * @param int $uid		ÓÃ»§ID
- * @param int $friendid		ºÃÓÑID
+ * @param int $uid		ï¿½Ã»ï¿½ID
+ * @param int $friendid		ï¿½ï¿½ï¿½ï¿½ID
  * @return
- * 	>0 ³É¹¦
- * 	<=0 Ê§°Ü
+ * 	>0 ï¿½É¹ï¿½
+ * 	<=0 Ê§ï¿½ï¿½
  */
 function uc_friend_add($uid, $friendid, $comment='') {
 	return call_user_func(UC_API_FUNC, 'friend', 'add', array('uid'=>$uid, 'friendid'=>$friendid, 'comment'=>$comment));
 }
 
 /**
- * É¾³ýºÃÓÑ
+ * É¾ï¿½ï¿½ï¿½ï¿½ï¿½
  *
- * @param int $uid		ÓÃ»§ID
- * @param array $friendids	ºÃÓÑID
+ * @param int $uid		ï¿½Ã»ï¿½ID
+ * @param array $friendids	ï¿½ï¿½ï¿½ï¿½ID
  * @return
- * 	>0 ³É¹¦
- * 	<=0 Ê§°Ü,»òÕßºÃÓÑÒÑ¾­É¾³ý
+ * 	>0 ï¿½É¹ï¿½
+ * 	<=0 Ê§ï¿½ï¿½,ï¿½ï¿½ï¿½ßºï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½É¾ï¿½ï¿½
  */
 function uc_friend_delete($uid, $friendids) {
 	return call_user_func(UC_API_FUNC, 'friend', 'delete', array('uid'=>$uid, 'friendids'=>$friendids));
 }
 
 /**
- * ºÃÓÑ×ÜÊý
- * @param int $uid		ÓÃ»§ID
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @param int $uid		ï¿½Ã»ï¿½ID
  * @return int
  */
 function uc_friend_totalnum($uid, $direction = 0) {
@@ -395,13 +397,13 @@ function uc_friend_totalnum($uid, $direction = 0) {
 }
 
 /**
- * ºÃÓÑÁÐ±í
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
  *
- * @param int $uid		ÓÃ»§ID
- * @param int $page		µ±Ç°Ò³
- * @param int $pagesize		Ã¿Ò³ÌõÄ¿Êý
- * @param int $totalnum		×ÜÊý
- * @param int $direction	Ä¬ÈÏÎªÕýÏò. ÕýÏò:1 , ·´Ïò:2 , Ë«Ïò:3
+ * @param int $uid		ï¿½Ã»ï¿½ID
+ * @param int $page		ï¿½ï¿½Ç°Ò³
+ * @param int $pagesize		Ã¿Ò³ï¿½ï¿½Ä¿ï¿½ï¿½
+ * @param int $totalnum		ï¿½ï¿½ï¿½ï¿½
+ * @param int $direction	Ä¬ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½:1 , ï¿½ï¿½ï¿½ï¿½:2 , Ë«ï¿½ï¿½:3
  * @return array
  */
 function uc_friend_ls($uid, $page = 1, $pagesize = 10, $totalnum = 10, $direction = 0) {
@@ -410,40 +412,40 @@ function uc_friend_ls($uid, $page = 1, $pagesize = 10, $totalnum = 10, $directio
 }
 
 /**
- * ÓÃ»§×¢²á
+ * ï¿½Ã»ï¿½×¢ï¿½ï¿½
  *
- * @param string $username 	ÓÃ»§Ãû
- * @param string $password 	ÃÜÂë
+ * @param string $username 	ï¿½Ã»ï¿½ï¿½ï¿½
+ * @param string $password 	ï¿½ï¿½ï¿½ï¿½
  * @param string $email		Email
- * @param int $questionid	°²È«ÌáÎÊ
- * @param string $answer 	°²È«ÌáÎÊ´ð°¸
+ * @param int $questionid	ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½
+ * @param string $answer 	ï¿½ï¿½È«ï¿½ï¿½ï¿½Ê´ï¿½
  * @return int
-	-1 : ÓÃ»§Ãû²»ºÏ·¨
-	-2 : °üº¬²»ÔÊÐí×¢²áµÄ´ÊÓï
-	-3 : ÓÃ»§ÃûÒÑ¾­´æÔÚ
-	-4 : email ¸ñÊ½ÓÐÎó
-	-5 : email ²»ÔÊÐí×¢²á
-	-6 : ¸Ã email ÒÑ¾­±»×¢²á
-	>1 : ±íÊ¾³É¹¦£¬ÊýÖµÎª UID
+	-1 : ï¿½Ã»ï¿½ï¿½ï¿½Ï·ï¿½
+	-2 : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
+	-3 : ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
+	-4 : email ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½
+	-5 : email ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½
+	-6 : ï¿½ï¿½ email ï¿½Ñ¾ï¿½ï¿½ï¿½×¢ï¿½ï¿½
+	>1 : ï¿½ï¿½Ê¾ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÎª UID
 */
 function uc_user_register($username, $password, $email, $questionid = '', $answer = '') {
 	return call_user_func(UC_API_FUNC, 'user', 'register', array('username'=>$username, 'password'=>$password, 'email'=>$email, 'questionid'=>$questionid, 'answer'=>$answer));
 }
 
 /**
- * ÓÃ»§µÇÂ½¼ì²é
+ * ï¿½Ã»ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½
  *
- * @param string $username	ÓÃ»§Ãû/uid
- * @param string $password	ÃÜÂë
- * @param int $isuid		ÊÇ·ñÎªuid
- * @param int $checkques	ÊÇ·ñÊ¹ÓÃ¼ì²é°²È«ÎÊ´ð
- * @param int $questionid	°²È«ÌáÎÊ
- * @param string $answer 	°²È«ÌáÎÊ´ð°¸
+ * @param string $username	ï¿½Ã»ï¿½ï¿½ï¿½/uid
+ * @param string $password	ï¿½ï¿½ï¿½ï¿½
+ * @param int $isuid		ï¿½Ç·ï¿½Îªuid
+ * @param int $checkques	ï¿½Ç·ï¿½Ê¹ï¿½Ã¼ï¿½é°²È«ï¿½Ê´ï¿½
+ * @param int $questionid	ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½
+ * @param string $answer 	ï¿½ï¿½È«ï¿½ï¿½ï¿½Ê´ï¿½
  * @return array (uid/status, username, password, email)
- 	Êý×éµÚÒ»Ïî
- 	1  : ³É¹¦
-	-1 : ÓÃ»§²»´æÔÚ,»òÕß±»É¾³ý
-	-2 : ÃÜÂë´í
+ 	ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
+ 	1  : ï¿½É¹ï¿½
+	-1 : ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ß±ï¿½É¾ï¿½ï¿½
+	-2 : ï¿½ï¿½ï¿½ï¿½ï¿½
 */
 function uc_user_login($username, $password, $isuid = 0, $checkques = 0, $questionid = '', $answer = '') {
 	$isuid = intval($isuid);
@@ -452,10 +454,10 @@ function uc_user_login($username, $password, $isuid = 0, $checkques = 0, $questi
 }
 
 /**
- * ½øÈëÍ¬²½µÇÂ¼´úÂë
+ * ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
  *
- * @param int $uid		ÓÃ»§ID
- * @return string 		HTML´úÂë
+ * @param int $uid		ï¿½Ã»ï¿½ID
+ * @return string 		HTMLï¿½ï¿½ï¿½ï¿½
  */
 function uc_user_synlogin($uid) {
 	$uid = intval($uid);
@@ -464,9 +466,9 @@ function uc_user_synlogin($uid) {
 }
 
 /**
- * ½øÈëÍ¬²½µÇ³ö´úÂë
+ * ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ç³ï¿½ï¿½ï¿½ï¿½ï¿½
  *
- * @return string 		HTML´úÂë
+ * @return string 		HTMLï¿½ï¿½ï¿½ï¿½
  */
 function uc_user_synlogout() {
 	$return = uc_api_post('user', 'synlogout', array());
@@ -474,109 +476,109 @@ function uc_user_synlogout() {
 }
 
 /**
- * ±à¼­ÓÃ»§
+ * ï¿½à¼­ï¿½Ã»ï¿½
  *
- * @param string $username	ÓÃ»§Ãû
- * @param string $oldpw		¾ÉÃÜÂë
- * @param string $newpw		ÐÂÃÜÂë
+ * @param string $username	ï¿½Ã»ï¿½ï¿½ï¿½
+ * @param string $oldpw		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @param string $newpw		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @param string $email		Email
- * @param int $ignoreoldpw 	ÊÇ·ñºöÂÔ¾ÉÃÜÂë, ºöÂÔ¾ÉÃÜÂë, Ôò²»½øÐÐ¾ÉÃÜÂëÐ£Ñé.
- * @param int $questionid	°²È«ÌáÎÊ
- * @param string $answer 	°²È«ÌáÎÊ´ð°¸
+ * @param int $ignoreoldpw 	ï¿½Ç·ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò²»½ï¿½ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½.
+ * @param int $questionid	ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½
+ * @param string $answer 	ï¿½ï¿½È«ï¿½ï¿½ï¿½Ê´ï¿½
  * @return int
- 	1  : ÐÞ¸Ä³É¹¦
- 	0  : Ã»ÓÐÈÎºÎÐÞ¸Ä
-  	-1 : ¾ÉÃÜÂë²»ÕýÈ·
-	-4 : email ¸ñÊ½ÓÐÎó
-	-5 : email ²»ÔÊÐí×¢²á
-	-6 : ¸Ã email ÒÑ¾­±»×¢²á
-	-7 : Ã»ÓÐ×öÈÎºÎÐÞ¸Ä
-	-8 : ÊÜ±£»¤µÄÓÃ»§£¬Ã»ÓÐÈ¨ÏÞÐÞ¸Ä
+ 	1  : ï¿½Þ¸Ä³É¹ï¿½
+ 	0  : Ã»ï¿½ï¿½ï¿½Îºï¿½ï¿½Þ¸ï¿½
+  	-1 : ï¿½ï¿½ï¿½ï¿½ï¿½ë²»ï¿½ï¿½È·
+	-4 : email ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½
+	-5 : email ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½
+	-6 : ï¿½ï¿½ email ï¿½Ñ¾ï¿½ï¿½ï¿½×¢ï¿½ï¿½
+	-7 : Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½Þ¸ï¿½
+	-8 : ï¿½Ü±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ã»ï¿½ï¿½È¨ï¿½ï¿½ï¿½Þ¸ï¿½
 */
 function uc_user_edit($username, $oldpw, $newpw, $email, $ignoreoldpw = 0, $questionid = '', $answer = '') {
 	return call_user_func(UC_API_FUNC, 'user', 'edit', array('username'=>$username, 'oldpw'=>$oldpw, 'newpw'=>$newpw, 'email'=>$email, 'ignoreoldpw'=>$ignoreoldpw, 'questionid'=>$questionid, 'answer'=>$answer));
 }
 
 /**
- * É¾³ýÓÃ»§
+ * É¾ï¿½ï¿½ï¿½Ã»ï¿½
  *
- * @param string/array $uid	ÓÃ»§µÄ UID
+ * @param string/array $uid	ï¿½Ã»ï¿½ï¿½ï¿½ UID
  * @return int
- 	>0 : ³É¹¦
- 	0 : Ê§°Ü
+ 	>0 : ï¿½É¹ï¿½
+ 	0 : Ê§ï¿½ï¿½
  */
 function uc_user_delete($uid) {
 	return call_user_func(UC_API_FUNC, 'user', 'delete', array('uid'=>$uid));
 }
 
 /**
- * É¾³ýÓÃ»§Í·Ïñ
+ * É¾ï¿½ï¿½ï¿½Ã»ï¿½Í·ï¿½ï¿½
  *
- * @param string/array $uid	ÓÃ»§µÄ UID
+ * @param string/array $uid	ï¿½Ã»ï¿½ï¿½ï¿½ UID
  */
 function uc_user_deleteavatar($uid) {
 	uc_api_post('user', 'deleteavatar', array('uid'=>$uid));
 }
 
 /**
- * ¼ì²éÓÃ»§ÃûÊÇ·ñÎªºÏ·¨
+ * ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½Ï·ï¿½
  *
- * @param string $username	ÓÃ»§Ãû
+ * @param string $username	ï¿½Ã»ï¿½ï¿½ï¿½
  * @return int
- 	 1 : ºÏ·¨
-	-1 : ÓÃ»§Ãû²»ºÏ·¨
-	-2 : °üº¬ÒªÔÊÐí×¢²áµÄ´ÊÓï
-	-3 : ÓÃ»§ÃûÒÑ¾­´æÔÚ
+ 	 1 : ï¿½Ï·ï¿½
+	-1 : ï¿½Ã»ï¿½ï¿½ï¿½Ï·ï¿½
+	-2 : ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
+	-3 : ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 function uc_user_checkname($username) {
 	return call_user_func(UC_API_FUNC, 'user', 'check_username', array('username'=>$username));
 }
 
 /**
- * ¼ì²éEmailµØÖ·ÊÇ·ñÕýÈ·
+ * ï¿½ï¿½ï¿½Emailï¿½ï¿½Ö·ï¿½Ç·ï¿½ï¿½ï¿½È·
  *
  * @param string $email		Email
  * @return
- *  	1  : ³É¹¦
- * 	-4 : email ¸ñÊ½ÓÐÎó
- * 	-5 : email ²»ÔÊÐí×¢²á
- * 	-6 : ¸Ã email ÒÑ¾­±»×¢²á
+ *  	1  : ï¿½É¹ï¿½
+ * 	-4 : email ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½
+ * 	-5 : email ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½
+ * 	-6 : ï¿½ï¿½ email ï¿½Ñ¾ï¿½ï¿½ï¿½×¢ï¿½ï¿½
  */
 function uc_user_checkemail($email) {
 	return call_user_func(UC_API_FUNC, 'user', 'check_email', array('email'=>$email));
 }
 
 /**
- * Ìí¼Ó±£»¤ÓÃ»§
+ * ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ï¿½Ã»ï¿½
  *
- * @param string/array $username ±£»¤ÓÃ»§Ãû
- * @param string $admin    ²Ù×÷µÄ¹ÜÀíÔ±
+ * @param string/array $username ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
+ * @param string $admin    ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½Ô±
  * @return
- * 	-1 : Ê§°Ü
- * 	 1 : ³É¹¦
+ * 	-1 : Ê§ï¿½ï¿½
+ * 	 1 : ï¿½É¹ï¿½
  */
 function uc_user_addprotected($username, $admin='') {
 	return call_user_func(UC_API_FUNC, 'user', 'addprotected', array('username'=>$username, 'admin'=>$admin));
 }
 
 /**
- * É¾³ý±£»¤ÓÃ»§
+ * É¾ï¿½ï¿½ï¿½Ã»ï¿½
  *
- * @param string/array $username ±£»¤ÓÃ»§Ãû
+ * @param string/array $username ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
  * @return
- * 	-1 : Ê§°Ü
- * 	 1 : ³É¹¦
+ * 	-1 : Ê§ï¿½ï¿½
+ * 	 1 : ï¿½É¹ï¿½
  */
 function uc_user_deleteprotected($username) {
 	return call_user_func(UC_API_FUNC, 'user', 'deleteprotected', array('username'=>$username));
 }
 
 /**
- * µÃµ½ÊÜ±£»¤µÄÓÃ»§ÃûÁÐ±í
+ * ï¿½Ãµï¿½ï¿½Ü±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
  *
  * @param empty
  * @return
- * 	ÊÜµ½±£»¤µÄÓÃ»§ÃûÁÐ±í
+ * 	ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
  *  	array()
  */
 function uc_user_getprotected() {
@@ -585,10 +587,10 @@ function uc_user_getprotected() {
 }
 
 /**
- * È¡µÃÓÃ»§Êý¾Ý
+ * È¡ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½
  *
- * @param string $username	ÓÃ»§Ãû
- * @param int $isuid	ÊÇ·ñÎªUID
+ * @param string $username	ï¿½Ã»ï¿½ï¿½ï¿½
+ * @param int $isuid	ï¿½Ç·ï¿½ÎªUID
  * @return array (uid, username, email)
  */
 function uc_get_user($username, $isuid=0) {
@@ -597,46 +599,46 @@ function uc_get_user($username, $isuid=0) {
 }
 
 /**
- * ÓÃ»§ºÏ²¢×îºóµÄ´¦Àí
+ * ï¿½Ã»ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
  *
- * @param string $oldusername	ÀÏÓÃ»§Ãû
- * @param string $newusername	ÐÂÓÃ»§Ãû
- * @param string $uid		ÀÏUID
- * @param string $password	ÃÜÂë
+ * @param string $oldusername	ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
+ * @param string $newusername	ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
+ * @param string $uid		ï¿½ï¿½UID
+ * @param string $password	ï¿½ï¿½ï¿½ï¿½
  * @param string $email		Email
  * @return int
-	-1 : ÓÃ»§Ãû²»ºÏ·¨
-	-2 : °üº¬²»ÔÊÐí×¢²áµÄ´ÊÓï
-	-3 : ÓÃ»§ÃûÒÑ¾­´æÔÚ
-	>1 : ±íÊ¾³É¹¦£¬ÊýÖµÎª UID
+	-1 : ï¿½Ã»ï¿½ï¿½ï¿½Ï·ï¿½
+	-2 : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
+	-3 : ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
+	>1 : ï¿½ï¿½Ê¾ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÎª UID
  */
 function uc_user_merge($oldusername, $newusername, $uid, $password, $email) {
 	return call_user_func(UC_API_FUNC, 'user', 'merge', array('oldusername'=>$oldusername, 'newusername'=>$newusername, 'uid'=>$uid, 'password'=>$password, 'email'=>$email));
 }
 
 /**
- * ÒÆÈ¥ºÏ²¢ÓÃ»§¼ÇÂ¼
- * @param string $username	ÓÃ»§Ãû
+ * ï¿½ï¿½È¥ï¿½Ï²ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Â¼
+ * @param string $username	ï¿½Ã»ï¿½ï¿½ï¿½
  */
 function uc_user_merge_remove($username) {
 	return call_user_func(UC_API_FUNC, 'user', 'merge_remove', array('username'=>$username));
 }
 
 /**
- * »ñÈ¡Ö¸¶¨Ó¦ÓÃµÄÖ¸¶¨ÓÃ»§»ý·ÖÖµ
- * @param int $appid	Ó¦ÓÃId
- * @param int $uid	ÓÃ»§Id
- * @param int $credit	»ý·Ö±àºÅ
+ * ï¿½ï¿½È¡Ö¸ï¿½ï¿½Ó¦ï¿½Ãµï¿½Ö¸ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Öµ
+ * @param int $appid	Ó¦ï¿½ï¿½Id
+ * @param int $uid	ï¿½Ã»ï¿½Id
+ * @param int $credit	ï¿½ï¿½Ö±ï¿½ï¿½
  */
 function uc_user_getcredit($appid, $uid, $credit) {
 	return call_user_func(UC_API_FUNC, 'user', 'getcredit', array('appid'=>$appid, 'uid'=>$uid, 'credit'=>$credit));
 }
 
 /**
- * ½øÈë¶ÌÏûÏ¢½çÃæ
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
  *
- * @param int $uid	ÓÃ»§ID
- * @param int $newpm	ÊÇ·ñÖ±½Ó½øÈënewpm
+ * @param int $uid	ï¿½Ã»ï¿½ID
+ * @param int $newpm	ï¿½Ç·ï¿½Ö±ï¿½Ó½ï¿½ï¿½ï¿½newpm
  */
 function uc_pm_location($uid, $newpm = 0) {
 	$apiurl = uc_api_url('pm_client', 'ls', "uid=$uid", ($newpm ? '&folder=newbox' : ''));
@@ -647,14 +649,14 @@ function uc_pm_location($uid, $newpm = 0) {
 }
 
 /**
- * ¼ì²éÐÂ¶ÌÏûÏ¢
+ * ï¿½ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½Ï¢
  *
- * @param  int $uid	ÓÃ»§ID
- * @param  int $more	ÏêÏ¸ÐÅÏ¢
- * @return int	 	ÊÇ·ñ´æÔÚÐÂ¶ÌÏûÏ¢
- * 	2	ÏêÏ¸	(¶ÌÏûÏ¢Êý¡¢¹«¹²ÏûÏ¢Êý¡¢×îºóÏûÏ¢Ê±¼ä, ×îºóÏûÏ¢ÄÚÈÝ)
- * 	1	¼òµ¥	(¶ÌÏûÏ¢Êý¡¢¹«¹²ÏûÏ¢Êý¡¢×îºóÏûÏ¢Ê±¼ä)
- * 	0	·ñ
+ * @param  int $uid	ï¿½Ã»ï¿½ID
+ * @param  int $more	ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢
+ * @return int	 	ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½Ï¢
+ * 	2	ï¿½ï¿½Ï¸	(ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Ê±ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½)
+ * 	1	ï¿½ï¿½	(ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Ê±ï¿½ï¿½)
+ * 	0	ï¿½ï¿½
  */
 function uc_pm_checknew($uid, $more = 0) {
 	$return = call_user_func(UC_API_FUNC, 'pm', 'check_newpm', array('uid'=>$uid, 'more'=>$more));
@@ -662,18 +664,18 @@ function uc_pm_checknew($uid, $more = 0) {
 }
 
 /**
- * ·¢ËÍ¶ÌÏûÏ¢
+ * ï¿½ï¿½ï¿½Í¶ï¿½ï¿½ï¿½Ï¢
  *
- * @param int $fromuid		·¢¼þÈËuid 0 ÎªÏµÍ³ÏûÏ¢
- * @param mix $msgto		ÊÕ¼þÈË uid/username ¶à¸ö¶ººÅ·Ö¸î
- * @param mix $subject		±êÌâ
- * @param mix $message		ÄÚÈÝ
- * @param int $instantly	Á¢¼´·¢ËÍ 1 Á¢¼´·¢ËÍ(Ä¬ÈÏ)  0 ½øÈë¶ÌÏûÏ¢·¢ËÍ½çÃæ
- * @param int $replypid		»Ø¸´µÄÏûÏ¢Id
- * @param int $isusername	0 = $msgto Îª uid¡¢1 = $msgto Îª username
+ * @param int $fromuid		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½uid 0 ÎªÏµÍ³ï¿½ï¿½Ï¢
+ * @param mix $msgto		ï¿½Õ¼ï¿½ï¿½ï¿½ uid/username ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å·Ö¸ï¿½
+ * @param mix $subject		ï¿½ï¿½ï¿½ï¿½
+ * @param mix $message		ï¿½ï¿½ï¿½ï¿½
+ * @param int $instantly	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(Ä¬ï¿½ï¿½)  0 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Í½ï¿½ï¿½ï¿½
+ * @param int $replypid		ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Id
+ * @param int $isusername	0 = $msgto Îª uidï¿½ï¿½1 = $msgto Îª username
  * @return
- * 	>1	·¢ËÍ³É¹¦µÄÈËÊý
- * 	0	ÊÕ¼þÈË²»´æÔÚ
+ * 	>1	ï¿½ï¿½ï¿½Í³É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * 	0	ï¿½Õ¼ï¿½ï¿½Ë²ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 function uc_pm_send($fromuid, $msgto, $subject, $message, $instantly = 1, $replypmid = 0, $isusername = 0) {
 	if($instantly) {
@@ -695,52 +697,52 @@ function uc_pm_send($fromuid, $msgto, $subject, $message, $instantly = 1, $reply
 }
 
 /**
- * É¾³ý¶ÌÏûÏ¢
+ * É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
  *
- * @param int $uid		ÓÃ»§Id
- * @param string $folder	´ò¿ªµÄÄ¿Â¼ inbox=ÊÕ¼þÏä£¬outbox=·¢¼þÏä
- * @param array	$pmids		ÒªÉ¾³ýµÄÏûÏ¢IDÊý×é
+ * @param int $uid		ï¿½Ã»ï¿½Id
+ * @param string $folder	ï¿½ò¿ªµï¿½Ä¿Â¼ inbox=ï¿½Õ¼ï¿½ï¿½ä£¬outbox=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @param array	$pmids		ÒªÉ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢IDï¿½ï¿½ï¿½ï¿½
  * @return
- * 	>0 ³É¹¦
- * 	<=0 Ê§°Ü
+ * 	>0 ï¿½É¹ï¿½
+ * 	<=0 Ê§ï¿½ï¿½
  */
 function uc_pm_delete($uid, $folder, $pmids) {
 	return call_user_func(UC_API_FUNC, 'pm', 'delete', array('uid'=>$uid, 'folder'=>$folder, 'pmids'=>$pmids));
 }
 
 /**
- * °´ÕÕÓÃ»§É¾³ý¶ÌÏûÏ¢
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
  *
- * @param int $uid		ÓÃ»§Id
- * @param array	$uids		ÒªÉ¾³ýµÄÏûÏ¢ÓÃ»§IDÊý×é
+ * @param int $uid		ï¿½Ã»ï¿½Id
+ * @param array	$uids		ÒªÉ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ã»ï¿½IDï¿½ï¿½ï¿½ï¿½
  * @return
- * 	>0 ³É¹¦
- * 	<=0 Ê§°Ü
+ * 	>0 ï¿½É¹ï¿½
+ * 	<=0 Ê§ï¿½ï¿½
  */
 function uc_pm_deleteuser($uid, $touids) {
 	return call_user_func(UC_API_FUNC, 'pm', 'deleteuser', array('uid'=>$uid, 'touids'=>$touids));
 }
 
 /**
- * ±ê¼ÇÒÑ¶Á/Î´¶Á×´Ì¬
+ * ï¿½ï¿½ï¿½ï¿½Ñ¶ï¿½/Î´ï¿½ï¿½×´Ì¬
  *
- * @param int $uid		ÓÃ»§Id
- * @param array	$uids		Òª±ê¼ÇÒÑ¶Á×´Ì¬µÄÓÃ»§IDÊý×é
- * @param array	$pmids		Òª±ê¼ÇÒÑ¶Á×´Ì¬µÄÏûÏ¢IDÊý×é
- * @param int $status		1 ÒÑ¶Á 0 Î´¶Á
+ * @param int $uid		ï¿½Ã»ï¿½Id
+ * @param array	$uids		Òªï¿½ï¿½ï¿½ï¿½Ñ¶ï¿½×´Ì¬ï¿½ï¿½ï¿½Ã»ï¿½IDï¿½ï¿½ï¿½ï¿½
+ * @param array	$pmids		Òªï¿½ï¿½ï¿½ï¿½Ñ¶ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½Ï¢IDï¿½ï¿½ï¿½ï¿½
+ * @param int $status		1 ï¿½Ñ¶ï¿½ 0 Î´ï¿½ï¿½
  */
 function uc_pm_readstatus($uid, $uids, $pmids = array(), $status = 0) {
 	return call_user_func(UC_API_FUNC, 'pm', 'readstatus', array('uid'=>$uid, 'uids'=>$uids, 'pmids'=>$pmids, 'status'=>$status));
 }
 
 /**
- * »ñÈ¡¶ÌÏûÏ¢ÁÐ±í
+ * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ð±ï¿½
  *
- * @param int $uid		ÓÃ»§Id
- * @param int $page 		µ±Ç°Ò³
- * @param int $pagesize 	Ã¿Ò³×î´óÌõÄ¿Êý
- * @param string $folder	´ò¿ªµÄÄ¿Â¼ newbox=Î´¶ÁÏûÏ¢£¬inbox=ÊÕ¼þÏä£¬outbox=·¢¼þÏä
- * @param string $filter	¹ýÂË·½Ê½ newpm=Î´¶ÁÏûÏ¢£¬systempm=ÏµÍ³ÏûÏ¢£¬announcepm=¹«¹²ÏûÏ¢
+ * @param int $uid		ï¿½Ã»ï¿½Id
+ * @param int $page 		ï¿½ï¿½Ç°Ò³
+ * @param int $pagesize 	Ã¿Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
+ * @param string $folder	ï¿½ò¿ªµï¿½Ä¿Â¼ newbox=Î´ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½inbox=ï¿½Õ¼ï¿½ï¿½ä£¬outbox=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @param string $filter	ï¿½ï¿½ï¿½Ë·ï¿½Ê½ newpm=Î´ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½systempm=ÏµÍ³ï¿½ï¿½Ï¢ï¿½ï¿½announcepm=ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
  				$folder		$filter
  				--------------------------
  				newbox
@@ -749,8 +751,8 @@ function uc_pm_readstatus($uid, $uids, $pmids = array(), $status = 0) {
  						announcepm
  				outbox		newpm
  				searchbox	*
- * @param string $msglen 	½ØÈ¡µÄÏûÏ¢ÎÄ×Ö³¤¶È
- * @return array('count' => ÏûÏ¢×ÜÊý, 'data' => ¶ÌÏûÏ¢Êý¾Ý)
+ * @param string $msglen 	ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ö³ï¿½ï¿½ï¿½
+ * @return array('count' => ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½, 'data' => ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½)
  */
 function uc_pm_list($uid, $page = 1, $pagesize = 10, $folder = 'inbox', $filter = 'newpm', $msglen = 0) {
 	$uid = intval($uid);
@@ -761,9 +763,9 @@ function uc_pm_list($uid, $page = 1, $pagesize = 10, $folder = 'inbox', $filter 
 }
 
 /**
- * ºöÂÔÎ´¶ÁÏûÏ¢ÌáÊ¾
+ * ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ê¾
  *
- * @param int $uid		ÓÃ»§Id
+ * @param int $uid		ï¿½Ã»ï¿½Id
  */
 function uc_pm_ignore($uid) {
 	$uid = intval($uid);
@@ -771,13 +773,13 @@ function uc_pm_ignore($uid) {
 }
 
 /**
- * »ñÈ¡¶ÌÏûÏ¢ÄÚÈÝ
+ * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
  *
- * @param int $uid		ÓÃ»§Id
- * @param int $pmid		ÏûÏ¢Id
- * @param int $touid		ÏûÏ¢¶Ô·½ÓÃ»§Id
- * @param int $daterange	ÈÕÆÚ·¶Î§ 1=½ñÌì,2=×òÌì,3=Ç°Ìì,4=ÉÏÖÜ,5=¸üÔç
- * @return array() ¶ÌÏûÏ¢ÄÚÈÝÊý×é
+ * @param int $uid		ï¿½Ã»ï¿½Id
+ * @param int $pmid		ï¿½ï¿½Ï¢Id
+ * @param int $touid		ï¿½ï¿½Ï¢ï¿½Ô·ï¿½ï¿½Ã»ï¿½Id
+ * @param int $daterange	ï¿½ï¿½ï¿½Ú·ï¿½Î§ 1=ï¿½ï¿½ï¿½ï¿½,2=ï¿½ï¿½ï¿½ï¿½,3=Ç°ï¿½ï¿½,4=ï¿½ï¿½ï¿½ï¿½,5=ï¿½ï¿½ï¿½ï¿½
+ * @return array() ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 function uc_pm_view($uid, $pmid, $touid = 0, $daterange = 1) {
 	$uid = intval($uid);
@@ -788,14 +790,14 @@ function uc_pm_view($uid, $pmid, $touid = 0, $daterange = 1) {
 }
 
 /**
- * »ñÈ¡µ¥Ìõ¶ÌÏûÏ¢ÄÚÈÝ
+ * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
  *
- * @param int $uid		ÓÃ»§Id
- * @param int $pmid		ÏûÏ¢Id
- * @param int $type		0 = »ñÈ¡Ö¸¶¨µ¥ÌõÏûÏ¢
- 				1 = »ñÈ¡Ö¸¶¨ÓÃ»§·¢µÄ×îºóµ¥ÌõÏûÏ¢
- 				2 = »ñÈ¡Ö¸¶¨ÓÃ»§ÊÕµÄ×îºóµ¥ÌõÏûÏ¢
- * @return array() ¶ÌÏûÏ¢ÄÚÈÝÊý×é
+ * @param int $uid		ï¿½Ã»ï¿½Id
+ * @param int $pmid		ï¿½ï¿½Ï¢Id
+ * @param int $type		0 = ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+ 				1 = ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+ 				2 = ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+ * @return array() ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 function uc_pm_viewnode($uid, $type = 0, $pmid = 0) {
 	$uid = intval($uid);
@@ -805,10 +807,10 @@ function uc_pm_viewnode($uid, $type = 0, $pmid = 0) {
 }
 
 /**
- * »ñÈ¡ºÚÃûµ¥
+ * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
  *
- * @param int $uid		ÓÃ»§Id
- * @return string ºÚÃûµ¥ÄÚÈÝ
+ * @param int $uid		ï¿½Ã»ï¿½Id
+ * @return string ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 function uc_pm_blackls_get($uid) {
 	$uid = intval($uid);
@@ -816,10 +818,10 @@ function uc_pm_blackls_get($uid) {
 }
 
 /**
- * ÉèÖÃºÚÃûµ¥
+ * ï¿½ï¿½ï¿½Ãºï¿½ï¿½ï¿½
  *
- * @param int $uid		ÓÃ»§Id
- * @param int $blackls		ºÚÃûµ¥ÄÚÈÝ
+ * @param int $uid		ï¿½Ã»ï¿½Id
+ * @param int $blackls		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 function uc_pm_blackls_set($uid, $blackls) {
 	$uid = intval($uid);
@@ -827,10 +829,10 @@ function uc_pm_blackls_set($uid, $blackls) {
 }
 
 /**
- * Ìí¼ÓºÚÃûµ¥ÏîÄ¿
+ * ï¿½ï¿½Óºï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
  *
- * @param int $uid		ÓÃ»§Id
- * @param int $username		ÓÃ»§Ãû
+ * @param int $uid		ï¿½Ã»ï¿½Id
+ * @param int $username		ï¿½Ã»ï¿½ï¿½ï¿½
  */
 function uc_pm_blackls_add($uid, $username) {
 	$uid = intval($uid);
@@ -838,10 +840,10 @@ function uc_pm_blackls_add($uid, $username) {
 }
 
 /**
- * É¾³ýºÚÃûµ¥ÏîÄ¿
+ * É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
  *
- * @param int $uid		ÓÃ»§Id
- * @param int $username		ÓÃ»§Ãû
+ * @param int $uid		ï¿½Ã»ï¿½Id
+ * @param int $username		ï¿½Ã»ï¿½ï¿½ï¿½
  */
 function uc_pm_blackls_delete($uid, $username) {
 	$uid = intval($uid);
@@ -849,7 +851,7 @@ function uc_pm_blackls_delete($uid, $username) {
 }
 
 /**
- * »ñÈ¡ÓòÃû½âÎö±í
+ * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *
  * @return array()
  */
@@ -859,16 +861,16 @@ function uc_domain_ls() {
 }
 
 /**
- * »ý·Ö¶Ò»»ÇëÇó
+ * ï¿½ï¿½Ö¶Ò»ï¿½ï¿½ï¿½ï¿½ï¿½
  *
- * @param int $uid		ÓÃ»§ID
- * @param int $from		Ô­»ý·Ö
- * @param int $to		Ä¿±ê»ý·Ö
- * @param int $toappid		Ä¿±êÓ¦ÓÃID
- * @param int $amount		»ý·ÖÊý¶î
+ * @param int $uid		ï¿½Ã»ï¿½ID
+ * @param int $from		Ô­ï¿½ï¿½ï¿½
+ * @param int $to		Ä¿ï¿½ï¿½ï¿½ï¿½
+ * @param int $toappid		Ä¿ï¿½ï¿½Ó¦ï¿½ï¿½ID
+ * @param int $amount		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @return
- *  	1  : ³É¹¦
- *	0  : Ê§°Ü
+ *  	1  : ï¿½É¹ï¿½
+ *	0  : Ê§ï¿½ï¿½
  */
 function uc_credit_exchange_request($uid, $from, $to, $toappid, $amount) {
 	$uid = intval($uid);
@@ -880,11 +882,11 @@ function uc_credit_exchange_request($uid, $from, $to, $toappid, $amount) {
 }
 
 /**
- * ·µ»ØÖ¸¶¨µÄÏà¹ØTAGÊý¾Ý
+ * ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½TAGï¿½ï¿½ï¿½
  *
- * @param string $tagname	TAGÃû³Æ
- * @param int $totalnum		·µ»ØÊý¾ÝµÄÌõÄ¿Êý
- * @return array() ÐòÁÐ»¯¹ýµÄÊý×é£¬Êý×éÄÚÈÝÎªµ±Ç°»òÆäËûÓ¦ÓÃµÄÏà¹ØTAGÊý¾Ý
+ * @param string $tagname	TAGï¿½ï¿½ï¿½
+ * @param int $totalnum		ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
+ * @return array() ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ãµï¿½ï¿½ï¿½ï¿½TAGï¿½ï¿½ï¿½
  */
 function uc_tag_get($tagname, $nums = 0) {
 	$return = call_user_func(UC_API_FUNC, 'tag', 'gettag', array('tagname'=>$tagname, 'nums'=>$nums));
@@ -892,10 +894,10 @@ function uc_tag_get($tagname, $nums = 0) {
 }
 
 /**
- * ÐÞ¸ÄÍ·Ïñ
+ * ï¿½Þ¸ï¿½Í·ï¿½ï¿½
  *
- * @param	int		$uid	ÓÃ»§ID
- * @param	string	$type	Í·ÏñÀàÐÍ real OR virtual Ä¬ÈÏÎª virtual
+ * @param	int		$uid	ï¿½Ã»ï¿½ID
+ * @param	string	$type	Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ real OR virtual Ä¬ï¿½ï¿½Îª virtual
  * @return	string
  */
 function uc_avatar($uid, $type = 'virtual', $returnhtml = 1) {
@@ -932,31 +934,31 @@ function uc_avatar($uid, $type = 'virtual', $returnhtml = 1) {
 }
 
 /**
- * ÓÊ¼þ¶ÓÁÐ
+ * ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½
  *
- * @param	string	$uids		ÓÃ»§Ãûid£¬¶à¸öÓÃ¶ººÅ(,)¸ô¿ª
- * @param	string	$emails		ÓÊ¼þµØÖ·£¬¶à¸öÓÃ¶ººÅ¸ô¿ª
- * @param	string	$subject	ÓÊ¼þ±êÌâ
- * @param	string	$message	ÓÊ¼þÄÚÈÝ
- * @param	string	$charset	ÓÊ¼þ×Ö·û¼¯£¬¿ÉÑ¡²ÎÊý£¬Ä¬ÈÏÎªgbk
- * @param	boolean	$htmlon		ÊÇ·ñ°´html¸ñÊ½·¢ËÍÓÊ¼þ£¬¿ÉÑ¡²ÎÊý£¬Ä¬ÈÏÎª·ñ
- * @param	integer $level		ÓÊ¼þ¼¶±ð£¬¿ÉÑ¡²ÎÊý£¬È¡Öµ0-127£¬Ä¬ÈÏÎª1£¬Ô½´ó·¢ËÍµÄÓÅÏÈ¼¶Ô½¸ß£¬Îª0Ê±²»Èë¿â£¬Ö±½Ó·¢ËÍ£¬»áÓ°Ïìµ±Ç°½ø³ÌËÙ¶È£¬É÷ÓÃ
+ * @param	string	$uids		ï¿½Ã»ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½(,)ï¿½ï¿½ï¿½ï¿½
+ * @param	string	$emails		ï¿½Ê¼ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½Å¸ï¿½ï¿½ï¿½
+ * @param	string	$subject	ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @param	string	$message	ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @param	string	$charset	ï¿½Ê¼ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Îªgbk
+ * @param	boolean	$htmlon		ï¿½Ç·ï¿½htmlï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Îªï¿½ï¿½
+ * @param	integer $level		ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ð£¬¿ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½È¡Öµ0-127ï¿½ï¿½Ä¬ï¿½ï¿½Îª1ï¿½ï¿½Ô½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½È¼ï¿½Ô½ï¿½ß£ï¿½Îª0Ê±ï¿½ï¿½ï¿½ï¿½â£¬Ö±ï¿½Ó·ï¿½ï¿½Í£ï¿½ï¿½ï¿½Ó°ï¿½ìµ±Ç°ï¿½ï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½ï¿½ï¿½
  * @return	integer
- *		=0 : Ê§°Ü
- *		>0 : ³É¹¦£¬·µ»Ø²åÈë¼ÇÂ¼µÄid£¬Èç¹ûÊÇ¶àÌõÔò·µ»Ø×îºóÒ»Ìõ¼ÇÂ¼µÄid£¬ÈôlevelµÈÓÚ0£¬Ôò·µ»Ø1
+ *		=0 : Ê§ï¿½ï¿½
+ *		>0 : ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¶ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½levelï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ò·µ»ï¿½1
  */
 function uc_mail_queue($uids, $emails, $subject, $message, $frommail = '', $charset = 'gbk', $htmlon = FALSE, $level = 1) {
 	return call_user_func(UC_API_FUNC, 'mail', 'add', array('uids' => $uids, 'emails' => $emails, 'subject' => $subject, 'message' => $message, 'frommail' => $frommail, 'charset' => $charset, 'htmlon' => $htmlon, 'level' => $level));
 }
 
 /**
- * ¼ì²âÊÇ·ñ´æÔÚÖ¸¶¨Í·Ïñ
- * @param	integer		$uid	ÓÃ»§id
- * @param	string		$size	Í·Ïñ³ß´ç£¬È¡Öµ·¶Î§(big,middle,small)£¬Ä¬ÈÏÎª middle
- * @param	string		$type	Í·ÏñÀàÐÍ£¬È¡Öµ·¶Î§(virtual,real)£¬Ä¬ÈÏÎªvirtual
+ * ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Í·ï¿½ï¿½
+ * @param	integer		$uid	ï¿½Ã»ï¿½id
+ * @param	string		$size	Í·ï¿½ï¿½ß´ç£¬È¡Öµï¿½ï¿½Î§(big,middle,small)ï¿½ï¿½Ä¬ï¿½ï¿½Îª middle
+ * @param	string		$type	Í·ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½È¡Öµï¿½ï¿½Î§(virtual,real)ï¿½ï¿½Ä¬ï¿½ï¿½Îªvirtual
  * @return	boolean
- *		true : Í·Ïñ´æÔÚ
- *		false: Í·Ïñ²»´æÔÚ
+ *		true : Í·ï¿½ï¿½ï¿½ï¿½ï¿½
+ *		false: Í·ï¿½ñ²»´ï¿½ï¿½ï¿½
  */
 function uc_check_avatar($uid, $size = 'middle', $type = 'virtual') {
 	$url = UC_API."/avatar.php?uid=$uid&size=$size&type=$type&check_file_exists=1";
@@ -969,11 +971,11 @@ function uc_check_avatar($uid, $size = 'middle', $type = 'virtual') {
 }
 
 /**
- * ¼ì²âuc_serverµÄÊý¾Ý¿â°æ±¾ºÍ³ÌÐò°æ±¾
+ * ï¿½ï¿½ï¿½uc_serverï¿½ï¿½ï¿½ï¿½Ý¿ï¿½æ±¾ï¿½Í³ï¿½ï¿½ï¿½æ±¾
  * @return mixd
  *		array('db' => 'xxx', 'file' => 'xxx');
- *		null ÎÞ·¨µ÷ÓÃµ½½Ó¿Ú
- *		string ÎÄ¼þ°æ±¾µÍÓÚ1.5
+ *		null ï¿½Þ·ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½Ó¿ï¿½
+ *		string ï¿½Ä¼ï¿½ï¿½æ±¾ï¿½ï¿½ï¿½ï¿½1.5
  */
 function uc_check_version() {
 	$return = uc_api_post('version', 'check', array());
