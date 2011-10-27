@@ -22,13 +22,11 @@ function tournament () {
 			$username = htmlspecialchars(addslashes($_COOKIE['comment_author_'.COOKIEHASH]));
 		} else {
 			echo "需要登陆才可以报名";
-			 header("location:".'/wp-login.php');
 			exit ;
 		}
 		$userid = intval($user_ID);
 		if(!getUserVerify($userid)) {
 			echo "需要选手认证才可以报名";
-			header("location:".'/bbs/home.php?mod=spacecp&ac=profile&op=verify&vid=1');
 			exit;
 		}
 		$apply = $wpdb->query("SELECT verify1 FROM pre_common_member_verify WHERE uid = $userid");

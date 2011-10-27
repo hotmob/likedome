@@ -99,7 +99,7 @@ function get_apply_match_button($userid, $matchid) {
 		已经报名
 		</div>
 	<?php else : ?>
-		<a class="btn margin-r10 fl" onclick="showWindowsFrameTimer('apply_match', 'wp-content/plugins/likedome/tournament.php?opt=apply&matchid=<?php echo $related_post->id; ?>&flag=1', 500);" href="###">
+		<a class="btn margin-r10 fl" onclick="showWindowsFrameTimer('apply_match', 'wp-content/plugins/likedome/tournament.php?opt=apply&matchid=<?php echo $matchid; ?>&flag=1', 1000);" href="##">
 		点击参加
 		</a>
 	<?php endif; 
@@ -114,7 +114,7 @@ function get_follow_match_button($userid, $matchid) {
 		已经关注
 		</div>
 	<?php else : ?>
-		<a class="btn margin-r10 fl" onclick="showWindowsFrameTimer('follow_match', 'wp-content/plugins/likedome/tournament.php?opt=follow&matchid=<?php echo $related_post->id; ?>&flag=1', 500);" href="###">
+		<a class="btn margin-r10 fl" onclick="showWindowsFrameTimer('follow_match', 'wp-content/plugins/likedome/tournament.php?opt=follow&matchid=<?php echo $matchid; ?>&flag=1', 1000);" href="##">
 		关注比赛
 		</a>
 	<?php endif; 

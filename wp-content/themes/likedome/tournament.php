@@ -1032,22 +1032,6 @@
 			<!--<p class="margin-t6"><span class="textOver btn8">报名结束</span></p>-->
 			<div class="joinGame-show textOver">
 				<h5 class="textOver">参赛流程图</h5>
-				<p style="margin-top:0;">
-					<a href="#">注册会员</a>
-				</p>
-				<p>
-					<a href="#">选手认证</a>
-				</p>
-				<p>
-					<a onclick="showWindowsFrame('wp-content/plugins/likedome/tournament.php?opt=apply&type=1&flag=1');" href="#">报名参赛</a>
-				</p>
-				<p>
-					<a href="#">等待审核</a>
-				</p>
-				<p>
-					<a href="#">报名成功</a>
-				</p>
-				    
 			</div>
 		</div>
 	</div>

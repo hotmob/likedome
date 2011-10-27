@@ -103,8 +103,28 @@ function getMatchApplyNum($matchid) {
  */
 function getMatchFollowNum($matchid) {
 	$result = getMatchFollowList($matchid);
-	if($result != null && is_array($result))
+	if(is_array($result))
 		return count($result);
 	return 0;
+} 
+
+/**
+ * 查询选手参加比赛列表
+ */
+function getUserApplyList($userid) {
+	global $wpdb;
+	$_userid = intval($userid);
+	$result = $wpdb->get_results('SELECT apply, match_id FROM wp_likedome_match_apply WHERE uid = '.$_userid, ARRAY_A);
+	return $result;
+} 
+
+/**
+ * 查询选手关注比赛列表
+ */
+function getUserFollowList($userid) {
+	global $wpdb;
+	$_userid = intval($userid);
+	$result = $wpdb->get_results('SELECT uid, match_id FROM wp_likedome_match_follow WHERE uid = '.$_userid, ARRAY_A);
+	return $result;
 } 
 ?>
