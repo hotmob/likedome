@@ -52,6 +52,19 @@ function tournament () {
 		}
 		echo "关注时发生错误";
 		exit ;
+	case 'applygroup' :
+		if(getUserApply($userid, $matchid) != NULL) {
+			$groupid = $_REQUEST['groupid'];
+			if(getUserGroup($userid, $groupid) != null) {
+				echo "您已经申请了其他的队伍!";
+				exit;
+			}
+			setUserGroup($userid, $groupid);
+			echo "申请成功!";
+			exit;
+		}
+		echo "你尚未参加此项比赛!";
+		exit ;
 	default :
 		echo "无法解析此函数";
 		exit ;

@@ -15,6 +15,16 @@ function getCharset() {
 }
 
 /**
+ * 获取比赛阶段, 0未开始, 1报名中, 2进行中, 3已结束, 无此比赛返回Null
+ */
+function getMatchStage($matchid) {
+	global $wpdb;
+	$_matchid = intval($matchid);
+	$result = $wpdb->get_var("SELECT stage FROM wp_likedome_match WHERE id = $_matchid");
+	return $result;
+}
+
+/**
  * 查询此ID是否经过选手认证
  */
 function getUserVerify($userid) {
@@ -106,5 +116,57 @@ function getMatchFollowNum($matchid) {
 	if($result != null && is_array($result))
 		return count($result);
 	return 0;
+} 
+
+/**
+ * 和比赛相关联的文章列表
+ */
+function getMatchPostList($matchid) {
+	global $wpdb;
+	$_matchid = intval($matchid);
+	$result = $wpdb->get_results('SELECT post_id FROM wp_postmeta WHERE meta_key = "链接比赛" AND meta_value = '.$_matchid);
+	return $result;
+} 
+
+/**
+ * 参加比赛队伍列表
+ */
+function getMatchGroupList($matchid) {
+	global $wpdb;
+	$_matchid = intval($matchid);
+	$result = $wpdb->get_results('SELECT id, match_id, name, captain_id, maxpeople, timestamp, state FROM wp_likedome_match_group WHERE match_id = '.$_matchid);
+	return $result;
+}
+
+/**
+ * 参加比赛队伍人员列表
+ */
+function getGroupUserList($groupid) {
+	global $wpdb;
+	$group_id = intval($groupid);
+	$result = $wpdb->get_results('SELECT user_id FROM wp_likedome_match_group_user WHERE state=1 AND group_id = '.$group_id);
+	return $result;
+}
+
+/**
+ * 申请加入队伍
+ */
+function setUserGroup($userid, $groupid) {
+	global $wpdb;
+	$user_id = intval($userid);
+	$group_id = intval($groupid);
+	$result = $wpdb->insert('wp_likedome_match_group_user', array( 'user_id' => $_userid, 'group_id' => $group_id ));
+	return $result;
+}
+
+/**
+ * 获取用户队伍申请
+ */
+function getUserGroup($userid, $groupid) {
+	global $wpdb;
+	$user_id = intval($userid);
+	$group_id = intval($groupid);
+	$result = $wpdb->get_var("SELECT state FROM wp_likedome_match_group_user WHERE user_id = $user_id AND group_id = $group_id");
+	return $result;
 } 
 ?>

@@ -91,6 +91,18 @@ function get_content_image() {
 }
 
 /**
+ * 根据比赛获取比赛相关文章
+ */
+function get_match_post($matchid, $posttype = 16) {
+	$matchPostIds = getMatchPostList($matchid);
+	$args = array( 'category__in' => array($posttype), // 包括的分类ID
+        		   'post__in' => $matchPostIds['post_id'],
+        		   'showposts' => 1, // 显示相关文章数量
+        		   'caller_get_posts' => 1 );
+	return $args;
+}
+
+/**
  * 获取参加比赛按钮
  */
 function get_apply_match_button($userid, $matchid) {
