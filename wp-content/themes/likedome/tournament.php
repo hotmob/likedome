@@ -5,9 +5,6 @@
 ?>
 <?php get_header();?>
 <div class="vsCon">
-	<div class="vsPos">
-		<a href="#">来动网竞技平台</a> >> <span><a href="#">赛事动态</a></span> >> <span>来动网比赛页面</span>
-	</div>
 	<div id="tab4">
 		<div class="title">
 			<h3 class="fl">赛事动态</h3>
