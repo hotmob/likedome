@@ -40,6 +40,7 @@ if ( file_exists( $config_file ) )
 else
 	exit( API_RETURN_FORBIDDEN );
 
+require_once( UCENTER_ROOT . '/ucenter.php' );
 require_once( UCENTER_ROOT . '/client/client.php' );
 require_once( UCENTER_ROOT . '/client/lib/xml.class.php' );
 
@@ -70,13 +71,21 @@ class uc_note {
 
 	function synlogin( $get, $post ) {
 		!API_SYNLOGIN && exit( API_RETURN_FORBIDDEN );
-
-		$user = get_userdatabylogin( $get['username'] );
-		if( $user ) {
-			header( 'P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"' );
-			wp_set_auth_cookie( $user->ID, false, '' );
+		$ID = intval($get['uid']);
+		$user = get_user_by('id', $ID);
+		if( ! $user ) {
+			$query = uc_get_user($ID , 1);
+			$user_login = esc_sql( $query[1] );
+			$user_email = esc_sql( $query[2] );
+			$user_pass = '$password';
+			$userdata = compact('ID', 'user_login', 'user_email', 'user_pass');
+			$data = stripslashes_deep( $userdata );
+			global $wpdb;
+			$user_id = $wpdb->insert( $wpdb->users, $userdata );
+			$user_id = wp_insert_user($userdata);
 		}
-
+		header( 'P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"' );
+		wp_set_auth_cookie( $ID, false, '' );
 		exit( API_RETURN_SUCCEED );
 	}
 

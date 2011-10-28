@@ -4,7 +4,7 @@ $(function(){
 		'<p><a href="bbs/member.php?mod=logging&action=login&viewlostpw=1">找回密码</a></p>'+
 		'<p class="secondPra"><a href="bbs/member.php?mod=register">立即注册</a></p>'+
 	'</div>'+
-	'<form id="lsform" onsubmit="return lsSubmit()" action="bbs/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes" autocomplete="off" method="post">'+
+	'<form id="lsform" onsubmit="return lsSubmit()" action="bbs/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes" autocomplete="off" method="post" accept-charset="gbk" onsubmit="document.charset=\'gbk\';">'+
 	'<div class="login2">'+
 		'<p>'+
 			'<label>账号：</label>'+

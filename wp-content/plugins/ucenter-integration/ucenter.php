@@ -129,7 +129,7 @@ class Ucenter_Integration {
 			require_once( ABSPATH . WPINC . '/registration.php' );
 
 			// Add ucenter authenticate
-			add_filter( 'authenticate', array( &$this, 'authenticate_username_password' ), 40, 3 );
+			add_filter( 'authenticate', array( &$this, 'wp_authenticate_username_password' ), 40, 3 );
 
 			// Echo sync login scripts to wp_head or admin_head
 			add_action( 'wp_head', array( &$this, 'sync_login' ) );
@@ -294,7 +294,7 @@ class Ucenter_Integration {
 		}
 	}
 
-	function authenticate_username_password( $user, $username, $password ) {
+	function wp_authenticate_username_password( $user, $username, $password ) {
 		if ( is_a( $user, 'WP_User' ) ) {
 
 			if ( !uc_get_user( $user->user_login ) ) {
@@ -318,19 +318,32 @@ class Ucenter_Integration {
 
 			return $error;
 		}
-
-		list( $uid, $_, $_, $email ) = uc_user_login( $username, $password );
-
+		
+		$strr = $username;
+		if(is_utf8($username))
+			$strr = iconv('utf8', 'gbk', $username);
+		
+		list( $uid, $username, $_, $email ) = uc_user_login($strr, $password );
 		$errors = new WP_Error();
+		$ID = 0;
 		if ( $uid > 0 ) {
 			// success login ucenter
 			$userdata = get_userdatabylogin( $username );
 			$user_id = $userdata->ID;
-
 			if( !$userdata ) {
 				// if user does not exist, create it
-				$user_id = wp_create_user( $username, $password, $email );
-
+				$ID = $uid;
+				$user_login = esc_sql( $username );
+				$user_email = esc_sql( $email    );
+				$user_pass = $password;
+				$display_name = esc_sql( $username );
+				$user_nicename = esc_sql( $username );
+				// $userdata = compact('uid', 'user_login', 'user_email', 'user_pass');
+				$data = compact( 'ID', 'user_login', 'user_pass', 'user_email', 'user_url', 'user_nicename', 'display_name', 'user_registered' );
+				$data = stripslashes_deep( $data );
+				global $wpdb;
+				$user_id = $wpdb->insert( $wpdb->users, $data );
+				$user_id = wp_insert_user($userdata);
 				if ( is_a( $user, 'WP_Error' ) )
 					$errors->add( $user_id->get_error_code(), $user_id->get_error_message() );
 					$errors->add( 'registerfail', sprintf( __( '<strong>ERROR</strong>: Couldn&#8217;t register you in wordpress... please contact the <a href="mailto:%s">webmaster</a> !', 'ucenter' ), get_option( 'admin_email' ) ) );
@@ -356,9 +369,20 @@ class Ucenter_Integration {
 			return $errors;
 		} else {
 			setcookie( 'sync_login', uc_user_synlogin( $uid ), 0, '/' );
-			return new WP_User( $user_id );
+			$user = new WP_User( $user_id );
+			if($ID == $uid)
+				$user->set_role(get_option('default_role'));
+			return $user;
 		}
 	}
+
+function is_utf8($liehuo_net) {
+	if (preg_match("/^([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){1}/",$liehuo_net) == true || preg_match("/([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){1}$/",$liehuo_net) == true || preg_match("/([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){2,}/",$liehuo_net) == true) {
+		return true;
+	} else {
+		return false;
+	}
+}
 
 	function sync_login() {
 		if ( !empty( $this->sync_login_cookie ) ) {

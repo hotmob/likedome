@@ -24,31 +24,42 @@ function tournament () {
 			echo "需要登陆才可以报名";
 			exit ;
 		}
-		$userid = intval($user_ID);
-		if(!getUserVerify($userid)) {
+		if(!getUserVerify($user_ID)) {
 			echo "需要选手认证才可以报名";
 			exit;
 		}
-		$apply = $wpdb->query("SELECT verify1 FROM pre_common_member_verify WHERE uid = $userid");
-		if(getUserApply($userid, $matchid) != NULL) {
+		$apply = $wpdb->query("SELECT verify1 FROM pre_common_member_verify WHERE uid = $user_ID");
+		if(getUserApply($user_ID, $matchid) != NULL) {
 			echo "你已经报过名了";
 			exit;
 		}
-		setUserApply($userid, $matchid);
-		if(getUserApply($userid, $matchid) != NULL) {
+		setUserApply($user_ID, $matchid);
+		if(getUserApply($user_ID, $matchid) != NULL) {
 			echo "报名成功!";
 			exit;
 		}
 		echo "报名时发生错误";
 		exit;
 	case 'follow' :
-		$userid = intval($user_ID);
-		setUserFollow($userid, $matchid);
-		if(getUserFollow($userid, $matchid) != NULL) {
+		setUserFollow($user_ID, $matchid);
+		if(getUserFollow($user_ID, $matchid) != NULL) {
 			echo "关注成功!";
 			exit;
 		}
 		echo "关注时发生错误";
+		exit ;
+	case 'applygroup' :
+		if(getUserApply($user_ID, $matchid) != NULL) {
+			$groupid = $_REQUEST['groupid'];
+			if(getUserGroup($user_ID, $groupid) != null) {
+				echo "您已经申请了其他的队伍!";
+				exit;
+			}
+			setUserGroup($user_ID, $groupid);
+			echo "申请成功!";
+			exit;
+		}
+		echo "你尚未参加此项比赛!";
 		exit ;
 	default :
 		echo "无法解析此函数";

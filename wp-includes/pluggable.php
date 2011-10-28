@@ -114,13 +114,28 @@ function get_userdata( $user_id ) {
 
 	if ( $user )
 		return $user;
-
+	
 	if ( ! $user = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $wpdb->users WHERE ID = %d LIMIT 1", $user_id ) ) )
 		return false;
 
+if(!is_utf8($user->user_login))
+$user->user_login = iconv("gbk","utf8",$user->user_login);
+if(!is_utf8($user->user_nicename))
+$user->user_nicename = iconv("gbk","utf8",$user->user_nicename);
+if(!is_utf8($user->display_name))
+$user->display_name = iconv("gbk","utf8",$user->display_name);
 	_fill_user( $user );
-
+if(!is_utf8($user->nickname))
+$user->nickname = iconv("gbk","utf8",$user->nickname);
 	return $user;
+}
+
+function is_utf8($liehuo_net) {
+	if (preg_match("/^([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){1}/",$liehuo_net) == true || preg_match("/([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){1}$/",$liehuo_net) == true || preg_match("/([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){2,}/",$liehuo_net) == true) {
+		return true;
+	} else {
+		return false;
+	}
 }
 endif;
 
