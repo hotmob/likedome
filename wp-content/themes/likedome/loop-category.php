@@ -13,14 +13,13 @@
 
 <?php else : ?>
 	<?php 
-		$tag = 'h4'; 
 		add_filter('excerpt_length', 'padd_theme_hook_excerpt_index_length'); 
 		$i = '1';
 	?>
 	<?php while (have_posts()) : ?>
 		<?php the_post(); ?>
 		<li>
-			<h4><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></<?php echo $tag; ?>></h4>
+			<h4><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h4>
 			<div class="img">
 				<a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>">
 					<?php

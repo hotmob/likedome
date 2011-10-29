@@ -45,7 +45,7 @@
 			</ul>
 		</div>
 		<div class="flo margin-l30 width-610">
-			<?php $matchid = $_REQUEST['matchid']; if( ($matchid != null) && (getMatchStage($matchid) != null)) : ?>
+			<?php $matchid = $_REQUEST['matchid']; if( ($matchid != null) && (count(getMatchList($matchid)) > 0)) : ?>
 			<!--比赛相关-->
 			<div class="tab_main">
 				<div class="width-600 height-700 margin-t18">
