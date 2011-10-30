@@ -71,8 +71,8 @@ class Likedome {
 			add_submenu_page('likedome-introduction', "管理比赛", "管理比赛", 'administrator', 'likedome/admin/match.php');
             add_submenu_page('likedome-introduction', "管理队伍", "管理队伍", 'administrator', 'likedome/admin/group.php');
             add_submenu_page('likedome-introduction', "管理选手", "管理选手", 'administrator', 'likedome/admin/member.php');
-			// add_submenu_page('likedome/admin/manager.php', "管理比赛", "管理比赛", 'administrator', array( &$this, 'submenu_define_settings' ));
-			// add_submenu_page('likedome/admin/manager.php', "比分审核", "比分审核", 'administrator', array( &$this, 'submenu_integration_settings' ));ction_exists('add_options_page')) {
+            add_submenu_page('likedome-introduction', "数据排行", "数据排行", 'administrator', 'likedome/admin/ranklist.php');
+            add_submenu_page('likedome-introduction', "数据审核", "数据审核", 'administrator', 'likedome/admin/audit.php');
 			// add_options_page('FeedBurner', 'FeedBurner', 8, basename(__FILE__), 'ol_feedburner_options_subpanel');
 		}
 	}

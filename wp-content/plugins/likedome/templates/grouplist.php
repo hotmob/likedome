@@ -21,7 +21,16 @@
             <td><?php echo $match->stage; ?></td>
         </tr>
         <?php endif; ?>
-        <tr>
+        <tr id="poll-6" >
+	        <th>参赛队伍</th>
+	        <th></th>
+	        <th>&nbsp;</th>
+	        <th>&nbsp;</th>
+	        <th>&nbsp;</th>
+	        <th>&nbsp;</th>
+	        <th>&nbsp;</th>
+        </tr>
+        <tr id="poll-7" class="alternate" >
             <td>ID</td>
             <td>队伍名称</td>
              <?php if (!empty($match)) :  ?>
@@ -39,9 +48,9 @@
     </thead>
     <tbody>
         <?php foreach($groups as $group) : ?>
-            <tr>
-                <td><strong><?php echo $group->id; ?></strong></td>
-                <td><strong><?php echo $group->name; ?></strong></td>
+            <tr "poll-7" class="alternate">
+                <td><strong><a href="admin.php?page=likedome/admin/member.php&groupId=<?php echo $group->id;  ?>"><?php echo $group->id; ?></a></strong></td>
+                <td><strong><a href="admin.php?page=likedome/admin/member.php&groupId=<?php echo $group->id;  ?>"><?php echo $group->name; ?></a></strong></td>
                 <td colspan="5"></td>
             </tr>
          <?php endforeach;  ?>

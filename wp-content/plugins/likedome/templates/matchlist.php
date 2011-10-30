@@ -43,7 +43,7 @@
         <tr id="poll-5" class="highlight">
             <form method="post">
             <td><strong><?php echo $match->id; ?></strong></td>
-            <td><strong><a href="#"><?php echo $match->name; ?></a></strong></td>
+            <td><strong><a href="admin.php?page=likedome/admin/group.php&matchId=<?php echo $match->id;  ?>&category=schedule"><?php echo $match->name; ?></a></strong></td>
             <td><?php echo ($matchtypelist[intval($match->type)]->type); ?></td>
             <td><select name="stageselect" id="stageselect">
                 <option value='1' <?php if($match->stage == 1)  echo 'selected="selected"'; ?> >报名中</option>

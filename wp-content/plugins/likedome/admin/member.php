@@ -15,10 +15,11 @@ require_once( LIKEDOME_PLUGINS_ROOT . '/includes/classes.php');
 ### Determines Which Category It Is
 switch($category) {
     // Add
-    case 'add':
-        $name = trim($_POST['groupname']);
+    case 'joingroup':
+        $groupId = intval($_POST['groupId']);
         $matchId = intval($_POST['matchId']);
-        $succe = addGroup($name, 0, $matchId);
+        $userId = intval($_POST['memberId']);
+        $succe = updateUser($userId, $matchId, $groupId, -1, 1, 1, 1, 1);
         if($succe != 1) {
             echo "添加队伍提交失败";
             return;
@@ -27,21 +28,33 @@ switch($category) {
         break;
       // Del
       case 'del':
+      	$matchId = intval($_POST['matchId']);
+      	$userId = intval($_POST['userId']);
+	    $succe = delUser($userId, $matchId);
+	    if($succe != 1) {
+           echo "删除选手失败";
+           return;
+	    }
+	    echo "删除选手完成";
       break;
       // Update
       case 'update':
       break;
      // Main Page
     default:
-        $matchId = 0;
-        $matchId = intval($_GET['matchId']);
-        $groupList = getMatchGroupList($matchId);
-        if($matchId != 0) {
-            $matchs = getMatchList($matchId);
-            $tpl->SetVar('match', $matchs[0]);
+        $groupId = 0;
+        $groupId = intval($_GET['groupId']);
+        if($groupId != 0) {
+            $groups = getGroupList(0, $groupId);
+            $tpl->SetVar('group', $groups[0]);
+            $userList = getUserList(-1, $groups[0]->match_id, $groupId);
+            $notgroupmember = getUserList(-1, $groups[0]->match_id, 0);
+            $tpl->SetVar('notgroupmember', $notgroupmember);
+        } else {
+        	$userList = getUserList(0);
         }
-        $tpl->SetVar('groups', $groupList);
-        $tpl->SetVar('paging', count($groupList)/20);
+        $tpl->SetVar('members', $userList);
+        $tpl->SetVar('paging', count($userList)/20);
         echo '<h2>'. '选手列表' . '</h2>';
         echo $tpl->GetTemplate('memberlist.php');
         break;

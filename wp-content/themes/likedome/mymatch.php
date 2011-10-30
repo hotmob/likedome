@@ -23,44 +23,41 @@
 			<?php else : ?>
 			<div class="tab_main">
 				<ul class="joinList margin-t13" style="width: 100%; float: left;">
-					<?php $matchList = getUserApplyList($current_user->ID);
-						if(is_array($matchList) && (count($matchList) > 0)) : foreach ($matchList as $match) {
-							$args = get_match_post($match->match_id);
+					<?php $users = getUserList($current_user->ID, -1, -1, -1, 1);
+						if(count($users)) : foreach ($users as $user) {
+							$args = get_match_post($user->match_id);
 							query_posts($args);
 							if (have_posts()) : while (have_posts()) : the_post(); ?>
 					<li style="width: 100%; float: left;">
-						<a href="?p=77&matchid=<?php  echo $match->match_id; ?>"><?php  the_post_thumbnail();?></a>
+						<a href="?p=77&matchid=<?php  echo $user->match_id; ?>"><?php  the_post_thumbnail();?></a>
 						<dl>
 							<?php the_excerpt(); ?>
 							<dd class="join margin-t10">
-								<?php get_follow_match_button($current_user -> ID, $match->match_id); ?>
+								<?php get_follow_match_button($current_user -> ID, $user->match_id); ?>
 							</dd>
 						</dl>
 						<div class="clear"></div>
 					</li>
-					<?php  wp_reset_query(); endwhile; endif; }; ?>
-					<?php  else : ?>
+					<?php endwhile; endif; }; wp_reset_postdata(); else : ?>
 					<li style="width: 100%; float: left;">
 						* 目前你还没有参加过任何比赛
 					</li>
 					<?php endif; ?>
 				</ul>
 			</div>
-			&nbsp;
 			<div class="tab_main">
 				<ul class="joinList margin-t13" style="width: 100%; float: left;">
-					<?php $matchList = getUserFollowList($current_user->ID);
-						if(is_array($matchList) && (count($matchList) > 0)) : foreach ($matchList as $match) {
-							$args = get_match_post($match->match_id);
+					<?php $users = getUserList($current_user->ID, -1, -1, 1);
+						if(count($users)) : foreach ($users as $user) {
+							$args = get_match_post($user->match_id);
 							query_posts($args);
-							if (have_posts()) : while (have_posts()) : the_post();
-					?>
+							if (have_posts()) : while (have_posts()) : the_post(); ?>
 					<li style="width: 100%; float: left;">
-						<a href="?p=77&matchid=<?php echo $match->match_id; ?>"><?php  the_post_thumbnail(); ?></a>
+						<a href="?p=77&matchid=<?php echo $user->match_id; ?>"><?php  the_post_thumbnail(); ?></a>
 						<dl>
 							<?php the_excerpt(); ?>
 							<dd class="join margin-t10">
-								<?php get_apply_match_button($current_user -> ID, $match->match_id); ?>
+								<?php get_apply_match_button($current_user -> ID, $user->match_id); ?>
 							</dd>
 						</dl>
 						<div class="clear"></div>

@@ -36,10 +36,10 @@ function getMatchTypeList() {
 /**
  * 添加比赛
  */
-function addMatch($name, $type=1 , $stage = 1, $grouplimit=200, $groupmemberlimit=20, $groupnumber=0) {
+function addMatch($name, $type=1, $stage = 1, $grouplimit=200, $groupmemberlimit=20, $groupnumber=0) {
     global $wpdb;
     if(!empty($name))
-        $result = $wpdb->insert('wp_likedome_match', array( 'name' =>$name, 'type' => $type, 'stage' => $stage, 'grouplimit' => $grouplimit, 'groupmemberlimit' => $groupmemberlimit, 'groupnumber' => $groupnumber));
+        $result = $wpdb->insert('wp_likedome_match_race', array( 'name' =>$name, 'type' => $type, 'stage' => $stage, 'grouplimit' => $grouplimit, 'groupmemberlimit' => $groupmemberlimit, 'groupnumber' => $groupnumber));
     return $result;
 }
 
@@ -48,8 +48,17 @@ function addMatch($name, $type=1 , $stage = 1, $grouplimit=200, $groupmemberlimi
  */
 function delMatch($id) {
     global $wpdb;
-    $result = $wpdb->query("DELETE FROM wp_likedome_match WHERE id =".$id);
+    $result = $wpdb->query("DELETE FROM wp_likedome_match_race WHERE id =".$id);
     return $result;
+}
+
+/**
+ * 删除用户
+ */
+function delUser($uid, $matchId) {
+	global $wpdb;
+	$result = $wpdb->query("DELETE FROM wp_likedome_match_user WHERE uid=".$uid." AND match_id=".$matchId);
+	return $result;
 }
 
 /**
@@ -69,7 +78,7 @@ function updateMatch($matchid, $type = -1, $stage = -1, $groupnumber = -1, $grou
         $columns['groupmemberlimit'] = intval($groupmemberlimit);
     if($groupnumber != -1)
         $columns['groupnumber'] = intval($groupnumber);
-    $result = $wpdb->update('wp_likedome_match', $columns, array( 'id' => $_matchid));
+    $result = $wpdb->update('wp_likedome_match_race', $columns, array( 'id' => $_matchid));
     return $result;
 }
 
@@ -78,7 +87,7 @@ function updateMatch($matchid, $type = -1, $stage = -1, $groupnumber = -1, $grou
  */
 function getMatchList($id = 0, $type = 0, $stage = 0, $limit = 10, $begin = 0) {
     global $wpdb;
-    $sql = 'SELECT id, name, stage, type, grouplimit, groupmemberlimit, groupnumber FROM wp_likedome_match';
+    $sql = 'SELECT id, name, stage, type, grouplimit, groupmemberlimit, groupnumber FROM wp_likedome_match_race';
     $columns = array();
     if($id > 0)
         array_push($columns, 'id='.$id);
@@ -103,88 +112,16 @@ function getUserVerify($userid) {
 } 
 
 /**
- * 查询选手是否已经报名, 已经报名返回审核状态值, 否则返回null
+ * 查询此ID认证资料
  */
-function getUserApply($userid, $matchid) {
+function getUserProfile($userid) {
 	global $wpdb;
 	$_userid = intval($userid);
-	$_matchid = intval($matchid);
-	$result = $wpdb->get_var("SELECT apply FROM wp_likedome_match_apply WHERE uid = $_userid AND match_id = $_matchid");
-	return $result;
+	$sql = "SELECT uid, realname, gender,birthyear, birthmonth,birthday,constellation, zodiac, telephone, mobile, idcardtype, idcard, address, zipcode, nationality, birthprovince, birthcity, birthdist, birthcommunity, resideprovince, residecity, residedist, residecommunity, residesuite, graduateschool, company, education, occupation, position, revenue, affectivestatus, lookingfor, bloodtype, height, weight, alipay, icq, qq, yahoo, msn, taobao, site, bio, interest, field1, field2, field3, field4, field5, field6, field7, field8 FROM pre_common_member_profile WHERE uid =".$_userid;
+	$verify = $wpdb->get_results($sql);
+	return $verify;
 }
 
-/**
- * 查询用户是否已经关注比赛
- */
-function getUserFollow($userid, $matchid) {
-	global $wpdb;
-	$_userid = intval($userid);
-	$_matchid = intval($matchid);
-	$result = $wpdb->get_var("SELECT uid FROM wp_likedome_match_follow WHERE uid = $_userid AND match_id = $_matchid");
-	return $result;
-}
-
-/**
- * 选手报名
- */
-function setUserApply($userid, $matchid) {
-	global $wpdb;
-	$_userid = intval($userid);
-	$_matchid = intval($matchid);
-	$result = $wpdb->insert('wp_likedome_match_apply', array( 'uid' => $_userid, 'match_id' => $_matchid ));
-	return $result;
-}
-
-/**
- * 关注比赛
- */
-function setUserFollow($userid, $matchid) {
-	global $wpdb;
-	$_userid = intval($userid);
-	$_matchid = intval($matchid);
-	$result = $wpdb->insert('wp_likedome_match_follow', array( 'uid' => $_userid, 'match_id' => $_matchid ));
-	return $result;
-} 
-
-/**
- * 参加比赛人员列表
- */
-function getMatchApplyList($matchid) {
-	global $wpdb;
-	$_matchid = intval($matchid);
-	$result = $wpdb->get_results('SELECT uid FROM wp_likedome_match_apply WHERE match_id = '.$_matchid, ARRAY_N);
-	return $result;
-} 
-
-/**
- * 关注比赛人员列表
- */
-function getMatchFollowList($matchid) {
-	global $wpdb;
-	$_matchid = intval($matchid);
-	$result = $wpdb->get_results('SELECT uid FROM wp_likedome_match_follow WHERE match_id = '.$_matchid, ARRAY_N);
-	return $result;
-} 
-
-/**
- * 参加比赛人员数量
- */
-function getMatchApplyNum($matchid) {
-	$result = getMatchApplyList($matchid);
-	if(is_array($result))
-		return count($result);
-	return 0;
-} 
-
-/**
- * 关注比赛人员数量
- */
-function getMatchFollowNum($matchid) {
-	$result = getMatchFollowList($matchid);
-	if(is_array($result))
-		return count($result);
-	return 0;
-} 
 
 /**
  * 和比赛相关联的文章列表
@@ -199,32 +136,17 @@ function getMatchPostList($matchid) {
 /**
  * 参加比赛队伍列表
  */
-function getMatchGroupList($matchid = 0) {
+function getGroupList($matchid = 0, $id = 0, $limit = 10, $begin = 0) {
 	global $wpdb;
-    $matchid = intval($matchid);
-    if($matchid > 0)
-	   $where = ' WHERE match_id='.$matchid;
-	$result = $wpdb->get_results('SELECT id, match_id, name, captain_id, maxpeople, timestamp, state FROM wp_likedome_match_group'.$where);
-	return $result;
-}
-
-/**
- * 查询选手参加比赛列表
- */
-function getUserApplyList($userid) {
-	global $wpdb;
-	$_userid = intval($userid);
-	$result = $wpdb->get_results('SELECT apply, match_id FROM wp_likedome_match_apply WHERE uid = '.$_userid);
-	return $result;
-} 
-
-/**
- * 查询选手关注比赛列表
- */
-function getUserFollowList($userid) {
-	global $wpdb;
-	$_userid = intval($userid);
-	$result = $wpdb->get_results('SELECT uid, match_id FROM wp_likedome_match_follow WHERE uid = '.$_userid);
+	$sql = 'SELECT id, match_id, name, captain_id, maxpeople, timestamp, state FROM wp_likedome_match_group';
+	$columns = array();
+	if($id > 0)
+		array_push($columns, 'id='.$id);
+	if($matchid > 0)
+		array_push($columns, 'match_id='.$matchid);
+	if(count($columns) > 0)
+		$sql.= ' WHERE ' . implode( ' AND ', $columns );
+	$result = $wpdb->get_results($sql.' LIMIT '.$begin.', '.$limit);
 	return $result;
 }
 
@@ -248,34 +170,77 @@ function addGroup($name, $captain_id, $matchId) {
 }
 
 /**
- * 申请加入队伍
+ * 获取人员列表
  */
-function setUserGroup($userid, $groupid) {
-	global $wpdb;
-	$user_id = intval($userid);
-	$group_id = intval($groupid);
-	$result = $wpdb->insert('wp_likedome_match_group_user', array( 'user_id' => $_userid, 'group_id' => $group_id ));
-	return $result;
+function getUserList($userId = -1, $matchId = -1, $groupId = -1, $apply_follow = -1, $apply_match = -1, $apply_group = -1, $pass_apply_match = -1, $pass_apply_group = -1, $limit = 10, $begin = 0) {
+    global $wpdb;
+    $_userId = intval($userId);
+    $_matchId = intval($matchId);
+    $_groupId = intval($groupId);
+    $_apply_follow = intval($apply_follow);
+    $_apply_match = intval($apply_match);
+    $_apply_group = intval($apply_group);
+    $_pass_apply_match = intval($pass_apply_match);
+    $_pass_apply_group = intval($pass_apply_group);
+    $sql = 'SELECT uid, match_id, group_id, apply_match, apply_group, apply_follow, pass_apply_match, pass_apply_group FROM wp_likedome_match_user';
+	if($_userId != 0) {
+	    $columns = array();
+	    if($_userId > -1)
+	    	array_push($columns, 'uid='.$_userId);
+	    if($_matchId > -1)
+	    	array_push($columns, 'match_id='.$_matchId);
+	    if($_groupId > -1)
+	    	array_push($columns, 'group_id='.$_groupId);
+	    if($_apply_follow > -1)
+	    	array_push($columns, 'apply_follow='.$_apply_follow);
+	    if($_apply_match > -1)
+	    	array_push($columns, 'apply_match='.$_apply_match);
+	    if($_apply_group > -1)
+	    	array_push($columns, 'apply_group='.$_apply_group);
+	    if($_pass_apply_match > -1)
+	    	array_push($columns, 'pass_apply_match='.$_pass_apply_match);
+	    if($_pass_apply_group > -1)
+	    	array_push($columns, 'pass_apply_group='.$_pass_apply_group);
+	    if(count($columns) > 0)
+	    	$sql.= ' WHERE ' . implode( ' AND ', $columns );
+	}
+    $result = $wpdb->get_results($sql.' LIMIT '.$begin.', '.$limit);
+    return $result;
 }
 
 /**
- * 获取用户队伍申请
+ * 设置人员属性
  */
-function getUserGroup($userid, $groupid) {
+function updateUser($userId, $matchId, $groupId = 0, $apply_follow = 0, $apply_match = 0, $apply_group = 0, $pass_apply_match = 0, $pass_apply_group = 0) {
 	global $wpdb;
-	$user_id = intval($userid);
-	$group_id = intval($groupid);
-	$result = $wpdb->get_var("SELECT state FROM wp_likedome_match_group_user WHERE user_id = $user_id AND group_id = $group_id");
+	$_userId = intval($userId);
+	$_matchId = intval($matchId);
+	$_groupId = intval($groupId);
+	$_apply_follow = intval($apply_follow);
+	$_apply_match = intval($apply_match);
+	$_apply_group = intval($apply_group);
+	$_pass_apply_match = intval($pass_apply_match);
+	$_pass_apply_group = intval($pass_apply_group);
+	$columns = array();
+	if($_groupId > 0)
+		$columns['group_id'] = intval($_groupId);
+	if($_apply_follow > 0)
+		$columns['apply_follow'] = intval($_apply_follow);
+	if($_apply_match > 0)
+		$columns['apply_match'] = intval($_apply_match);
+	if($_apply_group  > 0)
+		$columns['apply_group'] = intval($_apply_group);
+	if($_pass_apply_match  > 0)
+		$columns['pass_apply_match'] = intval($_pass_apply_match);
+	if($_pass_apply_group  > 0)
+		$columns['pass_apply_group'] = intval($_pass_apply_group);
+	if(($_userId > 0) && ($_matchId > 0)) {
+		if(count(getUserList($userId, $matchId))) {
+			$result = $wpdb->update('wp_likedome_match_user', $columns, array( 'uid' => $_userId, 'match_id' => $_matchId));
+		} else {
+			$result = $wpdb->insert('wp_likedome_match_user', array( 'uid' => $_userId, 'match_id' => $_matchId) + $columns);
+		}
+	}
 	return $result;
-} 
-
-/**
- * 参加比赛队伍人员列表
- */
-function getGroupUserList($groupid) {
-    global $wpdb;
-    $group_id = intval($groupid);
-    $result = $wpdb->get_results('SELECT user_id FROM wp_likedome_match_group_user WHERE state=1 AND group_id = '.$group_id);
-    return $result;
 }
 ?>

@@ -112,7 +112,7 @@ function get_match_post($matchid, $posttype = 16) {
  * 获取参加比赛按钮
  */
 function get_apply_match_button($userid, $matchid) {
-	if (getUserApply($userid, $matchid) != NULL) : ?>
+	if(count(getUserList($userid, $matchid, -1, -1, 1)))  : ?>
 		<div class="btn margin-r10 fl">
 		已经报名
 		</div>
@@ -127,7 +127,7 @@ function get_apply_match_button($userid, $matchid) {
  * 获取关注比赛按钮
  */
 function get_follow_match_button($userid, $matchid) {
-	if (getUserFollow($userid, $matchid) != NULL) : ?>
+	if (count(getUserList($userid, $matchid, -1, 1))) : ?>
 		<div class="btn margin-r10 fl">
 		已经关注
 		</div>

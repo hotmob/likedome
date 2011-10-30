@@ -37,7 +37,7 @@
             <ul class="tab_menu fro margin-t6 padding-r6"><li class="select">全部比赛</li><li>正在进行中</li><li>报名中</li><li>比赛结束</li></ul>
         </div>
         <div class="tab_main">
-        	<?php $querySql = "SELECT id FROM {$wpdb->prefix}likedome_match";
+        	<?php $querySql = "SELECT id FROM {$wpdb->prefix}likedome_match_race";
 				if(!empty($_POST['matchTypeList']) && !empty($matchTypeId)) {
 	            	$querySql.=" WHERE type=".$matchTypeId;
 				}
@@ -72,7 +72,7 @@
 									<dd class="margin-t13 join">
 										<?php get_apply_match_button($current_user->ID, $related_post->id); ?>
 										<?php get_follow_match_button($current_user->ID, $related_post->id); ?>
-										<span class="margin-r10 fl"><?php echo getMatchApplyNum($related_post->id); ?>人参加</span><span class="margin-r10 fl"><?php echo getMatchFollowNum($related_post->id); ?>人关注</span>
+										<span class="margin-r10 fl"><?php echo count(getUserList(-1, $related_post->id, -1, -1, 1)); ?>人参加</span><span class="margin-r10 fl"><?php echo count(getUserList(-1, $related_post->id, -1, 1)); ?>人关注</span>
 										<!--<span class="margin-r10 fl listen height-23"><a style="color:#222; font-weight:bold;" href="#">小天</a></span> <a href="#" class="fl" style="color:#3a8dc9;">立即收听</a>-->
 										<div id="txWB_W1"></div>
 										<script type="text/javascript">
@@ -104,7 +104,7 @@
 		<!-- 正在进行中 -->
         <div class="tab_main">
             <ul class="joinList margin-t2">
-            	<?php $querySql = "SELECT id FROM {$wpdb->prefix}likedome_match WHERE stage=2";
+            	<?php $querySql = "SELECT id FROM {$wpdb->prefix}likedome_match_race WHERE stage=2";
 				if(!empty($_POST['matchTypeList']) && !empty($matchTypeId)) {
 	            	$querySql.=" AND type=".$matchTypeId;
 				}
@@ -138,7 +138,7 @@
         <!-- 报名中  -->
         <div class="tab_main">
             <ul class="joinList margin-t2">
-            	<?php $querySql = "SELECT id FROM {$wpdb->prefix}likedome_match WHERE stage=1";
+            	<?php $querySql = "SELECT id FROM {$wpdb->prefix}likedome_match_race WHERE stage=1";
 				if(!empty($_POST['matchTypeList']) && !empty($matchTypeId)) {
 	            	$querySql.=" AND type=".$matchTypeId;
 				}
@@ -171,7 +171,7 @@
         </div>
         <div class="tab_main">
             <ul class="joinList margin-t2">
-               <?php $querySql = "SELECT id FROM {$wpdb->prefix}likedome_match WHERE stage=3";
+               <?php $querySql = "SELECT id FROM {$wpdb->prefix}likedome_match_race WHERE stage=3";
 				if(!empty($_POST['matchTypeList']) && !empty($matchTypeId)) {
 	            	$querySql.=" AND type=".$matchTypeId;
 				}

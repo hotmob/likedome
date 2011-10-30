@@ -25,17 +25,22 @@ switch($category) {
         }
         echo "添加队伍提交成功";
         break;
-      // Del
-      case 'del':
+    // Del
+    case 'del':
       break;
-      // Update
-      case 'update':
+    // Update
+    case 'update':
       break;
+    // Schedule
+    case 'schedule':
+    	echo '<h2>'. '对阵图设置' . '</h2>';
+    	echo $tpl->GetTemplate('matchschedule.php');
+      	break;
      // Main Page
     default:
         $matchId = 0;
         $matchId = intval($_GET['matchId']);
-        $groupList = getMatchGroupList($matchId);
+        $groupList = getGroupList($matchId);
         if($matchId != 0) {
             $matchs = getMatchList($matchId);
             $tpl->SetVar('match', $matchs[0]);

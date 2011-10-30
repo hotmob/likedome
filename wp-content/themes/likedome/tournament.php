@@ -94,20 +94,20 @@
 			<!--队伍查询-->
 			<div class="tab_main font-size14">
 				<dl class="vs-group margin-t18">
-					<?php $grouplist = getMatchGroupList($matchid);
+					<?php $grouplist = getGroupList($matchid);
 						if ($grouplist != null) : foreach ($grouplist as $group) { ?>
 							<dt><?php echo $group->name; ?></dt>
 							<dd>队长：<?php echo (get_user_by('id',$group->captain_id)->user_login); ?></dd>
-							<dd>队员：<?php $userList = getGroupUserList($group->id);
+							<dd>队员：<?php $userList = getUserList($group->id);
 								foreach ($userList as $player){
 									echo get_user_by('id', $player->user_id)->user_login."; ";
 								}; 
-								$joinGroupState = getUserGroup($current_user->ID, $group->id);
-								if( $joinGroupState == 1) {
-									echo "已经加入";
-								} else if( $joinGroupState == null) {
+								$users = getUserList($current_user->ID, $group->match_id, $group->id);
+								if((count($users)) == 0) {
 									echo "<a onclick=\"showWindowsFrameTimer('applygroup','wp-content/plugins/likedome/tournament.php?opt=applygroup&matchid=".$matchid."&groupid=".$group->id."', 1500);\" href=\"#\">申请加入</a>";
-								} else {
+								} else if ( $users[0]->pass_apply_group == 1) {
+									echo "已经加入";
+								} else if( $users[0]->apply_group == 1) {
 									echo "加入审核中";
 								}
 								?>
@@ -183,9 +183,9 @@
 			<!--创建队伍-->
 			<div class="tab_main font-size14">
 				<div class="width-600 height-700 margin-t18">
-					<?php if (getUserGroup($userid, $groupid) != null) {
+					<?php if (count(getUserList($userid, $matchid, $groupid))) {
 						  	echo "您已经申请了其他的队伍!";
-						  } else if (getUserApply($userid, $matchid) == NULL){
+						  } else if(count(getUserList($userid, $matchid, -1, -1, 1)) == 0){
 						  	echo "您还未参加此场比赛";	
 						  } else { ?>
 						  	<form name= "matchTypeSelect" action= "" method= "post">
