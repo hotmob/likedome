@@ -69,7 +69,8 @@ class Likedome {
 			add_submenu_page('likedome-introduction', "功能简介", "功能简介", 'administrator', 'likedome-introduction', array( &$this, 'submenu_introduction' ));
             add_submenu_page('likedome-introduction', "比赛类别", "比赛类别", 'administrator', 'likedome/admin/matchtype.php');
 			add_submenu_page('likedome-introduction', "管理比赛", "管理比赛", 'administrator', 'likedome/admin/match.php');
-            add_submenu_page('likedome-introduction', "队伍比赛", "队伍比赛", 'administrator', 'likedome/admin/group.php');
+            add_submenu_page('likedome-introduction', "管理队伍", "管理队伍", 'administrator', 'likedome/admin/group.php');
+            add_submenu_page('likedome-introduction', "管理选手", "管理选手", 'administrator', 'likedome/admin/member.php');
 			// add_submenu_page('likedome/admin/manager.php', "管理比赛", "管理比赛", 'administrator', array( &$this, 'submenu_define_settings' ));
 			// add_submenu_page('likedome/admin/manager.php', "比分审核", "比分审核", 'administrator', array( &$this, 'submenu_integration_settings' ));ction_exists('add_options_page')) {
 			// add_options_page('FeedBurner', 'FeedBurner', 8, basename(__FILE__), 'ol_feedburner_options_subpanel');

@@ -21,10 +21,8 @@
             <td><?php echo $match->stage; ?></td>
         </tr>
         <?php endif; ?>
-    </thead>
-    <tbody>
         <tr>
-            <td>队伍id</td>
+            <td>ID</td>
             <td>队伍名称</td>
              <?php if (!empty($match)) :  ?>
             <td colspan="2"><a href="#">点击下载本次全部队伍详细信息</a></td>
@@ -35,13 +33,15 @@
                 </form>
             </td>
             <?php else : ?>
-            <td colspan="5"></td>
+            <td colspan="5" width="70%"></td>
             <?php endif; ?>
         </tr>
+    </thead>
+    <tbody>
         <?php foreach($groups as $group) : ?>
             <tr>
-                <td><?php echo $group->id; ?></td>
-                <td><?php echo $group->name; ?></td>
+                <td><strong><?php echo $group->id; ?></strong></td>
+                <td><strong><?php echo $group->name; ?></strong></td>
                 <td colspan="5"></td>
             </tr>
          <?php endforeach;  ?>
@@ -49,7 +49,7 @@
              <?php if ($tpl->getVar('paging') == 1) : ?> 
             <td colspan="7">
                 <div class="ym">
-                    <a href="#">上一页</a>共12页面<a href="#" class="dqym">1</a><a href="#">2</a><a href="#">下一页</a>
+                    <a href="#">上一页</a>共2页面<a href="#" class="dqym">1</a><a href="#">2</a><a href="#">下一页</a>
                 </div>
             </td>
             <?php endif;  ?> 
