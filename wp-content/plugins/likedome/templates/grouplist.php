@@ -35,7 +35,7 @@
             <td>队伍名称</td>
              <?php if (!empty($match)) :  ?>
             <td colspan="2"><a href="#">点击下载本次全部队伍详细信息</a></td>
-            <td><a href="#">设置对阵图</a></td>
+            <td><a href="admin.php?page=likedome/admin/group.php&round=1&matchId=<?php echo $match->id; ?>&category=schedule">设置对阵图</a></td>
             <td colspan="2">
                 <form name= "currentSelect" method= "post">
                     <input name="groupname" type="text" id="groupname" value="输入队伍名称" /><input name="category" type="hidden" value="add" h/><input name="matchId" type="hidden" value="<?php echo $match->id; ?>" h/><input type="submit" value="创建队伍" />

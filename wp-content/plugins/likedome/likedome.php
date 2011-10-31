@@ -10,7 +10,8 @@ Author URI: http://www.ammob.com
 
 ### Load WP-Config File If This File Is Called Directly
 define( 'LIKEDOME_PLUGINS_ROOT', dirname( __FILE__ ) );
-require_once(LIKEDOME_PLUGINS_ROOT.'/includes/classes.php');
+require_once( LIKEDOME_PLUGINS_ROOT . '/includes/classes.php');
+require_once( LIKEDOME_PLUGINS_ROOT . '/includes/templatespart.php');
 
 if ( !defined('LIKEDOME_DEFINE_SETTING_NAME') ) :
 	

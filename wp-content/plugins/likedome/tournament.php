@@ -9,21 +9,21 @@ tournament();
 function tournament () {
 	global $wpdb, $user_identity, $user_ID;
 	header('Content-Type: text/html; charset='.getCharset().'');
-	if(empty($_REQUEST['matchid']) || empty($_REQUEST['opt'])) {
+	if(intval($_REQUEST['matchid']) > 0 && intval($_REQUEST['opt']) > 0) {
 		echo "参数错误!";
 		exit ;
 	}
 	$matchid = intval($_REQUEST['matchid']);
+	if (!empty($user_identity)) {
+		$username = htmlspecialchars(addslashes($user_identity));
+	} else if(!empty($_COOKIE['comment_author_'.COOKIEHASH])) {
+		$username = htmlspecialchars(addslashes($_COOKIE['comment_author_'.COOKIEHASH]));
+	} else {
+		echo "需要登陆";
+		exit ;
+	}
 	switch($_REQUEST['opt']) {
 	case 'apply' :
-		if (!empty($user_identity)) {
-			$username = htmlspecialchars(addslashes($user_identity));
-		} else if(!empty($_COOKIE['comment_author_'.COOKIEHASH])) {
-			$username = htmlspecialchars(addslashes($_COOKIE['comment_author_'.COOKIEHASH]));
-		} else {
-			echo "需要登陆才可以报名";
-			exit ;
-		}
 		if(!getUserVerify($user_ID)) {
 			echo "需要选手认证才可以报名";
 			exit;
@@ -33,34 +33,118 @@ function tournament () {
 			echo "你已经报过名了";
 			exit;
 		}
-		updateUser($user_ID, $matchid, 0 , 0, 1);
+		updateUser($user_ID, $matchid, -1, -1, 1);
 		if(count(getUserList($user_ID, $matchid, -1, -1, 1)) > 0) {
 			echo "报名成功!";
 			exit;
 		}
 		echo "报名时发生错误";
 		exit;
+	case 'cancelapply' :
+		updateUser($user_ID, $matchid, -1, -1, 0);
+		echo "报名已取消";
+		exit;
 	case 'follow' :
-		updateUser($user_ID, $matchid, 0 , 1);
+		updateUser($user_ID, $matchid, -1, 1);
 		if(count(getUserList($user_ID, $matchid, -1, 1)) > 0) {
 			echo "关注成功!";
 			exit;
 		}
 		echo "关注时发生错误";
-		exit ;
+		exit;
+	case 'cancelfollow' :
+		updateUser($user_ID, $matchid, -1, 0);
+		echo "关注已取消";
+		exit;
+	case 'cancelgroup' :
+		$groupid = intval($_REQUEST['groupid']);
+		$memberid = intval($_REQUEST['memberid']);
+		$users = getUserList($memberid);
+		if(empty($users)){
+			echo "找不到此用户ID, ".$memberid;
+			exit;
+		}
+		$groups = getGroupList(-1, $groupid);
+		if(empty($groups)){
+			echo "找不到此队伍ID, ".$groupid;
+			exit;
+		}
+		$matchs = getMatchList($groups[0]->match_id);
+		if(empty($matchs)){
+			echo "找不到此队伍的比赛ID, error code : ".$groups[0]->match_id;
+			exit;
+		}
+		if($matchs[0]->stage != 1) {
+			echo "比赛不处于报名阶段,无法退出 . error code : ".$groups[0]->match_id;
+			exit;
+		}
+		if($groups[0]->captain_id == $user_ID || // 队长踢人
+		 $memberid == $user_ID) {  // 队员离开
+			updateUser($memberid, $matchid, 0, -1, -1, 0, -1, 0);
+			echo "已退出队伍";
+			exit;
+		}
+		echo "权限不足.";
+		exit;
 	case 'applygroup' :
-		if(count(getUserList($user_ID, $matchid, -1, -1, 1)) > 0) {
+		$users = getUserList($user_ID, $matchid);
+		if(!empty($users)) {
 			$groupid = $_REQUEST['groupid'];
-			if(count(getUserList($user_ID, $matchid, -1, -1, -1, 1))) {
+			if(intval($users[0]->apply_group)) {
 				echo "您已经申请了其他的队伍!";
 				exit;
 			}
-			updateUser($user_ID, $matchid, $groupid, 0, 0, 1);
+			$groups = getGroupList($matchid, $groupid);
+			if(empty($groups)){
+				echo "比赛".$matchid."中找不到这个队伍!".$groupid;
+				exit;
+			}
+			$groupusers = getUserList(-1, -1, $groupid);
+			if(($groups[0]->maxpeople - 1) < count($groupusers)){
+				echo "这个队伍中的人数已经满了!".$groupid;
+				exit;
+			}
+			updateUser($user_ID, $matchid, $groupid, -1, -1, 1);
 			echo "申请成功!";
 			exit;
 		}
 		echo "你尚未参加此项比赛!";
 		exit ;
+	case 'passapplygroup' :
+		$memberid = intval($_REQUEST['memberid']);
+		$users = getUserList($memberid, $matchid);
+		if(!empty($users)) {
+			$groupid = intval($_REQUEST['groupid']);
+			if($users[0]->group_id == $groupid) {
+				updateUser($memberid, $matchid, $groupid, -1, -1, 1, -1, 1);
+				echo "通过申请!";
+				exit;
+			}
+			echo "申请失败!".$users[0]->group_id.":".$groupid;
+			exit;
+		}
+		echo "此用户尚未参加此项比赛!";
+		exit;
+	case 'creategroup' :
+		$users = getUserList($user_ID, $matchid);
+		if(!intval($users[0]->apply_match)) {
+			echo "你尚未参加此项比赛!";
+			exit;
+		}
+		if(intval($users[0]->apply_group)) {
+			echo "您已经申请了其他的队伍!";
+			exit;
+		}
+		$groupname = trim($_REQUEST['groupname']);
+		$success = addGroup($groupname, $user_ID, $matchid);
+		if(intval($success)) {
+			$groups = getGroupList($matchid, -1, $user_ID);
+			updateUser($user_ID, $matchid, $groups[0]->id, -1, -1, 1, -1, 1);
+			echo "申请成功!";
+			exit;
+		}
+		echo "申请发生错误error code : ".$success;
+		exit;
 	default :
 		echo "无法解析此函数";
 		exit ;

@@ -85,11 +85,11 @@ function updateMatch($matchid, $type = -1, $stage = -1, $groupnumber = -1, $grou
 /**
  * 获取比赛分类列表, stage = 比赛阶段, 0未开始, 1报名中, 2进行中, 3已结束
  */
-function getMatchList($id = 0, $type = 0, $stage = 0, $limit = 10, $begin = 0) {
+function getMatchList($id = -1, $type = -1, $stage = -1, $limit = 10, $begin = 0) {
     global $wpdb;
     $sql = 'SELECT id, name, stage, type, grouplimit, groupmemberlimit, groupnumber FROM wp_likedome_match_race';
     $columns = array();
-    if($id > 0)
+    if($id > -1)
         array_push($columns, 'id='.$id);
     if($stage > 0)
         array_push($columns, 'stage='.$stage);
@@ -97,7 +97,7 @@ function getMatchList($id = 0, $type = 0, $stage = 0, $limit = 10, $begin = 0) {
         array_push($columns, 'type='.$type);
     if(count($columns) > 0)
         $sql.= ' WHERE ' . implode( ' AND ', $columns );
-    $result = $wpdb->get_results($sql.' LIMIT '.$begin.', '.$limit);
+    $result = $wpdb->get_results($sql.' ORDER BY id DESC LIMIT '.$begin.', '.$limit);
     return $result;
 }
 
@@ -136,12 +136,14 @@ function getMatchPostList($matchid) {
 /**
  * 参加比赛队伍列表
  */
-function getGroupList($matchid = 0, $id = 0, $limit = 10, $begin = 0) {
+function getGroupList($matchid = 0, $groupid = 0, $userid = 0, $limit = 10, $begin = 0) {
 	global $wpdb;
 	$sql = 'SELECT id, match_id, name, captain_id, maxpeople, timestamp, state FROM wp_likedome_match_group';
 	$columns = array();
-	if($id > 0)
-		array_push($columns, 'id='.$id);
+	if($userid > 0)
+		array_push($columns, 'captain_id='.$userid);
+	if($groupid > 0)
+		array_push($columns, 'id='.$groupid);
 	if($matchid > 0)
 		array_push($columns, 'match_id='.$matchid);
 	if(count($columns) > 0)
@@ -211,7 +213,7 @@ function getUserList($userId = -1, $matchId = -1, $groupId = -1, $apply_follow =
 /**
  * 设置人员属性
  */
-function updateUser($userId, $matchId, $groupId = 0, $apply_follow = 0, $apply_match = 0, $apply_group = 0, $pass_apply_match = 0, $pass_apply_group = 0) {
+function updateUser($userId, $matchId, $groupId = -1, $apply_follow = -1, $apply_match = -1, $apply_group = -1, $pass_apply_match = -1, $pass_apply_group = -1) {
 	global $wpdb;
 	$_userId = intval($userId);
 	$_matchId = intval($matchId);
@@ -222,25 +224,26 @@ function updateUser($userId, $matchId, $groupId = 0, $apply_follow = 0, $apply_m
 	$_pass_apply_match = intval($pass_apply_match);
 	$_pass_apply_group = intval($pass_apply_group);
 	$columns = array();
-	if($_groupId > 0)
+	if($_groupId > -1)
 		$columns['group_id'] = intval($_groupId);
-	if($_apply_follow > 0)
+	if($_apply_follow > -1)
 		$columns['apply_follow'] = intval($_apply_follow);
-	if($_apply_match > 0)
+	if($_apply_match > -1)
 		$columns['apply_match'] = intval($_apply_match);
-	if($_apply_group  > 0)
+	if($_apply_group  > -1)
 		$columns['apply_group'] = intval($_apply_group);
-	if($_pass_apply_match  > 0)
+	if($_pass_apply_match  > -1)
 		$columns['pass_apply_match'] = intval($_pass_apply_match);
-	if($_pass_apply_group  > 0)
+	if($_pass_apply_group  > -1)
 		$columns['pass_apply_group'] = intval($_pass_apply_group);
 	if(($_userId > 0) && ($_matchId > 0)) {
-		if(count(getUserList($userId, $matchId))) {
-			$result = $wpdb->update('wp_likedome_match_user', $columns, array( 'uid' => $_userId, 'match_id' => $_matchId));
-		} else {
-			$result = $wpdb->insert('wp_likedome_match_user', array( 'uid' => $_userId, 'match_id' => $_matchId) + $columns);
-		}
+		$users = getUserList($userId, $matchId);
+		if(empty($users))
+			return $wpdb->insert('wp_likedome_match_user', array( 'uid' => $_userId, 'match_id' => $_matchId) + $columns);
+		$result = $wpdb->update('wp_likedome_match_user', $columns, array( 'uid' => $_userId, 'match_id' => $_matchId));
 	}
 	return $result;
 }
+
+// 用户名 真实姓名  性别 手机 证件类型 证件号 QQ
 ?>

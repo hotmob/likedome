@@ -4,15 +4,7 @@
         <td width="5%"><label>
             <form name= "currentSelect" method= "post">
                 <select name="currentTypeSelect" id="currentTypeSelect" onChange="document.currentSelect.submit();" >
-                    <option value="0">全部比赛</option>
-                    <?php 
-                        foreach($matchtypelist as $matchtype){
-                            echo '<option  value="'.$matchtype->id.'"';
-                            if($tpl->getVar('currentType') == $matchtype->id) {
-                                echo 'selected="selected"';
-                            }
-                            echo '>'.$matchtype->type.'</option>';
-                    }  ?>
+                    <?php drawMatchTypeSelect($tpl->getVar('currentType')); ?>
                 </select></label></td>
         <td width="45%"><label>
                 <select name="currentStageSelect" id="currentStageSelect" onChange= "document.currentSelect.submit();" >
@@ -43,7 +35,7 @@
         <tr id="poll-5" class="highlight">
             <form method="post">
             <td><strong><?php echo $match->id; ?></strong></td>
-            <td><strong><a href="admin.php?page=likedome/admin/group.php&matchId=<?php echo $match->id;  ?>&category=schedule"><?php echo $match->name; ?></a></strong></td>
+            <td><strong><a href="admin.php?page=likedome/admin/group.php&matchId=<?php echo $match->id;  ?>"><?php echo $match->name; ?></a></strong></td>
             <td><?php echo ($matchtypelist[intval($match->type)]->type); ?></td>
             <td><select name="stageselect" id="stageselect">
                 <option value='1' <?php if($match->stage == 1)  echo 'selected="selected"'; ?> >报名中</option>

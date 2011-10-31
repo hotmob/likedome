@@ -11,6 +11,7 @@ $category = trim($_REQUEST['category']);
 define( 'LIKEDOME_PLUGINS_ROOT', dirname( dirname( __FILE__ ) ) );
 require_once( LIKEDOME_PLUGINS_ROOT .  '/config.php' );
 require_once( LIKEDOME_PLUGINS_ROOT . '/includes/classes.php');
+require_once( LIKEDOME_PLUGINS_ROOT . '/includes/templatespart.php');
 
 ### Determines Which Category It Is
 switch($category) {
@@ -48,21 +49,17 @@ switch($category) {
       $matchid = intval($_POST['matchid']);
       $stage = intval($_POST['stageselect']);
       $succe = updateMatch($matchid, -1, $stage);
-      if($succe != 0) {
-            echo "修改比赛提交失败";
+      if($succe) {
+          echo "修改比赛提交成功";
           return;
        }
-      echo "修改比赛提交成功";
+      echo "修改比赛提交失败";
       break;
      // Main Page
     default:
         $currentType = intval($_POST['currentTypeSelect']);
         $currentStage = intval($_POST['currentStageSelect']);
-        if(empty($currentType))
-            $currentType = 0;
-         if(empty($currentStage))
-            $currentStage = 0;
-        $matchList = getMatchList($currentType, $currentStage);
+        $matchList = getMatchList(-1, $currentType, $currentStage);
         $tpl->SetVar('currentType', $currentType);
         $tpl->SetVar('currentStage', $currentStage);
         $tpl->SetVar('typelist', getMatchTypeList());

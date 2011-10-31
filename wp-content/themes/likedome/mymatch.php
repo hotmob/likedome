@@ -33,7 +33,8 @@
 						<dl>
 							<?php the_excerpt(); ?>
 							<dd class="join margin-t10">
-								<?php get_follow_match_button($current_user -> ID, $user->match_id); ?>
+								<?php 
+								get_follow_match_button($current_user -> ID, $user->match_id); ?>
 							</dd>
 						</dl>
 						<div class="clear"></div>
@@ -57,7 +58,8 @@
 						<dl>
 							<?php the_excerpt(); ?>
 							<dd class="join margin-t10">
-								<?php get_apply_match_button($current_user -> ID, $user->match_id); ?>
+								<?php $matchs = getMatchList($user->match_id);
+								get_apply_match_button($current_user -> ID, $user->match_id, $matchs[0]->stage); ?>
 							</dd>
 						</dl>
 						<div class="clear"></div>

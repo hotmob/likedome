@@ -109,31 +109,86 @@ function get_match_post($matchid, $posttype = 16) {
 }
 
 /**
- * 获取参加比赛按钮
+ * 获取参加比赛按钮 ,  $stage : 比赛阶段, 0未开始, 1报名中, 2进行中, 3已结束
  */
-function get_apply_match_button($userid, $matchid) {
-	if(count(getUserList($userid, $matchid, -1, -1, 1)))  : ?>
-		<div class="btn margin-r10 fl">
-		已经报名
-		</div>
-	<?php else : ?>
-		<a class="btn margin-r10 fl" onclick="showWindowsFrameTimer('apply_match', 'wp-content/plugins/likedome/tournament.php?opt=apply&matchid=<?php echo $matchid; ?>&flag=1', 1000);" href="##">
-		点击参加
-		</a>
-	<?php endif; 
+function get_apply_match_button($userid, $matchid, $stage = -1) {
+	if(intval($userid) == 0) {
+		$userid = -1;
+	} else {
+		$users = getUserList($userid, $matchid);
+	}
+	if(!empty($users)) {
+		if($stage < 2) {
+			if(intval($users[0]->apply_match)) : ?>
+				<div class="btn margin-r10 fl">
+				已经报名
+				</div>
+			<?php else : ?>
+				<a class="btn margin-r10 fl" onclick="showWindowsFrameTimer('apply_match', 'wp-content/plugins/likedome/tournament.php?opt=apply&matchid=<?php echo $matchid; ?>&flag=1', 1000);" href="##">
+				点击参加
+				</a>
+			<?php endif; 
+		} else if($stage == 2){ ?>
+			<div class="btn margin-r10 fl">
+				进行中
+			</div>
+		<?php } else { ?>
+			<div class="btn margin-r10 fl">
+				比赛结束
+			</div>
+		<?php }
+		return;
+	} ?>
+	<a class="btn margin-r10 fl" onclick="showWindowsFrameTimer('apply_match', 'wp-content/plugins/likedome/tournament.php?opt=apply&matchid=<?php echo $matchid; ?>&flag=1', 500);" >
+		参加比赛
+	</a>
+	<?php 
 }
 
 /**
- * 获取关注比赛按钮
+ * 获取关注比赛按钮_小
  */
 function get_follow_match_button($userid, $matchid) {
-	if (count(getUserList($userid, $matchid, -1, 1))) : ?>
-		<div class="btn margin-r10 fl">
-		已经关注
-		</div>
-	<?php else : ?>
-		<a class="btn margin-r10 fl" onclick="showWindowsFrameTimer('follow_match', 'wp-content/plugins/likedome/tournament.php?opt=follow&matchid=<?php echo $matchid; ?>&flag=1', 1000);" href="##">
-		关注比赛
-		</a>
-	<?php endif; 
+	if(intval($userid) == 0) {
+		$userid = -1;
+	} else {
+		$users = getUserList($userid, $matchid);
+	}
+	if(!empty($users)) {
+		if (intval($users[0]->apply_follow)) : ?>
+			<div class="btn margin-r10 fl">
+			已经关注
+			</div>
+		<?php return; endif; 
+	} ?>
+	<a class="btn margin-r10 fl" onclick="showWindowsFrameTimer('follow_match', 'wp-content/plugins/likedome/tournament.php?opt=follow&matchid=<?php echo $matchid; ?>&flag=1', 500);" >
+	关注比赛
+	</a>
+	<?php 
+}
+
+/**
+ * 首页分类调用
+ */
+function index_matchType_content($currentTypeId = 0, $stage = -1) {
+	if($currentTypeId != 0)
+		$matchList = getMatchList(-1, $currentTypeId, $stage, 4);
+	else
+        $matchList = getMatchList(-1, -1, $stage, 4);
+	if (count($matchList)) : foreach ($matchList as $match) :
+		$args = get_match_post($match->id);
+		query_posts($args);
+		echo '<ul class="joinList margin-t2">';
+		if (have_posts()) : while (have_posts()) : the_post();
+			echo '<li> <a href="?p=77&matchid='.$match->id.'" target="_blank">';
+				the_post_thumbnail(); 
+			echo '</a><dl>';
+	            the_excerpt();
+	            get_apply_match_button($current_user->ID, $match->id, $stage);
+	        echo '</dl><div class="clear"></div></li>';
+		endwhile;endif;
+		echo '</ul>';
+	endforeach;
+	endif;
+    wp_reset_postdata();
 }

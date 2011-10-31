@@ -1,63 +1,32 @@
-<?php get_header(); 
-	if($_POST['matchTypeList'] == "所有比赛") {
-		$_POST['matchTypeList'] = null;
-	}
-?>
+<?php get_header(); ?>
 <div class="margin-l18 flo width-600">
     <div id="tab">
         <div class="title">
-            <h3 class="flo margin-l12">查看<?php echo $_POST['matchTypeList']; ?></h3>
+            <h3 class="flo margin-l12">查看</h3>
             <div class="kind flo">
             	<form name= "matchTypeSelect" action= "" method= "post">
-	                <select name="matchTypeList" onChange= "document.matchTypeSelect.submit();">
-	                	<?php 
-	                		$matchTypeId = 0;
-	                		if(!empty($_POST['matchTypeList'])) {
-	                			echo '<option>'.$_POST['matchTypeList'].'</option>';
-							}
-							echo '<option>所有比赛</option>';
-			                $related = $wpdb->get_results("
-			                SELECT id, type
-			                FROM {$wpdb->prefix}likedome_match_type
-			                LIMIT 10");
-			                if ( $related ) {
-			                    foreach ($related as $related_post) {
-			                    	if(!empty($_POST['matchTypeList']) && ($related_post->type == $_POST['matchTypeList'])) {
-			                    		$matchTypeId = $related_post->id;
-			                    		continue;
-									}
-			                    	echo '<option>'.$related_post->type.'</option>';
-								}
-							}
-			            ?>
-			            <?php wp_reset_postdata(); ?>
+	                <select name="currentMatchTypeId" onChange= "document.matchTypeSelect.submit();">
+	                	<?php $currentTypeId = intval($_POST['currentMatchTypeId']); drawMatchTypeSelect($currentTypeId); ?>
 	                </select>
                 </form>
             </div>
             <ul class="tab_menu fro margin-t6 padding-r6"><li class="select">全部比赛</li><li>正在进行中</li><li>报名中</li><li>比赛结束</li></ul>
         </div>
         <div class="tab_main">
-        	<?php $querySql = "SELECT id FROM {$wpdb->prefix}likedome_match_race";
-				if(!empty($_POST['matchTypeList']) && !empty($matchTypeId)) {
-	            	$querySql.=" WHERE type=".$matchTypeId;
-				}
-	            $related = $wpdb->get_results($querySql." ORDER BY id DESC LIMIT 4"); // 显示4条
+        	<?php
+				if($currentTypeId != 0)
+					$matchList = getMatchList(-1, $currentTypeId, -1, 4);
+				else
+	            	$matchList = getMatchList(-1, -1, -1, 4);
 				$count = 0;
-	            if ( $related ) {
-	                foreach ($related as $related_post) {
-						$matchPostIds = $wpdb->get_results("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = '链接比赛' AND meta_value = '{$related_post->id}' LIMIT 10");
-						$args = array(
-	                        'category__in' => array(16), // 包括的分类ID
-	                        'post__in' => $matchPostIds['post_id'],
-	                        'showposts' => 1, // 显示相关文章数量
-	                        'caller_get_posts' => 1
-                    	);
+	            if (count($matchList)) : foreach ($matchList as $match) {
+                    	$args = get_match_post($match->id);
 						query_posts($args);
 						if (have_posts()) : while (have_posts()) : the_post();
 							if($count == 0){ 
 								$count++; ?>
 								<div class="margin-t10 tabimg">
-									<a href="?p=77&matchid=<?php echo $related_post->id; ?>" target="_blank" class="fl" title="<?php the_title_attribute(); ?>" >
+									<a href="?p=77&matchid=<?php echo $match->id; ?>" target="_blank" class="fl" title="<?php the_title_attribute(); ?>" >
 										<?php 
 										$imageContent = get_content_image();
 										if(!empty($imageContent)){
@@ -70,9 +39,9 @@
 								<dl class="margin-t10 tablist">
 									<?php the_excerpt(); ?>
 									<dd class="margin-t13 join">
-										<?php get_apply_match_button($current_user->ID, $related_post->id); ?>
-										<?php get_follow_match_button($current_user->ID, $related_post->id); ?>
-										<span class="margin-r10 fl"><?php echo count(getUserList(-1, $related_post->id, -1, -1, 1)); ?>人参加</span><span class="margin-r10 fl"><?php echo count(getUserList(-1, $related_post->id, -1, 1)); ?>人关注</span>
+										<?php get_apply_match_button($current_user->ID, $match->id, $match->stage); ?>
+										<?php get_follow_match_button($current_user->ID, $match->id); ?>
+										<span class="margin-r10 fl"><?php echo count(getUserList(-1, $match->id, -1, -1, 1)); ?>人参加</span><span class="margin-r10 fl"><?php echo count(getUserList(-1, $match->id, -1, 1)); ?>人关注</span>
 										<!--<span class="margin-r10 fl listen height-23"><a style="color:#222; font-weight:bold;" href="#">小天</a></span> <a href="#" class="fl" style="color:#3a8dc9;">立即收听</a>-->
 										<div id="txWB_W1"></div>
 										<script type="text/javascript">
@@ -84,122 +53,34 @@
 								</dl>
 								<ul class="joinList margin-t13 border-t">
 							<?php } else { ?>
-								<li> <a href="<?php the_permalink(); ?>" target="_blank"><?php the_post_thumbnail(); ?></a>
+								<li> <a href="?p=77&matchid=<?php echo $match->id; ?>" target="_blank"><?php the_post_thumbnail(); ?></a>
 				                    <dl>
 				                        <?php  the_excerpt();  ?>
-				                        <dd class="join margin-t10"> 
-				                        <?php get_apply_match_button($current_user->ID, $related_post->id); ?>
+				                        <?php get_apply_match_button($current_user->ID, $match->id, $match->stage); ?>
 				                    </dl>
 				                    <div class="clear"></div>
 				                </li>
-							<?php } endwhile; ?>
+							<?php } endwhile; wp_reset_postdata(); ?>
 							</ul>
 						<?php 
 						endif;
 					}
-				} ?>
-	        <?php wp_reset_postdata(); ?>
+				endif; ?>
             <div class="clear"></div>
         </div>
 		<!-- 正在进行中 -->
         <div class="tab_main">
-            <ul class="joinList margin-t2">
-            	<?php $querySql = "SELECT id FROM {$wpdb->prefix}likedome_match_race WHERE stage=2";
-				if(!empty($_POST['matchTypeList']) && !empty($matchTypeId)) {
-	            	$querySql.=" AND type=".$matchTypeId;
-				}
-	            $related = $wpdb->get_results($querySql." ORDER BY id DESC LIMIT 6"); // 显示6条
-				$count = 0;
-	            if ( $related ) {
-	                foreach ($related as $related_post) {
-						$matchPostIds = $wpdb->get_results("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = '链接比赛' AND meta_value = '{$related_post->id}' LIMIT 10");
-						$args = array(
-	                        'category__in' => array(16), // 包括的分类ID
-	                        'post__in' => $matchPostIds['post_id'],
-	                        'showposts' => 1, // 显示相关文章数量
-	                        'caller_get_posts' => 1
-                    	);
-						query_posts($args);
-						if (have_posts()) : while (have_posts()) : the_post(); ?>
-							<li> <a href="<?php the_permalink(); ?>" target="_blank"><?php the_post_thumbnail(); ?></a>
-			                    <dl>
-			                        <?php the_excerpt(); ?>
-			                        <dd class="join margin-t10"> <a href="比赛页面.html" target="_blank" class="btn margin-r10 fl">点击参加</a> </dd>
-			                    </dl>
-			                    <div class="clear"></div>
-			                </li>
-						<?php endwhile;endif;
-						}
-					} ?>
-	        	<?php wp_reset_postdata(); ?>
-            </ul>
+			<?php index_matchType_content($currentTypeId, 2); ?>
             <div class="clear"></div>
         </div>
         <!-- 报名中  -->
         <div class="tab_main">
-            <ul class="joinList margin-t2">
-            	<?php $querySql = "SELECT id FROM {$wpdb->prefix}likedome_match_race WHERE stage=1";
-				if(!empty($_POST['matchTypeList']) && !empty($matchTypeId)) {
-	            	$querySql.=" AND type=".$matchTypeId;
-				}
-	            $related = $wpdb->get_results($querySql." ORDER BY id DESC LIMIT 6"); // 显示6条
-				$count = 0;
-	            if ( $related ) {
-	                foreach ($related as $related_post) {
-						$matchPostIds = $wpdb->get_results("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = '链接比赛' AND meta_value = '{$related_post->id}' LIMIT 10");
-						$args = array(
-	                        'category__in' => array(16), // 包括的分类ID
-	                        'post__in' => $matchPostIds['post_id'],
-	                        'showposts' => 1, // 显示相关文章数量
-	                        'caller_get_posts' => 1
-                    	);
-						query_posts($args);
-						if (have_posts()) : while (have_posts()) : the_post(); ?>
-							<li> <a href="<?php the_permalink(); ?>" target="_blank"><?php the_post_thumbnail(); ?></a>
-			                    <dl>
-			                        <?php the_excerpt(); ?>
-			                        <?php get_apply_match_button($current_user->ID, $related_post->id); ?>
-			                    </dl>
-			                    <div class="clear"></div>
-			                </li>
-						<?php endwhile;endif;
-						}
-					} ?>
-	        	<?php wp_reset_postdata(); ?>
-            </ul>
+        	<?php index_matchType_content($currentTypeId, 1); ?>
             <div class="clear"></div>
         </div>
+        <!-- 比赛结束  -->
         <div class="tab_main">
-            <ul class="joinList margin-t2">
-               <?php $querySql = "SELECT id FROM {$wpdb->prefix}likedome_match_race WHERE stage=3";
-				if(!empty($_POST['matchTypeList']) && !empty($matchTypeId)) {
-	            	$querySql.=" AND type=".$matchTypeId;
-				}
-	            $related = $wpdb->get_results($querySql." ORDER BY id DESC LIMIT 6"); // 显示6条
-				$count = 0;
-	            if ( $related ) {
-	                foreach ($related as $related_post) {
-						$matchPostIds = $wpdb->get_results("SELECT post_id FROM {$wpdb->prefix}postmeta WHERE meta_key = '链接比赛' AND meta_value = '{$related_post->id}' LIMIT 10");
-						$args = array(
-	                        'category__in' => array(16), // 包括的分类ID
-	                        'post__in' => $matchPostIds['post_id'],
-	                        'showposts' => 1, // 显示相关文章数量
-	                        'caller_get_posts' => 1
-                    	);
-						query_posts($args);
-						if (have_posts()) : while (have_posts()) : the_post(); ?>
-							<li> <a href="<?php the_permalink(); ?>" target="_blank"><?php the_post_thumbnail(); ?></a>
-			                    <dl>
-			                        <?php the_excerpt(); ?>
-			                        <?php get_apply_match_button($current_user->ID, $related_post->id); ?>
-			                    </dl>
-			                    <div class="clear"></div>
-			                </li>
-						<?php endwhile;endif;
-						}
-					} ?>
-	        	<?php wp_reset_postdata(); ?>
-            </ul>
+            <?php index_matchType_content($currentTypeId, 3); ?>
             <div class="clear"></div>
         </div>
     </div>

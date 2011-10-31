@@ -11,6 +11,7 @@ $category = trim($_REQUEST['category']);
 define( 'LIKEDOME_PLUGINS_ROOT', dirname( dirname( __FILE__ ) ) );
 require_once( LIKEDOME_PLUGINS_ROOT .  '/config.php' );
 require_once( LIKEDOME_PLUGINS_ROOT . '/includes/classes.php');
+require_once( LIKEDOME_PLUGINS_ROOT . '/includes/templatespart.php');
 
 ### Determines Which Category It Is
 switch($category) {

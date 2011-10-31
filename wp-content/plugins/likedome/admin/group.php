@@ -11,6 +11,7 @@ $category = trim($_REQUEST['category']);
 define( 'LIKEDOME_PLUGINS_ROOT', dirname( dirname( __FILE__ ) ) );
 require_once( LIKEDOME_PLUGINS_ROOT .  '/config.php' );
 require_once( LIKEDOME_PLUGINS_ROOT . '/includes/classes.php');
+require_once( LIKEDOME_PLUGINS_ROOT . '/includes/templatespart.php');
 
 ### Determines Which Category It Is
 switch($category) {
@@ -33,7 +34,20 @@ switch($category) {
       break;
     // Schedule
     case 'schedule':
-    	echo '<h2>'. '对阵图设置' . '</h2>';
+		$round = intval($_REQUEST['round']);
+		$matchId = intval($_GET['matchId']);
+        $groupList = getGroupList($matchId);
+		if(empty($groupList)) {
+			echo "找不到比赛ID";
+			return;
+		}
+		$optionString = getGroupListSelect($matchId);
+        $tpl->SetVar('groups', $groupList);
+        $tpl->SetVar('paging', count($groupList)/20);
+		$tpl->SetVar('matchId', $matchId);
+		$tpl->SetVar('round', $round);
+		$tpl->SetVar('optionString', $optionString);
+    	echo '<h2>'.'对阵图设置'.'</h2>';
     	echo $tpl->GetTemplate('matchschedule.php');
       	break;
      // Main Page
