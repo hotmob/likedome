@@ -1,7 +1,7 @@
 <?php
 define( 'API_DELETEUSER', 0 );
 define( 'API_RENAMEUSER', 0 );
-define( 'API_UPDATEPW', 0 );
+define( 'API_UPDATEPW', 1 );
 define( 'API_GETTAG', 0 );
 define( 'API_SYNLOGIN', 1 );
 define( 'API_SYNLOGOUT', 1 );
@@ -34,13 +34,13 @@ define( 'WP_ROOT', join( DIRECTORY_SEPARATOR, array_slice( explode( DIRECTORY_SE
 define( 'UCENTER_ROOT', dirname( dirname( __FILE__ ) ) );
 
 require_once( WP_ROOT . '/wp-load.php' );
+require_once( WP_ROOT . '/wp-content/plugins/likedome/includes/classes.php' );
 $config_file = UCENTER_ROOT . '/config.php';
 if ( file_exists( $config_file ) )
 	require_once( $config_file );
 else
 	exit( API_RETURN_FORBIDDEN );
 
-require_once( UCENTER_ROOT . '/ucenter.php' );
 require_once( UCENTER_ROOT . '/client/client.php' );
 require_once( UCENTER_ROOT . '/client/lib/xml.class.php' );
 
@@ -56,7 +56,7 @@ if ( empty( $get ) )
 elseif ( $timestamp - $get['time'] > 3600 )
 	exit( 'Authracation has expiried' );
 
-if ( in_array( $get['action'], array( 'test', 'synlogin', 'synlogout', 'getcreditsettings', 'updatecreditsettings' ) ) ) {
+if ( in_array( $get['action'], array( 'updatepw', 'test', 'synlogin', 'synlogout', 'getcreditsettings', 'updatecreditsettings' ) ) ) {
 	$post = uc_unserialize( file_get_contents( 'php://input' ) );
 	$uc_note = new uc_note();
 	exit( $uc_note->$get['action']( $get, $post ) );
@@ -71,21 +71,19 @@ class uc_note {
 
 	function synlogin( $get, $post ) {
 		!API_SYNLOGIN && exit( API_RETURN_FORBIDDEN );
+		
+		
 		$ID = intval($get['uid']);
 		$user = get_user_by('id', $ID);
-		if( ! $user ) {
+		for($i = 0; $i < 5; $i++){
+			if( $user ) {
+				header( 'P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"' );
+				wp_set_auth_cookie( $ID, false, '' );
+				break;
+			}
 			$query = uc_get_user($ID , 1);
-			$user_login = esc_sql( $query[1] );
-			$user_email = esc_sql( $query[2] );
-			$user_pass = '$password';
-			$userdata = compact('ID', 'user_login', 'user_email', 'user_pass');
-			$data = stripslashes_deep( $userdata );
-			global $wpdb;
-			$user_id = $wpdb->insert( $wpdb->users, $userdata );
-			$user_id = wp_insert_user($userdata);
+			createUser($ID, $get['username'], $get['password'], $query[2]);
 		}
-		header( 'P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"' );
-		wp_set_auth_cookie( $ID, false, '' );
 		exit( API_RETURN_SUCCEED );
 	}
 
@@ -97,7 +95,25 @@ class uc_note {
 
 		exit( API_RETURN_SUCCEED );
 	}
-
+	
+	function updatepw($get, $post) {
+		if(!API_UPDATEPW) {
+			return API_RETURN_FORBIDDEN;
+		}
+		$ID = intval($get['uid']);
+		$user = get_user_by('id', $ID);
+		for($i = 0; $i < 3; $i++){
+			if( $user ) {
+				header( 'P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"' );
+				wp_set_auth_cookie( $ID, false, '' );
+				break;
+			}
+			$query = uc_get_user($ID , 1);
+			createUser($ID, $query[1], 'user_pass', $query[2]);
+		}
+		return API_RETURN_SUCCEED;
+	}
+	
 	function getcreditsettings( $get, $post ) {
 		!API_GETCREDITSETTINGS && exit( API_RETURN_FORBIDDEN );
 
