@@ -55,45 +55,5 @@
         点击数值变成输入框修改数值</td>
         <td>&nbsp;</td>
       </tr>
-      <tr id="poll-6" >
-        <td>2</td>
-        <td>李友银</td>
-        <td>lyy20111</td>
-        <td>30</td>
-        <td>30</td>
-        <td>30</td>
-        <td><input type="submit" name="button19" id="button19" value="提交" /></td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr id="poll-7" class="alternate">
-        <td>3</td>
-        <td>李友银</td>
-        <td>lyy20111</td>
-        <td>30</td>
-        <td>30</td>
-        <td>30</td>
-        <td><input type="submit" name="button20" id="button20" value="提交" /></td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr id="poll-8" >
-        <td>4</td>
-        <td>李友银</td>
-        <td>lyy20111</td>
-        <td>30</td>
-        <td>30</td>
-        <td>30</td>
-        <td><input type="submit" name="button21" id="button21" value="提交" /></td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr >
-        <td>5</td>
-        <td>李友银</td>
-        <td>lyy20111</td>
-        <th>30</th>
-        <td>30</td>
-        <th>30</th>
-        <td><input type="submit" name="button22" id="button22" value="提交" /></td>
-        <td>&nbsp;</td>
-      </tr>
     </tbody>
   </table>

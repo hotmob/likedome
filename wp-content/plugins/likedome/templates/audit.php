@@ -48,45 +48,5 @@
         <td>xxx队与xx首轮公开赛数据</td>
         <td>&nbsp;</td>
       </tr>
-      <tr id="poll-6" >
-        <td>李友银</td>
-        <td>lyy20111</td>
-        <td>30</td>
-        <td>30</td>
-        <td>30</td>
-        <td><input type="submit" name="button24" id="button24" value="审核通过" /></td>
-        <td>xxx队与xx首轮公开赛数据</td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr id="poll-7" class="alternate">
-        <td>李友银</td>
-        <td>lyy20111</td>
-        <td>30</td>
-        <td>30</td>
-        <td>30</td>
-        <td><input type="submit" name="button25" id="button25" value="审核通过" /></td>
-        <td>xxx队与xx首轮公开赛数据</td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr id="poll-8" >
-        <td>李友银</td>
-        <td>lyy20111</td>
-        <td>30</td>
-        <td>30</td>
-        <td>30</td>
-        <td><input type="submit" name="button26" id="button26" value="审核通过" /></td>
-        <td>xxx队与xx首轮公开赛数据</td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr >
-        <td>李友银</td>
-        <td>lyy20111</td>
-        <th>30</th>
-        <td>30</td>
-        <th>30</th>
-        <td><input type="submit" name="button27" id="button27" value="审核通过" /></td>
-        <td>xxx队与xx首轮公开赛数据</td>
-        <td>&nbsp;</td>
-      </tr>
     </tbody>
   </table>

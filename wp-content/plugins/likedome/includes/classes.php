@@ -187,11 +187,75 @@ function addMatch($name, $type=1, $stage = 1, $grouplimit=200, $groupmemberlimit
 }
 
 /**
+ * 添加比赛对阵图
+ */
+function addSchedule($ngid, $sgid, $mid, $rid, $round='', $begin='', $end='', $result='') {
+    global $wpdb;
+    $schedules = getScheduleList($ngid, $sgid, $mid, $rid);
+    if(empty($schedules)) {
+    	$result = $wpdb->insert('wp_likedome_match_schedule', array( 'ngid' =>$ngid, 'sgid' => $sgid, 'mid' => $mid, 'rid' => $rid, 'round' => $round, 'begin' => $begin, 'end' => $end, 'result' => $result));
+    	return $result;
+	} else {
+		$result = updateSchedule($ngid, $sgid, $mid, $rid, $round, $begin, $end, $result);
+		return $result; // 重复添加, 或Update;
+	}
+}
+
+/**
+ * 更新比赛对阵图
+ */
+function updateSchedule($mid = -1, $rid = -1, $ngid = -1, $sgid = -1, $round='', $begin='', $end='', $result='') {
+	global $wpdb;
+    $columns = array();
+    $_matchid = intval($matchid);
+    if(!empty($round))
+        $columns['round'] = $round;
+    if(!empty($begin))
+        $columns['begin'] = $begin;
+    if(!empty($end))
+        $columns['end'] = $end;
+    if(!empty($result))
+        $columns['result'] = $result;
+	$result = $wpdb->update('wp_likedome_match_schedule', $columns, array( 'mid' => $mid, 'rid' => $rid, 'ngid' => $ngid, 'sgid' => $sgid));
+    return $result;
+}
+
+/**
+ * 获取比赛对阵图
+ */
+function getScheduleList($mid = -1, $rid = -1, $ngid = -1, $sgid = -1, $round='', $begin='', $end='', $result='') {
+    global $wpdb;
+    $sql = 'SELECT mid, rid, ngid, sgid, round, begin, end, result FROM wp_likedome_match_schedule';
+    $columns = array();
+    if($mid > 0)
+        array_push($columns, 'mid='.$mid);
+    if($rid > 0)
+        array_push($columns, 'rid='.$rid);
+    if($ngid > 0)
+        array_push($columns, 'type='.$ngid);
+	if($sgid > 0)
+        array_push($columns, 'type='.$sgid);
+    if(count($columns) > 0)
+        $sql.= ' WHERE ' . implode( ' AND ', $columns );
+    $result = $wpdb->get_results($sql.' ORDER BY rid DESC');
+    return $result;
+}
+
+/**
  * 删除比赛
  */
 function delMatch($id) {
     global $wpdb;
     $result = $wpdb->query("DELETE FROM wp_likedome_match_race WHERE id =".$id);
+    return $result;
+}
+
+/**
+ * 删除队伍
+ */
+function delGroup($id) {
+    global $wpdb;
+    $result = $wpdb->query("DELETE FROM wp_likedome_match_group WHERE id =".$id);
     return $result;
 }
 
@@ -279,7 +343,7 @@ function getMatchPostList($matchid) {
 /**
  * 参加比赛队伍列表
  */
-function getGroupList($matchid = 0, $groupid = 0, $userid = 0, $limit = 10, $begin = 0) {
+function getGroupList($matchid = 0, $groupid = 0, $userid = 0, $limit = 10, $begin = 0, $querastate = OBJECT_K) {
 	global $wpdb;
 	$sql = 'SELECT id, match_id, name, captain_id, maxpeople, timestamp, state FROM wp_likedome_match_group';
 	$columns = array();
@@ -291,7 +355,7 @@ function getGroupList($matchid = 0, $groupid = 0, $userid = 0, $limit = 10, $beg
 		array_push($columns, 'match_id='.$matchid);
 	if(count($columns) > 0)
 		$sql.= ' WHERE ' . implode( ' AND ', $columns );
-	$result = $wpdb->get_results($sql.' LIMIT '.$begin.', '.$limit);
+	$result = $wpdb->get_results($sql.' LIMIT '.$begin.', '.$limit,  OBJECT_K  );
 	return $result;
 }
 

@@ -53,7 +53,7 @@ switch($category) {
           echo "修改比赛提交成功";
           return;
        }
-      echo "修改比赛提交失败";
+      echo "没有提交更新的比赛数据或发生异常";
       break;
      // Main Page
     default:

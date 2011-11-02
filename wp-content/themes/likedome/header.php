@@ -25,8 +25,6 @@
 				echo '<meta http-equiv="refresh" content="0">';
 			}
 		}
-		
-		
         ?>
         <script type="text/javascript">
             var b_v = navigator.appVersion;

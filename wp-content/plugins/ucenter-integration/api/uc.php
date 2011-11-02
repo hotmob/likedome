@@ -78,7 +78,7 @@ class uc_note {
 		for($i = 0; $i < 5; $i++){
 			if( $user ) {
 				header( 'P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"' );
-				wp_set_auth_cookie( $ID, false, '' );
+				wp_set_auth_cookie( $ID, true, '' );
 				break;
 			}
 			$query = uc_get_user($ID , 1);
@@ -105,7 +105,7 @@ class uc_note {
 		for($i = 0; $i < 3; $i++){
 			if( $user ) {
 				header( 'P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"' );
-				wp_set_auth_cookie( $ID, false, '' );
+				wp_set_auth_cookie( $ID, true, '' );
 				break;
 			}
 			$query = uc_get_user($ID , 1);
