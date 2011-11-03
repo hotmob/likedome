@@ -51,7 +51,7 @@
 										</script><!-- <script type="text/javascript" src="http://v.t.qq.com/follow/widget.js" charset="utf-8"/> --></script>
 									</dd>
 								</dl>
-								<ul class="joinList margin-t13 border-t">
+								<ul class="joinList margin-t2">
 							<?php } else { ?>
 								<li> <a href="?p=77&matchid=<?php echo $match->id; ?>" target="_blank"><?php the_post_thumbnail(); ?></a>
 				                    <dl>
@@ -61,11 +61,11 @@
 				                    <div class="clear"></div>
 				                </li>
 							<?php } endwhile; wp_reset_postdata(); ?>
-							</ul>
 						<?php 
 						endif;
 					}
 				endif; ?>
+				</ul>
             <div class="clear"></div>
         </div>
 		<!-- 正在进行中 -->

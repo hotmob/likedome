@@ -16,12 +16,13 @@ $scheduleList = $tpl->getVar('scheduleList'); ?>
 			<th width="15%" align="center" >结束</th>
 			<th width="15%" align="center" >战绩</th>
 			<th width="10%" align="center" >提交</th>
+			<th width="10%" align="center" >删除</th>
 		</tr>
 	</thead>
 	<tbody id="manage_polls2">
 		<?php $countSize = (count($groups)/2); $count = 1;
 		foreach ($scheduleList as $schedule) : 
-			drawScheduleList($groups, $schedule->mid, $schedule->rid, $schedule->ngid, $schedule->sgid, $schedule->round, $schedule->begin, $schedule->end, $schedule->result);
+			drawScheduleList($groups, $schedule->mid, $schedule->rid, $schedule->ngid, $schedule->sgid, $schedule->round, $schedule->begin, $schedule->end, $schedule->result, $schedule->id);
 			$count++;
 		endforeach;
 		for ($i = ($count - 1); $i < $countSize; $i++) :

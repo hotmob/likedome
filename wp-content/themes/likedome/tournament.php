@@ -40,9 +40,6 @@
 					成绩查询
 				</li>
 				<li>
-					比赛结果
-				</li>
-				<li>
 					战绩提交
 				</li>
 				<li>
@@ -216,38 +213,29 @@
 					echo '<div style="width:360px; height:200px; line-height:200px; font-family:\'微热雅黑\'; font-size:30px; text-align:center; margin:20px auto; border:8px solid #e8e8e8; color:#333; background: #FDFDFD;">权限错误或没有登陆</div>';
 				} else{ ?>
 					<div class="width-600 margin-t18">
-						<?php  query_posts(get_match_post($matchid, 19));
-						if (have_posts()) :
-							while (have_posts()) : the_post();
-								echo '<h4 class="margin-t10 vs-h4">';
-								the_title_attribute();
-								echo '</h4>';
-								the_content();
-							endwhile;
+						<?php $scheduleList = getScheduleList($matchid, -1, intval($users[0]->group_id)); $groups = getGroupList($matchid, OBJECT_K);
+						if (!empty($scheduleList)) : 
+							echo '<table width="100%" border="1" cellspacing="0" cellpadding="0">';
+							echo '<tr><td width="15%" height="24" align="center">队伍</td>
+									    <td width="15%" height="24" align="center">队伍</td>
+									    <td width="10%" height="24" align="center">场次</td>
+									    <td width="20%" height="24" align="center">开始</td>
+									    <td width="20%" align="center">结束</td>
+									    <td width="20%" align="center">结果</td>
+								  </tr>';
+							foreach ($scheduleList as $schedule) : ?>
+							<tr>
+								<td width="15%" height="24" align="center"><?php echo $groups[$schedule->sgid]->name; ?></td>
+							    <td width="15%" height="24" align="center"><?php echo $groups[$schedule->ngid]->name; ?></td>
+							    <td width="10%" height="24" align="center"><?php echo $schedule->round; ?></td>
+							    <td width="20%" height="24" align="center"><?php echo $schedule->begin; ?></td>
+							    <td width="20%" align="center"><?php echo $schedule->end; ?></td>
+							    <td width="20%" align="center"><?php echo $schedule->result; ?></td>
+							</tr>
+							<?php endforeach;
+							echo '</table>';
 						else :
-							echo '还没有结束的比赛';
-						endif;
-						wp_reset_query();
-						?>
-					</div>
-				<?php } ?>
-			</div>
-			<!--比赛结果-->
-			<div class="tab_main font-size14">
-				<?php if(!$require_login || !$accept) {
-					echo '<div style="width:360px; height:200px; line-height:200px; font-family:\'微热雅黑\'; font-size:30px; text-align:center; margin:20px auto; border:8px solid #e8e8e8; color:#333; background: #FDFDFD;">权限错误或没有登陆</div>';
-				} else{ ?>
-					<div class="width-600 margin-t18">
-						<?php  query_posts(get_match_post($matchid, 19));
-						if (have_posts()) :
-							while (have_posts()) : the_post();
-								echo '<h4 class="margin-t10 vs-h4">';
-								the_title_attribute();
-								echo '</h4>';
-								the_content();
-							endwhile;
-						else :
-							echo '还没有结束的比赛';
+							echo '没有查找到与您相关的比赛成绩;';
 						endif;
 						wp_reset_query();
 						?>

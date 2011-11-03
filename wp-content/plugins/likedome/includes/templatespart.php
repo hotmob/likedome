@@ -3,8 +3,9 @@
 /**
  * 绘制比赛类型option输出栏目
  */
-function drawMatchTypeSelect($currentType = 0) {
-	echo '<option value="0">全部比赛</option>';
+function drawMatchTypeSelect($currentType = 0, $defaultAll = 1) {
+	if($defaultAll)
+		echo '<option value="0">全部比赛</option>';
 	$matchTypeList = getMatchTypeList();
 	foreach($matchTypeList as $matchType){
 	    echo '<option  value="'.$matchType->id.'"';
@@ -51,9 +52,24 @@ function drawGroupListSelect($groupList, $currentType = 0) {
 }
 
 /**
+ * 绘制比分类型option输出栏目, 返回下一个$currentType值
+ */
+function drawRankListSelect($matchTypeId = 0, $currentType = 0, $rankTypeList = 0) {
+	if($rankTypeList == 0)
+		$rankTypeList = getRankTypeList(-1, $matchTypeId);
+	foreach($rankTypeList as $rankType){
+	    echo '<option  value="'.$rankType->id.'"';
+	    if($currentType == $rankType->id) {
+	        echo 'selected="selected"';
+	    }
+	    echo '>'.$rankType->name.'</option>';
+	}
+}
+
+/**
  * 绘制比赛队伍对阵图
  */
-function drawScheduleList($groups, $mid = -1, $rid = -1, $ngid = -1, $sgid = -1, $round='', $begin='', $end='', $result='') {  ?>
+function drawScheduleList($groups, $mid = -1, $rid = -1, $ngid = -1, $sgid = -1, $round='', $begin='', $end='', $result='', $id = 0) {  ?>
 	<tr id="poll-5" class="highlight">
 		<form name= "currentSelect" method= "post">
 			<td>
@@ -79,6 +95,13 @@ function drawScheduleList($groups, $mid = -1, $rid = -1, $ngid = -1, $sgid = -1,
 				<input name="matchid" type="hidden" value="<?php echo $mid; ?>" />
 				<input name="category" type="hidden" value="addschedule" />
 				<input type="submit" value="提交" />
+			</td>
+			<td>
+				<?php if($id != 0) : ?>
+				<input name="id" type="hidden" value="<?php echo $id; ?>" />
+				<input name="category" type="hidden" value="delschedule" />
+				<input type="submit" value="删除" />
+				<?php endif; ?>
 			</td>
 		</form>
 	</tr>

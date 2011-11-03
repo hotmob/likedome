@@ -43,6 +43,7 @@ switch($category) {
       break;
      // Main Page
     default:
+		$currentType = intval($_POST['currentTypeSelect']);
         echo '<h2>'. '数据审核' . '</h2>';
         echo $tpl->GetTemplate('audit.php');
         break;

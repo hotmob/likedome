@@ -162,8 +162,11 @@ function createUser($ID, $user_login, $user_pass, $user_email = '') {
  */
 function addMatchType($matchtype) {
     global $wpdb;
-    if(!empty($matchtype))
+    if(!empty($matchtype)) {
         $result = $wpdb->insert('wp_likedome_match_type', array( 'type' => $matchtype ));
+		if(intval($result))
+			addRankType($result, '总分');
+	}
     return $result;
 }
 
@@ -172,7 +175,66 @@ function addMatchType($matchtype) {
  */
 function getMatchTypeList() {
     global $wpdb;
-    $result = $wpdb->get_results('SELECT id, type FROM wp_likedome_match_type', OBJECT_K );
+    $result = $wpdb->get_results('SELECT id, type FROM wp_likedome_match_type');
+    return $result;
+}
+
+/**
+ * 获取用户积分列表
+ */
+function getUserRankList($userid = -1, $matchTypeId = -1, $rankid = -1, $value = -1, $output = OBJECT ) {
+    global $wpdb;
+	$sql = 'SELECT uid, matchTypeId, rid, value FROM wp_likedome_match_user_rank';
+    $columns = array();
+    if($userid > 0)
+        array_push($columns, 'uid='.$userid);
+	if($matchTypeId > 0)
+        array_push($columns, 'matchTypeId='.$matchTypeId);
+    if($rankid > 0)
+        array_push($columns, 'rid='.$rankid);
+    if($value > 0)
+        array_push($columns, 'value='.$value);
+    if(count($columns) > 0)
+        $sql.= ' WHERE ' . implode( ' AND ', $columns );
+    $result = $wpdb->get_results($sql.' ORDER BY value DESC', $output);
+    return $result;
+}
+
+/**
+ * 添加比赛得分分类列表
+ */
+function addRankType($matchTypeId, $name) {
+	global $wpdb;
+    if(!empty($matchTypeId) && !empty($name))
+        $result = $wpdb->insert('wp_likedome_match_rank_type', array( 'matchTypeId' => $matchTypeId, 'name' => $name ));
+    return $result;
+}
+
+/**
+ * 删除比赛得分分类列表
+ */
+function delRankType($id) {
+	global $wpdb;
+    $result = $wpdb->query("DELETE FROM wp_likedome_match_rank_type WHERE id =".$id);
+    return $result;
+}
+
+/**
+ * 获取比赛得分分类列表
+ */
+function getRankTypeList($id = -1, $matchTypeId = -1, $name = -1) {
+    global $wpdb;
+	$sql = 'SELECT id, matchTypeId, name FROM wp_likedome_match_rank_type';
+    $columns = array();
+    if($id > 0)
+        array_push($columns, 'id='.$id);
+    if($matchTypeId > 0)
+        array_push($columns, 'matchTypeId='.$matchTypeId);
+    if($name > 0)
+        array_push($columns, 'name='.$name);
+    if(count($columns) > 0)
+        $sql.= ' WHERE ' . implode( ' AND ', $columns );
+    $result = $wpdb->get_results($sql, OBJECT_K);
     return $result;
 }
 
@@ -191,6 +253,11 @@ function addMatch($name, $type=1, $stage = 1, $grouplimit=200, $groupmemberlimit
  */
 function addSchedule($ngid, $sgid, $mid, $rid, $round='', $begin='', $end='', $result='') {
     global $wpdb;
+	if($ngid > $sgid) {
+		$temp = $ngid;
+		$ngid = $sgid;
+		$sgid = $temp;
+	}
     $schedules = getScheduleList($ngid, $sgid, $mid, $rid);
     if(empty($schedules)) {
     	$result = $wpdb->insert('wp_likedome_match_schedule', array( 'ngid' =>$ngid, 'sgid' => $sgid, 'mid' => $mid, 'rid' => $rid, 'round' => $round, 'begin' => $begin, 'end' => $end, 'result' => $result));
@@ -206,6 +273,11 @@ function addSchedule($ngid, $sgid, $mid, $rid, $round='', $begin='', $end='', $r
  */
 function updateSchedule($mid = -1, $rid = -1, $ngid = -1, $sgid = -1, $round='', $begin='', $end='', $result='') {
 	global $wpdb;
+	if($ngid > $sgid) {
+		$temp = $ngid;
+		$ngid = $sgid;
+		$sgid = $temp;
+	}
     $columns = array();
     $_matchid = intval($matchid);
     if(!empty($round))
@@ -223,18 +295,21 @@ function updateSchedule($mid = -1, $rid = -1, $ngid = -1, $sgid = -1, $round='',
 /**
  * 获取比赛对阵图
  */
-function getScheduleList($mid = -1, $rid = -1, $ngid = -1, $sgid = -1, $round='', $begin='', $end='', $result='') {
+function getScheduleList($mid = -1, $rid = -1, $gid = -1, $round='', $begin='', $end='', $result='') {
     global $wpdb;
-    $sql = 'SELECT mid, rid, ngid, sgid, round, begin, end, result FROM wp_likedome_match_schedule';
+	if($ngid > $sgid) {
+		$temp = $ngid;
+		$ngid = $sgid;
+		$sgid = $temp;
+	}
+    $sql = 'SELECT id, mid, rid, ngid, sgid, round, begin, end, result FROM wp_likedome_match_schedule';
     $columns = array();
     if($mid > 0)
         array_push($columns, 'mid='.$mid);
     if($rid > 0)
         array_push($columns, 'rid='.$rid);
-    if($ngid > 0)
-        array_push($columns, 'type='.$ngid);
-	if($sgid > 0)
-        array_push($columns, 'type='.$sgid);
+    if($gid > 0)
+        array_push($columns, '( ngid='.$gid.' OR sgid='.$gid.' )');
     if(count($columns) > 0)
         $sql.= ' WHERE ' . implode( ' AND ', $columns );
     $result = $wpdb->get_results($sql.' ORDER BY rid DESC');
@@ -246,6 +321,11 @@ function getScheduleList($mid = -1, $rid = -1, $ngid = -1, $sgid = -1, $round=''
  */
 function delMatch($id) {
     global $wpdb;
+	if($ngid > $sgid) {
+		$temp = $ngid;
+		$ngid = $sgid;
+		$sgid = $temp;
+	}
     $result = $wpdb->query("DELETE FROM wp_likedome_match_race WHERE id =".$id);
     return $result;
 }
@@ -266,6 +346,15 @@ function delUser($uid, $matchId) {
 	global $wpdb;
 	$result = $wpdb->query("DELETE FROM wp_likedome_match_user WHERE uid=".$uid." AND match_id=".$matchId);
 	return $result;
+}
+
+/**
+ * 删除比赛对阵图
+ */
+function delSchedule($id) {
+    global $wpdb;
+    $result = $wpdb->query("DELETE FROM wp_likedome_match_schedule WHERE id=".$id);
+	return $result; // 重复添加, 或Update;
 }
 
 /**
@@ -343,7 +432,7 @@ function getMatchPostList($matchid) {
 /**
  * 参加比赛队伍列表
  */
-function getGroupList($matchid = 0, $groupid = 0, $userid = 0, $limit = 10, $begin = 0, $querastate = OBJECT_K) {
+function getGroupList($matchid = 0, $groupid = 0, $userid = 0, $limit = 10, $begin = 0, $querastate = OBJECT) {
 	global $wpdb;
 	$sql = 'SELECT id, match_id, name, captain_id, maxpeople, timestamp, state FROM wp_likedome_match_group';
 	$columns = array();
@@ -355,7 +444,7 @@ function getGroupList($matchid = 0, $groupid = 0, $userid = 0, $limit = 10, $beg
 		array_push($columns, 'match_id='.$matchid);
 	if(count($columns) > 0)
 		$sql.= ' WHERE ' . implode( ' AND ', $columns );
-	$result = $wpdb->get_results($sql.' LIMIT '.$begin.', '.$limit,  OBJECT_K  );
+	$result = $wpdb->get_results($sql.' LIMIT '.$begin.', '.$limit,  $querastate  );
 	return $result;
 }
 

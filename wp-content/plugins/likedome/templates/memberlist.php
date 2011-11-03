@@ -16,7 +16,7 @@
         <td><strong><?php echo $group->name; ?></strong></td>
         <td><strong><?php if($group->captain_id == 0) {
         									echo '系统管理员';
-       									 } else {  $user = get_user_by('id', $group->captain_id);  echo $user->user_login; } ?></strong></td>
+       									 } else {  $wpuser = get_user_by('id', $group->captain_id);  echo $wpuser->user_login; } ?></strong></td>
         <td><strong><?php echo $group->maxpeople; ?></strong></td>
         <td><strong><?php echo $groupcurrent; ?></strong></td>
       <?php endif; ?>

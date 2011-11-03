@@ -79,6 +79,17 @@ switch($category) {
         }
         echo "添加队伍对阵图成功";
 		break; 
+	// Del Schedule
+    case 'delschedule':
+	  $id = intval($_REQUEST['id']);
+      $succe = delSchedule($id);
+      if($succe != 1) {
+		  echo "删除队伍对阵图:".ngid."失败";
+          return;
+      }
+	  updateMatch($matchid, -1, -1, count(getGroupList($matchid)));
+      echo "成功删除队伍对阵图:".$groupid;
+      break;
     // Main Page
     default:
         $matchId = 0;
