@@ -171,6 +171,15 @@ function addMatchType($matchtype) {
 }
 
 /**
+ * 添加用户比赛得分
+ */
+function addUserRank($uid, $matchTypeId, $rid, $value) {
+	global $wpdb;
+	$result = $wpdb->insert('wp_likedome_match_user_rank', array( 'uid' => $uid, 'matchTypeId' => $matchTypeId, 'rid' => $rid, 'value' => $value));
+	return $result;
+}
+
+/**
  * 获取比赛分类列表
  */
 function getMatchTypeList() {
@@ -207,15 +216,6 @@ function addRankType($matchTypeId, $name) {
 	global $wpdb;
     if(!empty($matchTypeId) && !empty($name))
         $result = $wpdb->insert('wp_likedome_match_rank_type', array( 'matchTypeId' => $matchTypeId, 'name' => $name ));
-    return $result;
-}
-
-/**
- * 删除比赛得分分类列表
- */
-function delRankType($id) {
-	global $wpdb;
-    $result = $wpdb->query("DELETE FROM wp_likedome_match_rank_type WHERE id =".$id);
     return $result;
 }
 
@@ -346,6 +346,15 @@ function delUser($uid, $matchId) {
 	global $wpdb;
 	$result = $wpdb->query("DELETE FROM wp_likedome_match_user WHERE uid=".$uid." AND match_id=".$matchId);
 	return $result;
+}
+
+/**
+ * 删除比赛得分分类列表
+ */
+function delRankType($id) {
+	global $wpdb;
+    $result = $wpdb->query("DELETE FROM wp_likedome_match_rank_type WHERE id =".$id);
+    return $result;
 }
 
 /**

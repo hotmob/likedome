@@ -26,22 +26,31 @@ switch($category) {
         }
         echo "比分类型添加成功";
         break;
-      // Del
-      case 'del':
-      	$matchId = intval($_POST['matchId']);
-      	$userId = intval($_POST['userId']);
-	    $succe = delUser($userId, $matchId);
+    // Del
+    case 'delRankType':
+      	$currentRankTypeSelect = intval($_POST['currentRankTypeSelect']);
+	    $succe = delRankType($currentRankTypeSelect);
 	    if($succe != 1) {
-           echo "删除选手失败";
+           echo "删除比分类型失败";
            return;
 	    }
-	    echo "删除选手完成";
-      break;
-      // Update
-      case 'update':
-      break;
-     // Main Page
+	    echo "删除比分类型完成";
+    break;
+    // Update
+	    case 'updateRank':
+	    $matchTypeId = intval($_POST['matchTypeId']);
+	    $userId = intval($_POST['userId']);
+	    $rankTypeList = getRankTypeList(-1, $matchTypeId);
+	    foreach ($rankTypeList as $rankType) {
+	    	addUserRank($userId, $matchTypeId, $rankType->id, intval($_POST['rank-'.$rankType->id]));
+	    }
+	    echo "提交选手成绩完成";
+    break;
+    // Main Page
     default:
+    	$username = trim($_POST['username']);
+    	
+    	
 		$currentRankTypeSelect = intval($_POST['currentRankTypeSelect']);
 		$currentType = intval($_POST['currentTypeSelect']);
 		if($currentRankTypeSelect < 1)

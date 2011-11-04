@@ -4,34 +4,35 @@ $rankTypeList  = $tpl->getVar('rankTypeList');
 $users  = $tpl->getVar('users'); ?>
 <table width="100%" border="0" cellspacing="1" cellpadding="0">
   <tr>
-    <td width="5%">
+    <td width="10%">
     	<form name= "currentSelect" method= "post">
             <select name="currentTypeSelect" id="currentTypeSelect" onChange="document.currentSelect.submit();" >
                 <?php drawMatchTypeSelect($currentMatchTypeId, 0); ?>
             </select>
         </form>
     </td>
-    <td width="1%">
-    	<form name= "currentRankSelect" method= "post">
-    		<select name="currentRankTypeSelect" id="currentRankTypeSelect" onChange="document.currentRankSelect.submit();">
-				<?php drawRankListSelect(-1, $tpl->getVar('currentRankTypeSelect'), $rankTypeList); ?>
-    		</select>
-    	</form>
-    </td>
-    <td width="4%">添加分类</td>
-    <td width="25%">
+    <td width="3%">添加分类</td>
+    <td width="17%">
     	<form method= "post">
 	    	<input name="matchTypeId" type="hidden" value="<?php echo $currentMatchTypeId; ?>" />
 	    	<input name="category" type="hidden" value="addRankType" />
 	      	<input name="rankName" type="text" id="rankName" value="例如：助攻" style="width:80px;"/>
-	      	<input type="submit" name="submit" id="submit" value="提交" />说明：只对当前选中的类型有效
+	      	<input type="submit" name="submit" id="submit" value="提交" />
       	</form>
     </td>
-    <td width="18%">
-    </td>
-    <td width="66%">查找队员：
-        <input name="textfield22" type="text" id="textfield22" value="输入队员账号" />
+    <td width="30%">查找队员：
+        <input name="username" type="text" id="username" value="输入队员账号" />
         <input type="submit" name="button12" id="button12" value="搜索" />
+    </td>
+    <td width="3%">删除分类</td>
+    <td width="17%">
+    	<form name= "currentRankSelect" method= "post">
+    		<select name="currentRankTypeSelect" id="currentRankTypeSelect" onChange="document.currentRankSelect.submit();">
+				<?php drawRankListSelect(-1, $tpl->getVar('currentRankTypeSelect'), $rankTypeList); ?>
+    		</select>
+	    	<input name="category" type="hidden" value="delRankType" />
+        	<input type="submit" name="submit" id="submit" value="提交" />
+    	</form>
     </td>
   </tr>
 </table>
@@ -39,11 +40,11 @@ $users  = $tpl->getVar('users'); ?>
     <thead>
       <tr>
       	<th width="3%">ID</th>
-        <th width="6%">排名</th>
-        <th width="9%">队员</th>
-        <th width="6%">账号</th>
+        <th width="3%">排名</th>
+        <th width="10%">队员</th>
+        <th width="10%">账号</th>
 		<?php foreach ($rankTypeList as $rankType) {
-			echo '<th width="6%">'.$rankType->name.'</th>';
+			echo '<th width="8%">'.$rankType->name.'</th>';
 		}?>
         <th width="35%">添加分类自动生成在这里，数据提交上的分类取决于这里</th>
         <th width="35%">&nbsp;</th>
@@ -68,9 +69,10 @@ $users  = $tpl->getVar('users'); ?>
         <td><?php $wpuser = get_user_by('id', $user->uid);  echo $wpuser->user_login; ?></td>
         <?php foreach ($rankTypeList as $rankType) {
         	$userRanks = getUserRankList($user->uid, $currentMatchTypeId, $rankType->id);
-			echo '<th><input name="'.$rankType->id.'" type="text" id="'.$rankType->id.'" style="width:60px;" value="'.$userRanks[0]->value.'" /></th>';
+			echo '<td><input name="rank-'.$rankType->id.'" type="text" id="rank-'.$rankType->id.'" style="width:60px;" value="'.$userRanks[0]->value.'" /></td>';
 		}?>
         <td>
+        	<input name="userId" type="hidden" value="<?php echo $user->uid; ?>" />
         	<input name="matchTypeId" type="hidden" value="<?php echo $currentMatchTypeId; ?>" />
 	    	<input name="category" type="hidden" value="updateRank" />
         	<input type="submit" name="submit" id="submit" value="提交" />
