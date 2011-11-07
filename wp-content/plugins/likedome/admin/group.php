@@ -54,7 +54,7 @@ switch($category) {
 			echo "现在的队伍数量是".count($groupList).", 对战类型为 one Vs one, 因此无法生成对阵图, 请删除一个队伍后再试;";
 			return;
 		}
-		$scheduleList = getScheduleList($matchId, $rid);
+		$scheduleList = getScheduleList(-1, $matchId, $rid);
 		$tpl->SetVar('scheduleList', $scheduleList);
 		$tpl->SetVar('rid', $rid);
         $tpl->SetVar('groups', $groupList);

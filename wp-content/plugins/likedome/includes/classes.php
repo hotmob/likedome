@@ -19,85 +19,48 @@ function getCharset() {
  */
 function createUser($ID, $user_login, $user_pass, $user_email = '') {
 	$userdata = compact( 'ID', 'user_login', 'user_email', 'user_pass');
-	
 	global $wpdb;
-
 	extract($userdata, EXTR_SKIP);
 		
 	$update = false;
-		// Hash the password
+	// Hash the password
 	$user_pass = wp_hash_password($user_pass);
-	
 	$user_login = sanitize_user($user_login, true);
-	
 	$user_login = apply_filters('pre_user_login', $user_login);
-
 	//Remove any non-printable chars from the login string to see if we have ended up with an empty username
 	$user_login = trim($user_login);
-
 	if ( empty($user_login) )
 		return new WP_Error('empty_user_login', __('Cannot create a user with an empty login name.') );
 
 	if ( !$update && username_exists( $user_login ) )
 		return new WP_Error('existing_user_login', __('This username is already registered.') );
-
-	if ( empty($user_nicename) )
-		$user_nicename = sanitize_title( $user_login );
+	$user_nicename = sanitize_title( $user_login );
 	$user_nicename = apply_filters('pre_user_nicename', $user_nicename);
-
-	if ( empty($user_url) )
-		$user_url = '';
+	$user_url = '';
 	$user_url = apply_filters('pre_user_url', $user_url);
-
 	if ( empty($user_email) )
 		$user_email = '';
 	$user_email = apply_filters('pre_user_email', $user_email);
-
 	if ( !$update && ! defined( 'WP_IMPORTING' ) && email_exists($user_email) )
 		return new WP_Error('existing_user_email', __('This email address is already registered.') );
-
-	if ( empty($display_name) )
-		$display_name = $user_login;
+	$display_name = $user_login;
 	$display_name = apply_filters('pre_user_display_name', $display_name);
-
-	if ( empty($nickname) )
-		$nickname = $user_login;
+	$nickname = $user_login;
 	$nickname = apply_filters('pre_user_nickname', $nickname);
-
-	if ( empty($first_name) )
-		$first_name = '';
+	$first_name = '';
 	$first_name = apply_filters('pre_user_first_name', $first_name);
-
-	if ( empty($last_name) )
-		$last_name = '';
+	$last_name = '';
 	$last_name = apply_filters('pre_user_last_name', $last_name);
-
-	if ( empty($description) )
-		$description = '';
+	$description = '';
 	$description = apply_filters('pre_user_description', $description);
-
-	if ( empty($rich_editing) )
-		$rich_editing = 'true';
-
-	if ( empty($comment_shortcuts) )
-		$comment_shortcuts = 'false';
-
-	if ( empty($admin_color) )
-		$admin_color = 'fresh';
+	$rich_editing = 'true';
+	$comment_shortcuts = 'false';
+	$admin_color = 'fresh';
 	$admin_color = preg_replace('|[^a-z0-9 _.\-@]|i', '', $admin_color);
-
-	if ( empty($use_ssl) )
-		$use_ssl = 0;
-
-	if ( empty($user_registered) )
-		$user_registered = gmdate('Y-m-d H:i:s');
-
-	if ( empty($show_admin_bar_front) )
-		$show_admin_bar_front = 'true';
-
-	if ( empty($show_admin_bar_admin) )
-		$show_admin_bar_admin = is_multisite() ? 'true' : 'false';
-
+	$use_ssl = 0;
+	$user_registered = gmdate('Y-m-d H:i:s');
+	$show_admin_bar_front = 'true';
+	$show_admin_bar_admin = is_multisite() ? 'true' : 'false';
 	$user_nicename_check = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM $wpdb->users WHERE user_nicename = %s AND user_login != %s LIMIT 1" , $user_nicename, $user_login));
 
 	if ( $user_nicename_check ) {
@@ -108,18 +71,13 @@ function createUser($ID, $user_login, $user_pass, $user_email = '') {
 			$suffix++;
 		}
 		$user_nicename = $alt_user_nicename;
+		
 	}
-
 	$data = compact( 'user_pass', 'user_email', 'user_url', 'user_nicename', 'display_name', 'user_registered' );
 	$data = stripslashes_deep( $data );
-
-	if ( $update ) {
-		$wpdb->update( $wpdb->users, $data, compact( 'ID' ) );
-		$user_id = (int) $ID;
-	} else {
-		$wpdb->insert( $wpdb->users, $data + compact( 'ID', 'user_login' ) );
-		$user_id = (int) $ID;
-	}
+	$wpdb->insert( $wpdb->users, $data + compact( 'ID', 'user_login' ) );
+	
+	$user_id = (int) $ID;
 	
 	update_user_meta( $user_id, 'first_name', $first_name );
 	update_user_meta( $user_id, 'last_name', $last_name );
@@ -131,29 +89,16 @@ function createUser($ID, $user_login, $user_pass, $user_email = '') {
 	update_user_meta( $user_id, 'use_ssl', $use_ssl );
 	update_user_meta( $user_id, 'show_admin_bar_front', $show_admin_bar_front );
 	update_user_meta( $user_id, 'show_admin_bar_admin', $show_admin_bar_admin );
-
 	$user = new WP_User($user_id);
-
 	foreach ( _wp_get_user_contactmethods( $user ) as $method => $name ) {
 		if ( empty($$method) )
 			$$method = '';
-
 		update_user_meta( $user_id, $method, $$method );
 	}
-
-	if ( isset($role) )
-		$user->set_role($role);
-	elseif ( !$update )
-		$user->set_role(get_option('default_role'));
-
+	$user->set_role(get_option('default_role'));
 	wp_cache_delete($user_id, 'users');
 	wp_cache_delete($user_login, 'userlogins');
-
-	if ( $update )
-		do_action('profile_update', $user_id, $old_user_data);
-	else
-		do_action('user_register', $user_id);
-
+	do_action('user_register', $user_id);
 	return $user_id;
 }
 
@@ -173,27 +118,110 @@ function addMatchType($matchtype) {
 /**
  * 添加用户比赛得分
  */
-function addUserRank($uid, $matchTypeId, $rid, $value) {
+function addUserRank($uid, $matchTypeId, $rid, $value, $verify = 0, $submitId = 0) {
 	global $wpdb;
-	$result = $wpdb->insert('wp_likedome_match_user_rank', array( 'uid' => $uid, 'matchTypeId' => $matchTypeId, 'rid' => $rid, 'value' => $value));
+	$userRank = getUserRankList($uid, $matchTypeId, $rid, -1, -1, $submitId);
+	if(!empty($userRank) && intval($userRank)){
+		$result = updateUserRank($uid, $matchTypeId, $rid, $value);
+	} else {
+		$result = $wpdb->insert('wp_likedome_match_user_rank', array( 'uid' => $uid, 'matchTypeId' => $matchTypeId, 'rid' => $rid, 'value' => $value, 'verify' => $verify, 'submitId' => $submitId));
+	}
 	return $result;
+}
+
+/**
+ * 更新用户比赛得分
+ */
+function updateUserRank($uid, $matchTypeId, $rid = -1, $value = -1, $verify = -1, $submitId= -1) {
+	global $wpdb;
+	$columns = array();
+    if($submitId > -1)
+    	$columns['submitId'] = $submitId;
+    if($verify > -1)
+    	$columns['verify'] = $verify;
+    if($value > -1)
+    	$columns['value'] = $value;
+	$result = $wpdb->update('wp_likedome_match_user_rank', $columns, array( 'uid' => $uid, 'rid' => $rid, 'matchTypeId' => $matchTypeId));
+	return $result;
+}
+
+/**
+ * 删除用户比赛得分临时文件
+ */
+function delUserRank($submitId) {
+	global $wpdb;
+	$result = $wpdb->query("DELETE FROM wp_likedome_match_user_rank WHERE submitId =".$submitId);
+	return $result;
+}
+
+/**
+ * 添加用户比赛得分申请
+ */
+function addUserRankApply($userId, $matchId, $scheduleId, $matchTypeId = 0) {
+	global $wpdb;
+	$userRankApplys = getUserRankApplyList(-1, $userId, $matchId, $scheduleId);
+	if(!empty($userRankApplys) && intval($userRankApplys)){
+		$result = 0;
+	} else if(!empty($userId) && !empty($matchId) && !empty($scheduleId)) {
+		if(!$matchTypeId) {
+			$match = getMatchList($matchId);
+			$matchTypeId = $match[0]->type;
+		}
+		$result = $wpdb->insert('wp_likedome_match_user_rank_submit', array( 'userId' => $userId, 'matchId' => $matchId, 'scheduleId' => $scheduleId ));
+	}
+	return $result;
+}
+
+/**
+ * 更新用户比赛得分申请
+ */
+function updateUserRankApply($id, $verify = -1) {
+	global $wpdb;
+	$columns = array();
+	if($verify > -1)
+		$columns['verify'] = $verify;
+	$result = $wpdb->update('wp_likedome_match_user_rank_submit', $columns, array( 'id' => $id ));
+	return $result;
+}
+
+/**
+ * 获取用户比赛得分申请
+ */
+function getUserRankApplyList($id = -1, $userId = -1, $matchId = -1, $scheduleId = -1, $verify = -1, $output = OBJECT ) {
+    global $wpdb;
+	$sql = 'SELECT id, userId, matchId, scheduleId, matchTypeId, verify FROM wp_likedome_match_user_rank_submit';
+    $columns = array();
+    if($id > 0)
+        array_push($columns, 'id='.$id);
+	if($userId > 0)
+        array_push($columns, 'userId='.$userId);
+    if($matchId > 0)
+        array_push($columns, 'matchId='.$matchId);
+    if($scheduleId > 0)
+        array_push($columns, 'scheduleId='.$scheduleId);
+    if($verify > 0)
+        array_push($columns, 'verify='.$verify);
+    if(count($columns) > 0)
+        $sql.= ' WHERE ' . implode( ' AND ', $columns );
+    $result = $wpdb->get_results($sql.' ORDER BY id DESC', $output);
+    return $result;
 }
 
 /**
  * 获取比赛分类列表
  */
-function getMatchTypeList() {
+function getMatchTypeList($output = OBJECT) {
     global $wpdb;
-    $result = $wpdb->get_results('SELECT id, type FROM wp_likedome_match_type');
+    $result = $wpdb->get_results('SELECT id, type FROM wp_likedome_match_type', $output);
     return $result;
 }
 
 /**
  * 获取用户积分列表
  */
-function getUserRankList($userid = -1, $matchTypeId = -1, $rankid = -1, $value = -1, $output = OBJECT ) {
+function getUserRankList($userid = -1, $matchTypeId = -1, $rankid = -1, $value = -1, $verify = -1, $submitId = -1, $output = OBJECT ) {
     global $wpdb;
-	$sql = 'SELECT uid, matchTypeId, rid, value FROM wp_likedome_match_user_rank';
+	$sql = 'SELECT uid, matchTypeId, rid, value, verify, submitId FROM wp_likedome_match_user_rank';
     $columns = array();
     if($userid > 0)
         array_push($columns, 'uid='.$userid);
@@ -203,9 +231,13 @@ function getUserRankList($userid = -1, $matchTypeId = -1, $rankid = -1, $value =
         array_push($columns, 'rid='.$rankid);
     if($value > 0)
         array_push($columns, 'value='.$value);
+    if($verify > -1)
+        array_push($columns, 'verify='.$verify);
+    if($submitId > 0)
+    	array_push($columns, 'submitId='.$submitId);
     if(count($columns) > 0)
         $sql.= ' WHERE ' . implode( ' AND ', $columns );
-    $result = $wpdb->get_results($sql.' ORDER BY value DESC', $output);
+    $result = $wpdb->get_results($sql.' ORDER BY rid DESC', $output);
     return $result;
 }
 
@@ -258,8 +290,9 @@ function addSchedule($ngid, $sgid, $mid, $rid, $round='', $begin='', $end='', $r
 		$ngid = $sgid;
 		$sgid = $temp;
 	}
-    $schedules = getScheduleList($ngid, $sgid, $mid, $rid);
-    if(empty($schedules)) {
+    $schedule_n = getScheduleList(-1, $mid, $rid, $ngid);
+    $schedule_s = getScheduleList(-1, $mid, $rid, $sgid);
+    if(empty($schedule_n) && empty($schedule_s)) {
     	$result = $wpdb->insert('wp_likedome_match_schedule', array( 'ngid' =>$ngid, 'sgid' => $sgid, 'mid' => $mid, 'rid' => $rid, 'round' => $round, 'begin' => $begin, 'end' => $end, 'result' => $result));
     	return $result;
 	} else {
@@ -279,7 +312,6 @@ function updateSchedule($mid = -1, $rid = -1, $ngid = -1, $sgid = -1, $round='',
 		$sgid = $temp;
 	}
     $columns = array();
-    $_matchid = intval($matchid);
     if(!empty($round))
         $columns['round'] = $round;
     if(!empty($begin))
@@ -295,15 +327,12 @@ function updateSchedule($mid = -1, $rid = -1, $ngid = -1, $sgid = -1, $round='',
 /**
  * 获取比赛对阵图
  */
-function getScheduleList($mid = -1, $rid = -1, $gid = -1, $round='', $begin='', $end='', $result='') {
+function getScheduleList($id = -1, $mid = -1, $rid = -1, $gid = -1, $round='', $begin='', $end='', $result='') {
     global $wpdb;
-	if($ngid > $sgid) {
-		$temp = $ngid;
-		$ngid = $sgid;
-		$sgid = $temp;
-	}
     $sql = 'SELECT id, mid, rid, ngid, sgid, round, begin, end, result FROM wp_likedome_match_schedule';
     $columns = array();
+    if($id > 0)
+    	array_push($columns, 'id='.$id);
     if($mid > 0)
         array_push($columns, 'mid='.$mid);
     if($rid > 0)
@@ -321,11 +350,6 @@ function getScheduleList($mid = -1, $rid = -1, $gid = -1, $round='', $begin='', 
  */
 function delMatch($id) {
     global $wpdb;
-	if($ngid > $sgid) {
-		$temp = $ngid;
-		$ngid = $sgid;
-		$sgid = $temp;
-	}
     $result = $wpdb->query("DELETE FROM wp_likedome_match_race WHERE id =".$id);
     return $result;
 }

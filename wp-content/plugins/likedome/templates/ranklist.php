@@ -1,7 +1,7 @@
 <?php global $tpl; 
 $currentMatchTypeId = $tpl->getVar('currentType');
 $rankTypeList  = $tpl->getVar('rankTypeList');
-$users  = $tpl->getVar('users'); ?>
+$userRankList  = $tpl->getVar('userRankList'); ?>
 <table width="100%" border="0" cellspacing="1" cellpadding="0">
   <tr>
     <td width="10%">
@@ -20,9 +20,12 @@ $users  = $tpl->getVar('users'); ?>
 	      	<input type="submit" name="submit" id="submit" value="提交" />
       	</form>
     </td>
-    <td width="30%">查找队员：
-        <input name="username" type="text" id="username" value="输入队员账号" />
-        <input type="submit" name="button12" id="button12" value="搜索" />
+    <td width="40%">查找队员：
+    	<form name= "currentRankSelect" method= "post">
+	        <input name="username" type="text" id="username" value="输入队员账号" />
+	        <input name="category" type="hidden" value="getUserRank" />
+	        <input type="submit" name="button12" id="button12" value="搜索" />
+        </form>
     </td>
     <td width="3%">删除分类</td>
     <td width="17%">
@@ -52,14 +55,13 @@ $users  = $tpl->getVar('users'); ?>
     </thead>
     <tbody id="manage_polls2">
       <?php 
-      	$usersRanks = getUserRankList(-1, $currentMatchTypeId, -1, -1, ARRAY_A); // ARRAY_A | ARRAY_N | OBJECT | OBJECT_K
+      	$usersRanks = getUserRankList(-1, $currentMatchTypeId, -1, -1, 1, -1, ARRAY_A); // ARRAY_A | ARRAY_N | OBJECT | OBJECT_K
       	$columns = array(1);
       	foreach ($usersRanks as $userRanks) {
       		 array_push($columns, $userRanks['uid'] );
       	}
-      	foreach ($users as $user) : 
+      	foreach ($userRankList as $user) : 
 		$ranking =	array_keys($columns, $user->uid, true);
-			
       	?>
       <tr id="poll-5" class="highlight">
       	<form method= "post">
@@ -80,6 +82,6 @@ $users  = $tpl->getVar('users'); ?>
         <td>&nbsp;</td>
         </form>
       </tr>
-       <?php endforeach; ?>
+      <?php endforeach; ?>
     </tbody>
   </table>

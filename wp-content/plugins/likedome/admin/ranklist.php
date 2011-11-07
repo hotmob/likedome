@@ -37,7 +37,7 @@ switch($category) {
 	    echo "删除比分类型完成";
     break;
     // Update
-	    case 'updateRank':
+	case 'updateRank':
 	    $matchTypeId = intval($_POST['matchTypeId']);
 	    $userId = intval($_POST['userId']);
 	    $rankTypeList = getRankTypeList(-1, $matchTypeId);
@@ -49,16 +49,18 @@ switch($category) {
     // Main Page
     default:
     	$username = trim($_POST['username']);
-    	
-    	
+     	if(!empty($username)) {
+     		$user = get_user_by('login', $username);
+     		$userid = $user->ID;
+     	}
 		$currentRankTypeSelect = intval($_POST['currentRankTypeSelect']);
 		$currentType = intval($_POST['currentTypeSelect']);
 		if($currentRankTypeSelect < 1)
 			$currentRankTypeSelect = 1;
 		if($currentType < 1)
 			$currentType = 1;
-		$users = getUserList(0);
-		$tpl->SetVar('users', $users);
+		$userRankList = getUserRankList(-1, $currentType, -1, -1, 1);
+		$tpl->SetVar('userRankList', $userRankList);
 		$tpl->SetVar('currentRankTypeSelect', $currentRankTypeSelect);
 		$tpl->SetVar('currentType', $currentType);
 		$tpl->SetVar('rankTypeList', getRankTypeList(-1, $currentType));

@@ -145,6 +145,32 @@ function tournament () {
 		}
 		echo "申请发生错误error code : ".$success;
 		exit;
+	case 'ranksubmit' :
+		$matchId = intval($_POST['matchId']);
+		$matchTypeId = intval($_POST['matchTypeId']);
+		$scheduleId = intval($_POST['scheduleId']);
+		$applyId = intval(addUserRankApply($user_ID, $matchId, $scheduleId));
+		if(!$applyId) {
+			echo "申请发生错误, Code:".$applyId;
+			exit;
+		}
+		$submit = getUserRankApplyList(-1, $user_ID, $matchId, $scheduleId);
+		$rankTypeList = getRankTypeList(-1, $matchTypeId);
+		foreach ($rankTypeList as $rankType) {
+			$value = intval($_POST['rank-'.$rankType->id]);
+			if($value && $submit[0]->id) {
+				$result = addUserRank($user_ID, $matchTypeId, $rankType->id, $value, 0, $submit[0]->id);
+				if(!$result){
+					echo "录入信息失败,Code:".$rankType->id;
+					exit;
+				}
+			} else {
+				echo "录入信息失败,Error Code:".$value." AND ".$submit[0]->id;
+				exit;
+			}
+		}
+		echo "提交选手成绩完成";
+		exit;
 	default :
 		echo "无法解析此函数";
 		exit ;

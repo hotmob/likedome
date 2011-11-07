@@ -178,7 +178,7 @@
 					echo '<div style="width:360px; height:200px; line-height:200px; font-family:\'微热雅黑\'; font-size:30px; text-align:center; margin:20px auto; border:8px solid #e8e8e8; color:#333; background: #FDFDFD;">权限错误或没有登陆</div>';
 				} else{ ?>
 					<div class="width-600 margin-t18">
-						<?php $scheduleList = getScheduleList($matchid); $groups = getGroupList($matchid, OBJECT_K);
+						<?php $scheduleList = getScheduleList(-1, $matchid); $groups = getGroupList($matchid, OBJECT_K);
 						if (!empty($scheduleList)) : 
 							echo '<table width="100%" border="1" cellspacing="0" cellpadding="0">';
 							echo '<tr><td width="15%" height="24" align="center">队伍</td>
@@ -213,7 +213,7 @@
 					echo '<div style="width:360px; height:200px; line-height:200px; font-family:\'微热雅黑\'; font-size:30px; text-align:center; margin:20px auto; border:8px solid #e8e8e8; color:#333; background: #FDFDFD;">权限错误或没有登陆</div>';
 				} else{ ?>
 					<div class="width-600 margin-t18">
-						<?php $scheduleList = getScheduleList($matchid, -1, intval($users[0]->group_id)); $groups = getGroupList($matchid, OBJECT_K);
+						<?php $scheduleList = getScheduleList(-1, $matchid, -1, intval($users[0]->group_id)); $groups = getGroupList($matchid, OBJECT_K);
 						if (!empty($scheduleList)) : 
 							echo '<table width="100%" border="1" cellspacing="0" cellpadding="0">';
 							echo '<tr><td width="15%" height="24" align="center">队伍</td>
@@ -251,16 +251,41 @@
 						友情提醒：本平台会对数据进行审核一旦发现作假，将会适当对其进行相关处罚。
 					</div>
 					<div class="width-600 margin-t18">
-						<?php  query_posts(get_match_post($matchid, 19));
-						if (have_posts()) :
-							while (have_posts()) : the_post();
-								echo '<h4 class="margin-t10 vs-h4">';
-								the_title_attribute();
-								echo '</h4>';
-								the_content();
-							endwhile;
+						<?php $scheduleList = getScheduleList(-1, $matchid, -1, intval($users[0]->group_id)); $groups = getGroupList($matchid, OBJECT_K);
+						if (!empty($scheduleList)) : foreach ($scheduleList as $schedule) : ?>
+							<p><?php echo $groups[$schedule->sgid]->name." Vs ".$groups[$schedule->ngid]->name ?></p>
+							<p><?php echo $schedule->begin." ".$schedule->end." 论次:".$schedule->round; ?></p>
+							<?php 
+							if((!empty($schedule->result)) && (strlen($schedule->result) > 0)) : 
+								$userRankApplys = getUserRankApplyList(-1, $current_user->ID, $matchid, $schedule->id);
+								if(!empty($userRankApplys) && intval($userRankApplys)){ 
+									echo "<p>本场已经提交成绩;</p>";
+									if($userRankApplys[0]->verify){
+										echo "<p>并已经通过审核,计入总分;</p>";
+									}
+								} else { 
+									$match = getMatchList($matchid);
+									$matchTypes = getMatchTypeList(OBJECT_K);
+									$rankTypeList = getRankTypeList(-1, $match[0]->type);
+									echo "<form method= \"post\" action=\"wp-content/plugins/likedome/tournament.php?opt=ranksubmit&matchid=".$matchid."\" >";
+									foreach ($rankTypeList as $rankType) {
+										echo '<p>'.$rankType->name.' : <input name="rank-'.$rankType->id.'" type="text" id="rank-'.$rankType->id.'" class="vs-text" value="" /></p>';
+									} ?>
+									<p>
+										<input name="matchId" type="hidden" value="<?php echo $matchid; ?>" />
+										<input name="matchTypeId" type="hidden" value="<?php echo $match[0]->type; ?>" />
+										<input name="scheduleId" type="hidden" value="<?php echo $schedule->id; ?>" />
+										<input type="submit" class="btn3" value="提交" />
+									</p>
+									<p></p>
+							<?php echo "</form>"; } ?>
+							<?php else: ?>
+							<p><?php echo $schedule->result; ?></p>
+							<p>本场比赛尚未结束或未录入成绩,请稍候提交成绩;</p>
+							<?php endif; ?>
+							<?php endforeach;
 						else :
-							echo '只有队长才能提交比赛得分数据.';
+							echo '没有查找到与您相关的比赛成绩;';
 						endif;
 						wp_reset_query();
 						?>
