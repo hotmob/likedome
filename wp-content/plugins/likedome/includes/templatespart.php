@@ -3,17 +3,24 @@
 /**
  * 绘制比赛类型option输出栏目
  */
-function drawMatchTypeSelect($currentType = 0, $defaultAll = 1) {
+function drawMatchTypeSelect($currentType = 0, $defaultAll = 1, $matchTypeList = 0) {
+	$tmpCurrent = 0;
 	if($defaultAll)
 		echo '<option value="0">全部比赛</option>';
-	$matchTypeList = getMatchTypeList();
+	if($matchTypeList == 0)
+		$matchTypeList = getMatchTypeList();
 	foreach($matchTypeList as $matchType){
 	    echo '<option  value="'.$matchType->id.'"';
 	    if($currentType == $matchType->id) {
 	        echo 'selected="selected"';
+	    } else if(!$currentType && !$tmpCurrent) {
+	    	$tmpCurrent = intval($matchType->id);
 	    }
 	    echo '>'.$matchType->type.'</option>';
 	}
+	if($tmpCurrent == 0)
+		return $currentType;
+	return $tmpCurrent;
 }
 
 /**
