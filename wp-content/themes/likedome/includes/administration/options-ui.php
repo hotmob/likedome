@@ -33,7 +33,7 @@
 		
 		<fieldset id="padd-admin-tab-tracker">
 			<h3>Page Tracker Settings</h3>
-			<p>Page tracker options for <?php echo PADD_THEME_NAME; ?> theme.</p>
+			<p>Page tracker options for <?php echo THEME_LIKEDO_NAME; ?> theme.</p>
 			<table class="form-table">
 			<?php
 				foreach ($padd_options['tracker'] as $opt) {
@@ -46,7 +46,7 @@
 
 		<fieldset id="padd-admin-tab-sn">
 			<h3>Social Networking</h3>
-			<p>Social networking settings for <?php echo PADD_THEME_NAME; ?> theme to work.</p>
+			<p>Social networking settings for <?php echo THEME_LIKEDO_NAME; ?> theme to work.</p>
 			<table class="form-table">
 			<?php
 				foreach ($padd_options['socialnetwork'] as $opt) {
@@ -59,7 +59,7 @@
 		<?php if (!function_exists('related_posts')) : ?>
 		<fieldset id="padd-admin-tab-relatedposts">
 			<h3>Related Posts</h3>
-			<p>Related posts options for <?php echo PADD_THEME_NAME; ?> theme.</p>
+			<p>Related posts options for <?php echo THEME_LIKEDO_NAME; ?> theme.</p>
 			<table class="form-table">
 			<?php
 				foreach ($padd_options['relatedposts'] as $opt) {
@@ -73,7 +73,7 @@
 		
 		<fieldset id="padd-admin-tab-pagenav">
 			<h3>Page Navigation Options</h3>
-			<p>Page navigation options for <?php echo PADD_THEME_NAME; ?> theme.</p>
+			<p>Page navigation options for <?php echo THEME_LIKEDO_NAME; ?> theme.</p>
 			<table class="form-table">
 			<?php
 				foreach ($padd_options['pagenav'] as $opt) {

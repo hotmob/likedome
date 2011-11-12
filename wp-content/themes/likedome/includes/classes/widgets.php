@@ -5,9 +5,9 @@ class Padd_Widget_Custom_Ads extends WP_Widget {
 	function Padd_Widget_Custom_Ads() {
 		$widget_ops = array(
 						'classname' => 'box-ads',
-						'description' => PADD_THEME_NAME . ' Theme widget for custom advertisement. For the management of the sponsors\' images and links, go to ' . PADD_THEME_NAME . ' Options.'
+						'description' => THEME_LIKEDO_NAME . ' Theme widget for custom advertisement. For the management of the sponsors\' images and links, go to ' . THEME_LIKEDO_NAME . ' Options.'
 					);
-		$this->WP_Widget(PADD_THEME_SLUG . '_custom_ads',PADD_THEME_NAME . ' Custom Ads', $widget_ops);
+		$this->WP_Widget(PADD_THEME_SLUG . '_custom_ads',THEME_LIKEDO_NAME . ' Custom Ads', $widget_ops);
 		$this->alt_option_name = PADD_THEME_SLUG .  '_widget_custom_ads';
 	}
 
@@ -37,7 +37,7 @@ class Padd_Widget_Custom_Ads extends WP_Widget {
 		$title = $instance['title'];
 ?>
 		<p><label for="<?php echo $this->get_field_id('title'); ?>">Title: <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" /></label></p>
-		<p>For the management of the sponsors' images and links, proceed to <a href="<?php bloginfo('url'); ?>/wp-admin/themes.php?page=functions.php"><?php echo PADD_THEME_NAME; ?> Options</a>. </p>
+		<p>For the management of the sponsors' images and links, proceed to <a href="<?php bloginfo('url'); ?>/wp-admin/themes.php?page=functions.php"><?php echo THEME_LIKEDO_NAME; ?> Options</a>. </p>
 
 <?php
 	}
@@ -53,9 +53,9 @@ class Padd_Widget_Featured_Video extends WP_Widget {
 	function Padd_Widget_Featured_Video() {
 		$widget_ops = array(
 						'classname' => 'box-featured-video',
-						'description' => PADD_THEME_NAME . ' Theme widget for featured video. For the management of the featured video, go to ' . PADD_THEME_NAME . ' Options.'
+						'description' => THEME_LIKEDO_NAME . ' Theme widget for featured video. For the management of the featured video, go to ' . THEME_LIKEDO_NAME . ' Options.'
 					);
-		$this->WP_Widget(PADD_THEME_SLUG . '_featured_video',PADD_THEME_NAME . ' Featured Video', $widget_ops);
+		$this->WP_Widget(PADD_THEME_SLUG . '_featured_video',THEME_LIKEDO_NAME . ' Featured Video', $widget_ops);
 		$this->alt_option_name = PADD_THEME_SLUG . '_widget_featured_video';
 	}
 

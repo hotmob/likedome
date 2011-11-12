@@ -1,6 +1,6 @@
 <?php
 
-define('PADD_THEME_NAME','Likedome');
+define('THEME_LIKEDO_NAME','Likedome');
 define('PADD_THEME_VERS','1.0');
 define('PADD_THEME_SLUG','likedome');
 define('PADD_NAME_SPACE','padd');
@@ -31,13 +31,6 @@ add_image_size(PADD_THEME_SLUG . '-gallery',PADD_GALL_THUMB_W,PADD_GALL_THUMB_H,
 add_image_size(PADD_THEME_SLUG . '-related-posts',136,70,true);
 
 function padd_widgets_init() {
-//	register_sidebar(array(
-//		'name' => '赛事热点',
-//		'before_widget' => '<div id="%1$s" class="margin-l18 flo width-600">',
-//		'after_widget' => '</div></div>',
-//		'before_title' => '<div class="title"><h2>',
-//		'after_title' => '</h2></div><div class="interior">',
-//	));
 	register_sidebar(array(
 		'name' => '侧边区域',
 		'before_widget' => '<div id="%1$s" class="margin-r18 fro width-300">',
