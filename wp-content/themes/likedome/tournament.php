@@ -250,45 +250,50 @@
 					<div class="wraningText margin-t22">
 						友情提醒：本平台会对数据进行审核一旦发现作假，将会适当对其进行相关处罚。
 					</div>
-					<div class="width-600 margin-t18">
-						<?php $scheduleList = getScheduleList(-1, $matchid, -1, intval($users[0]->group_id)); $groups = getGroupList($matchid, OBJECT_K);
-						if (!empty($scheduleList)) : foreach ($scheduleList as $schedule) : ?>
-							<p><?php echo $groups[$schedule->sgid]->name." Vs ".$groups[$schedule->ngid]->name ?></p>
-							<p><?php echo $schedule->begin." ".$schedule->end." 论次:".$schedule->round; ?></p>
-							<?php 
-							if((!empty($schedule->result)) && (strlen($schedule->result) > 0)) : 
-								$userRankApplys = getUserRankApplyList(-1, $current_user->ID, $matchid, $schedule->id);
-								if(!empty($userRankApplys) && intval($userRankApplys)){ 
-									echo "<p>本场已经提交成绩;</p>";
-									if($userRankApplys[0]->verify){
-										echo "<p>并已经通过审核,计入总分;</p>";
-									}
-								} else { 
-									$match = getMatchList($matchid);
-									$matchTypes = getMatchTypeList(OBJECT_K);
-									$rankTypeList = getRankTypeList(-1, $match[0]->type);
-									echo "<form method= \"post\" action=\"wp-content/plugins/likedome/tournament.php?opt=ranksubmit&matchid=".$matchid."\" >";
-									foreach ($rankTypeList as $rankType) {
-										echo '<p>'.$rankType->name.' : <input name="rank-'.$rankType->id.'" type="text" id="rank-'.$rankType->id.'" class="vs-text" value="" /></p>';
-									} ?>
-									<p>
-										<input name="matchId" type="hidden" value="<?php echo $matchid; ?>" />
-										<input name="matchTypeId" type="hidden" value="<?php echo $match[0]->type; ?>" />
-										<input name="scheduleId" type="hidden" value="<?php echo $schedule->id; ?>" />
-										<input type="submit" class="btn3" value="提交" />
-									</p>
-									<p></p>
-							<?php echo "</form>"; } ?>
-							<?php else: ?>
-							<p><?php echo $schedule->result; ?></p>
-							<p>本场比赛尚未结束或未录入成绩,请稍候提交成绩;</p>
-							<?php endif; ?>
-							<?php endforeach;
-						else :
-							echo '没有查找到与您相关的比赛成绩;';
-						endif;
-						wp_reset_query();
-						?>
+					<div class="width-600 margin-t18"><?php 
+						if(empty($users)){
+							echo "您还未参加此场比赛";
+						} else if (intval($users[0]->apply_group)) {
+							$scheduleList = getScheduleList(-1, $matchid, -1, intval($users[0]->group_id)); $groups = getGroupList($matchid, OBJECT_K);
+							if (!empty($scheduleList)) : foreach ($scheduleList as $schedule) : ?>
+								<p><?php echo $groups[$schedule->sgid]->name." Vs ".$groups[$schedule->ngid]->name ?></p>
+								<p><?php echo $schedule->begin." ".$schedule->end." 论次:".$schedule->round; ?></p>
+								<?php 
+								if((!empty($schedule->result)) && (strlen($schedule->result) > 0)) : 
+									$userRankApplys = getUserRankApplyList(-1, $current_user->ID, $matchid, $schedule->id);
+									if(!empty($userRankApplys) && intval($userRankApplys)){ 
+										echo "<p>本场已经提交成绩;</p>";
+										if($userRankApplys[0]->verify){
+											echo "<p>并已经通过审核,计入总分;</p>";
+										}
+									} else { 
+										$match = getMatchList($matchid);
+										$matchTypes = getMatchTypeList(OBJECT_K);
+										$rankTypeList = getRankTypeList(-1, $match[0]->type);
+										echo "<form method= \"post\" action=\"wp-content/plugins/likedome/tournament.php?opt=ranksubmit&matchid=".$matchid."\" >";
+										foreach ($rankTypeList as $rankType) {
+											echo '<p>'.$rankType->name.' : <input name="rank-'.$rankType->id.'" type="text" id="rank-'.$rankType->id.'" class="vs-text" value="" /></p>';
+										} ?>
+										<p>
+											<input name="matchId" type="hidden" value="<?php echo $matchid; ?>" />
+											<input name="matchTypeId" type="hidden" value="<?php echo $match[0]->type; ?>" />
+											<input name="scheduleId" type="hidden" value="<?php echo $schedule->id; ?>" />
+											<input type="submit" class="btn3" value="提交" />
+										</p>
+										<p></p>
+								<?php echo "</form>"; } ?>
+								<?php else: ?>
+								<p><?php echo $schedule->result; ?></p>
+								<p>本场比赛尚未结束或未录入成绩,请稍候提交成绩;</p>
+								<?php endif; ?>
+								<?php endforeach;
+							else :
+								echo '没有查找到与您相关的比赛成绩;';
+							endif;
+							wp_reset_query();
+						} else {
+							echo "您还没有队伍或没通过队伍申请.";
+						} ?>
 					</div>
 				<?php } ?>
 			</div>
