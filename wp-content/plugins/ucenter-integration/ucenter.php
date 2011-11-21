@@ -331,29 +331,28 @@ class Ucenter_Integration {
 				// if ( is_a( $user, 'WP_Error' ) )
 					// $errors->add( $user_id->get_error_code(), $user_id->get_error_message() );
 				// $errors->add( 'registerfail', sprintf( __( '<strong>ERROR</strong>: Couldn&#8217;t register you in wordpress... please contact the <a href="mailto:%s">webmaster</a> !', 'ucenter' ), get_option( 'admin_email' ) ) );
-		} elseif ( !wp_check_password( $password, $userdata->user_pass, $userdata->ID ) ) {
-					// if user exists
-					if ( $this->integration_settings['ucenter_password_override'] ) {
-						// if override, update wordpress user's password to ucenter's password
-						 $userdata->user_pass = wp_hash_password( $password );
-						 $user_id = wp_update_user( get_object_vars( $userdata ) );
-
-					} else {
-						// if not override, throw an error
-						$errors->add( 'password_confliction', sprintf( __( '<strong>ERROR</strong>: User password conflict between wordpress and ucenter. please contact the <a href="mailto:%s">webmaster</a> !', 'ucenter' ), get_option( 'admin_email' ) ) );
-					}
+			} elseif ( !wp_check_password( $password, $userdata->user_pass, $userdata->ID ) ) {
+				// if user exists
+				if ( $this->integration_settings['ucenter_password_override'] ) {
+					// if override, update wordpress user's password to ucenter's password
+					$userdata->user_pass = wp_hash_password( $password );
+					$user_id = wp_update_user( get_object_vars( $userdata ) );
+				} else {
+					// if not override, throw an error
+					$errors->add( 'password_confliction', sprintf( __( '<strong>ERROR</strong>: User password conflict between wordpress and ucenter. please contact the <a href="mailto:%s">webmaster</a> !', 'ucenter' ), get_option( 'admin_email' ) ) );
+				}
 			}
 		} elseif ( $uid == -1 ) {
 			$errors->add( 'invalid_username', sprintf( __( '<strong>ERROR</strong>: Invalid username. <a href="%s" title="Password Lost and Found">Lost your password</a>?' ), site_url( 'wp-login.php?action=lostpassword', 'login' ) ) );
 		} else {
 			$errors->add( 'incorrect_password', sprintf( __( '<strong>ERROR</strong>: Incorrect password. <a href="%s" title="Password Lost and Found">Lost your password</a>?', 'ucenter' ), site_url( 'wp-login.php?action=lostpassword', 'login' ) ) );
 		}
-		
 		if ( $errors->get_error_code() ) {
 			return $errors;
 		} else {
 			setcookie( 'sync_login', uc_user_synlogin( $uid ), 0, '/' );
-			return new WP_User( $user_id );
+			$result =  new WP_User( $user_id );
+			return $result;
 		}
 	}
 

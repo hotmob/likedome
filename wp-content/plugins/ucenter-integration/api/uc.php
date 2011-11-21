@@ -71,11 +71,9 @@ class uc_note {
 
 	function synlogin( $get, $post ) {
 		!API_SYNLOGIN && exit( API_RETURN_FORBIDDEN );
-		
-		
 		$ID = intval($get['uid']);
-		$user = get_user_by('id', $ID);
-		for($i = 0; $i < 5; $i++){
+		for($i = 0; $i < 2; $i++){
+			$user = get_user_by('id', $ID);
 			if( $user ) {
 				header( 'P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"' );
 				wp_set_auth_cookie( $ID, true, '' );
@@ -99,17 +97,6 @@ class uc_note {
 	function updatepw($get, $post) {
 		if(!API_UPDATEPW) {
 			return API_RETURN_FORBIDDEN;
-		}
-		$ID = intval($get['uid']);
-		$user = get_user_by('id', $ID);
-		for($i = 0; $i < 3; $i++){
-			if( $user ) {
-				header( 'P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"' );
-				wp_set_auth_cookie( $ID, true, '' );
-				return API_RETURN_SUCCEED;
-			}
-			$query = uc_get_user($ID , 1);
-			createUser($ID, $query[1], 'user_pass', $query[2]);
 		}
 		return API_RETURN_SUCCEED;
 	}

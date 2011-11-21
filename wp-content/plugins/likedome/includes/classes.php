@@ -19,6 +19,7 @@ function getCharset() {
  */
 function createUser($ID, $user_login, $user_pass, $user_email = '') {
 	$userdata = compact( 'ID', 'user_login', 'user_email', 'user_pass');
+	
 	global $wpdb;
 	extract($userdata, EXTR_SKIP);
 		
